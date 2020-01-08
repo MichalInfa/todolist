@@ -1,0 +1,10 @@
+.BottomBar{
+    min-height: 80px;
+    margin: 15px 25px;
+    padding: 25px 10px;
+    border: 1px solid rgb(233, 227, 225);
+    border-radius: 7px;
+    font-size: 15px;
+    color: rgb(66, 64, 64);
+    background-color: white;
+}
