@@ -1,17 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from './Components/View1/Header';  
-import ProjectCard from './Components/View1/ProjectCard';
-import AddProjectCard from './Components/View1/AddProjectCard';
-import Detail from './Components/View2/Detail';
+import Header from './Components/AddProject/Header';  
+import ProjectCard from './Components/AddProject/ProjectCard';
+import AddProjectCard from './Components/AddProject/AddProjectCard';
+import Detail from './Components/ProjectCard/Detail';
 import {
   BrowserRouter,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-
 
 function App() {
   return (

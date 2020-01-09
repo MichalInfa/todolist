@@ -2,10 +2,13 @@ import React from 'react'
 import './Detail.css'
 import symbol_2 from '../../Images/symbol_2.png'
 import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
+
+
 const Detail = (props) => {
     const[text, setText] = useState("");
 
+    let history = useHistory();
     return (
         <div className = "Detail">
             <div>
@@ -14,8 +17,8 @@ const Detail = (props) => {
                     All right, let's get your project started!<br />
                 </p>
             </div>
-            <div className = "frm">
-                <form>
+            <div className = "Form">
+                <form onSubmit = {(event) => event.preventDefault}>
                     <label>
                             Name this project
                         <br />
@@ -28,18 +31,12 @@ const Detail = (props) => {
                         <br />
                         <input type = "textarea" placeholder="e.g. Plans and scheduling for expanding office" />
                     </label>
-                </form>
-            </div>
-            <div>
-                <form>
-                    <Link to = "/">
-                    <button type = "submit"
-                    disabled = {(text.replace(/\s/g, '')).length  < 6}
-                    className = {(text.replace(/\s/g, '')).length  > 5 ? "Proper" : "NotProper"}
-                    >
-                        Submit
-                    </button>
-                    </Link>
+                        <button type = "submit"
+                        disabled = {text.trim().length  < 6}
+                        className = {text.trim().length  > 5 ? "Proper" : "NotProper"}
+                        onClick = {() => history.push("/")}>
+                            Submit
+                        </button>
                 </form>
             </div>
         </div>
