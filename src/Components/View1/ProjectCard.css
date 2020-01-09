@@ -1,11 +1,8 @@
-.MainBar{
+.ProjectCard{
     text-align: left;
     font-size: 15px;
     font-weight: 700;
     color: rgb(66, 64, 64);
-}
-
-.MainBar > div{
     min-height: 150px;
     margin: 15px 25px;
     padding: 10px;

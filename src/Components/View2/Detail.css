@@ -1,0 +1,54 @@
+.Detail{
+    text-align: center;
+    color: rgb(66, 64, 64);
+    min-height: 400px;
+    margin: 15px 25px;
+    padding: 10px;
+    border: 1px solid rgb(233, 227, 225);
+    background-color: white;
+    border-radius: 7px;
+}
+
+.Heavy{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.frm{
+    margin: 15px 25px;
+    text-align: left;
+}
+
+input[type = text]{ 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+input[type = textarea]{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+button{
+    color: white;
+    width: 20%;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.Proper{
+    background-color: rgb(102, 187, 102);
+    border: 1px solid rgb(102, 187, 102);
+}
+
+.Proper:hover{
+    background-color: rgb(81, 148, 81);
+}
+
+.NotProper{
+    color: black;
+    background-color: rgb(238, 238, 238);
+}
