@@ -29,20 +29,11 @@ input[type = text]{
 }
 
 input[type = textarea]{
-    min-height: 100px;
+    height: 100px;
     width: 100%;
     text-align: left;
 }
 
-button{
-    margin-top: 15px;
-    text-align: center;
-    color: white;
-    width: 20%;
-    height: 20px;
-    border: 1px solid black;
-    border-radius: 7px;
-}
 
 .Proper{
     background-color: rgb(102, 187, 102);

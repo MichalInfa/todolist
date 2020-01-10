@@ -1,0 +1,22 @@
+.Wraper{
+    display: inline-block;
+}
+
+.Circle{
+    width: 15px;
+    height: 15px;
+    background: rgb(111, 207, 111);
+    border-radius: 10px;
+    float: left;
+}
+
+.Light{
+    font-size: 10px;
+    color: grey;
+}
+
+.BigFont{
+    font-size: 15px;
+    color: blue;
+    text-decoration: underline;
+}

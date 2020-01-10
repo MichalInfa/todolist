@@ -1,14 +1,36 @@
 import React from 'react';
 import './ProjectDetailView.css';
+import ListCard from './ListCard';
 import {useHistory} from 'react-router-dom';
-import {useState} from 'react'
+import {useState} from 'react';
+import Button from '../Button/Button'
+
 
 const ProjectDetailView = () => {
     const[text, setText] = useState("");
-    const[message, showMessage] = useState(0);
+    const[todolists, setTodolist] = useState([]);
     
     let history = useHistory();
     
+    const renderListCards = (todolists) => {
+    return todolists.map (
+        listCard => {
+            return (<ListCard key={listCard.id} name ={listCard.name}/>)
+            }
+        )
+    }
+
+    const addItemToList = () => {
+        setTodolist([
+            ...todolists,
+            {   
+                id: todolists.length,
+                name: text
+            }       
+        ]);
+        console.log(todolists);
+    }
+
     return(
         <div className = "Top">
             <p className = "Heavy">
@@ -16,73 +38,32 @@ const ProjectDetailView = () => {
             </p>
             <hr />
             <div>
-                {message > 0 ? text : ""}
+                {renderListCards(todolists)}
             </div>
             <div className = "ButtonWrapper">
-                <form>
+                <form onSubmit = {(event) => {
+                    event.preventDefault()
+                    }}>
                     <label>
                         <input className="NoOutline" type = "text" placeholder = "Name this list..."
-                        onChange = {(event) => setText(event.target.value)}
+                        value = {text} onChange = {(event) => setText(event.target.value)}
                         />
                     </label>
-                    <button type = "submit" 
-                    className = "Proper"
-                    onClick = {(event) => showMessage(1)}> 
-                    Add this list
-                    </button>
+                    <Button type = "submit" 
+                    disabledProperties = {text.trim().length  < 6}
+                    buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
+                    buttonText = {"Add on click"}
+                    onClickFunction = {() => {
+                        addItemToList()
+                        setText("")
+                    }
+                    }/>
+
                 </form>
             </div>
-
         </div>
-        
     );
 
 }
 
 export default ProjectDetailView
-
-
-/*import React from 'react';
-import './ProjectDetailView.css';
-import {useHistory} from 'react-router-dom';
-import {useState} from 'react'
-import { queries } from '@testing-library/react';
-
-const ProjectDetailView = (props) => {
-    const[text, setText] = useState("");
-    
-    let history = useHistory();
-    
-    return(
-        <div className = "Top">
-            <p className = "Heavy">
-                To-dos
-            </p>
-            <hr />
-            <div>
-                
-            {props.location.text !== "" ? props.location.text : ""}
-                
-            </div>
-            <div className = "ButtonWrapper">
-                <form onSubmit = {(event) => event.preventDefault}>
-                    <label>
-                        <input className="NoOutline" type = "text" placeholder = "Name this list..."
-                        onChange = {(event) => setText(event.target.value)}
-                        />
-                    </label>
-                    <button type = "submit" 
-                    onClick = {() => history.push({pathname: "/project/" + props},{search: "?query=abc"},{response: text})}> 
-                    Add this list
-                    </button>
-                </form>
-            </div>
-
-        </div>
-        
-    );
-
-}
-
-export default ProjectDetailView
-*/

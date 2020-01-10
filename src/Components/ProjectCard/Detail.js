@@ -1,6 +1,7 @@
 import React from 'react'
 import './Detail.css'
 import symbol_2 from '../../Images/symbol_2.png'
+import Button from '../Button/Button'
 import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 
@@ -18,7 +19,7 @@ const Detail = (props) => {
                 </p>
             </div>
             <div className = "Form">
-                <form onSubmit = {(event) => event.preventDefault}>
+                <form onSubmit = {(event) => event.preventDefault()}>
                     <label>
                         <p className = "Default">
                             Name this project
@@ -31,14 +32,14 @@ const Detail = (props) => {
                         <p className = "Default">
                             Add an optional descripiton
                         </p>
-                        <input type = "textarea" placeholder = "e.g. Plans and scheduling for expanding office" />
+                        <input type = "textarea" className="Description" placeholder = "e.g. Plans and scheduling for expanding office" />
                     </label>
-                    <button type = "submit"
-                        disabled = {text.trim().length  < 6}
-                        className = {text.trim().length  > 5 ? "Proper" : "NotProper"}
-                        onClick = {() => history.push("/")}>
-                            Submit
-                    </button>
+                    <Button type = "submit"
+                        disabledProperties = {text.trim().length  < 6}
+                        buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
+                        buttonText = {"Submit"}
+                        onClickFunction = {() => history.push("/")}/>
+                    
                 </form>
             </div>
         </div>

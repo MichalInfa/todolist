@@ -11,16 +11,6 @@ const ProjectCard  = (props) => {
             </div>
         </Link>
     )
-    /*
-    let history = useHistory();
-
-    return(
-    <div className = "ProjectCard"
-        onClick = {() => history.push("/project/" + (props.title).replace(/ /g,"_"))}>
-        {props.title}
-    </div>
-    )
-    */
 }
 
 export default ProjectCard
