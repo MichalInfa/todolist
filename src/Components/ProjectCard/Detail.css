@@ -16,22 +16,27 @@
 
 .Form{
     margin: 15px 25px;
-    text-align: left;
 }
 
+.Default{
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+}
 input[type = text]{ 
-    margin-top: 10px;
-    margin-bottom: 10px;
+    text-align: left;
     width: 100%;
 }
 
 input[type = textarea]{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    min-height: 100px;
     width: 100%;
+    text-align: left;
 }
 
 button{
+    margin-top: 15px;
+    text-align: center;
     color: white;
     width: 20%;
     height: 20px;

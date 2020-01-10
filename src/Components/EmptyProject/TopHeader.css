@@ -1,0 +1,17 @@
+.TopHeader{
+    text-align: center;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgb(52, 110, 165);
+    width: 70%;
+    margin-top: 10px;
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 5px;
+}
+
+.TopHeader:hover{
+    text-decoration: underline;
+}

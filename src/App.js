@@ -5,6 +5,9 @@ import Header from './Components/AddProject/Header';
 import ProjectCard from './Components/AddProject/ProjectCard';
 import AddProjectCard from './Components/AddProject/AddProjectCard';
 import Detail from './Components/ProjectCard/Detail';
+import TopHeader from './Components/EmptyProject/TopHeader';
+import ProjectDetailView from './Components/EmptyProject/ProjectDetailView';
+
 import {
   BrowserRouter,
   Switch,
@@ -24,6 +27,14 @@ function App() {
             <AddProjectCard />
           </Route>
           <Route path = "/add-project" exact component = {Detail} />
+          <Route path = "/project/Acme_Inc._Landing_Page_Design" exact>
+            <TopHeader title = "Acme_Inc._Landing_Page_Design" />
+            <ProjectDetailView title = "Acme_Inc._Landing_Page_Design"/>
+          </Route>
+          <Route path = "/project/Office_Renovation" exact>
+            <TopHeader title = "Office_Renovation" />
+            <ProjectDetailView title = "Office_Renovation"/>
+          </Route>
           <Route path = "/" render = {() => <div>404</div>} />
         </Switch>
 

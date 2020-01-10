@@ -20,23 +20,25 @@ const Detail = (props) => {
             <div className = "Form">
                 <form onSubmit = {(event) => event.preventDefault}>
                     <label>
+                        <p className = "Default">
                             Name this project
-                        <br />
-                        <input type = "text" placeholder="e.g. Office renovation"
+                        </p>
+                        <input type = "text" placeholder = "e.g. Office renovation"
                          onChange = {(event) => setText(event.target.value)}/>
                     </label>
                     <label>
                         <br />
+                        <p className = "Default">
                             Add an optional descripiton
-                        <br />
-                        <input type = "textarea" placeholder="e.g. Plans and scheduling for expanding office" />
+                        </p>
+                        <input type = "textarea" placeholder = "e.g. Plans and scheduling for expanding office" />
                     </label>
-                        <button type = "submit"
+                    <button type = "submit"
                         disabled = {text.trim().length  < 6}
                         className = {text.trim().length  > 5 ? "Proper" : "NotProper"}
                         onClick = {() => history.push("/")}>
                             Submit
-                        </button>
+                    </button>
                 </form>
             </div>
         </div>
