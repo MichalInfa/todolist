@@ -1,8 +1,6 @@
-.Wraper{
-    display: inline-block;
-}
-
 .Circle{
+    margin-bottom: 0px;
+    margin-top: 14px;
     width: 15px;
     height: 15px;
     background: rgb(111, 207, 111);
@@ -11,12 +9,18 @@
 }
 
 .Light{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 20px;
     font-size: 10px;
     color: grey;
 }
 
 .BigFont{
-    font-size: 15px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-left: 20px;
+    font-size: 12px;
     color: blue;
     text-decoration: underline;
 }

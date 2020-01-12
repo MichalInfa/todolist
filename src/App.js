@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './Components/AddProject/Header';  
 import ProjectCard from './Components/AddProject/ProjectCard';
@@ -11,8 +10,7 @@ import ProjectDetailView from './Components/EmptyProject/ProjectDetailView';
 import {
   BrowserRouter,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 function App() {

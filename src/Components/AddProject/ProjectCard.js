@@ -1,7 +1,6 @@
 import React from 'react';
 import './ProjectCard.css';
 import {Link} from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
 
 const ProjectCard  = (props) => {
     return(

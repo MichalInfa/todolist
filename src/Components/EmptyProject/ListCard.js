@@ -3,19 +3,14 @@ import './ListCard.css'
 
 const ListCard = (props) =>{
     return (
-        <div className = "Wrapper">
-            <div className = "Circle">
-                <br />
-            </div> 
-            <div>
+        <div>
+                <p className = "Circle" />
                 <p className = "Light">
                     0/0 complete   
                 </p> 
                 <p className = "BigFont">
                     {props.name} 
                 </p>
-                
-            </div>
         </div>
     )
 }
