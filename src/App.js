@@ -6,12 +6,29 @@ import AddProjectCard from './Components/AddProject/AddProjectCard';
 import Detail from './Components/ProjectCard/Detail';
 import TopHeader from './Components/EmptyProject/TopHeader';
 import ProjectDetailView from './Components/EmptyProject/ProjectDetailView';
+import UserFetch from './Components/UserFetch/UserFetch';
+import styled, {css} from 'styled-components';
 
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
+
+// Here we create a component that will rotate everything we pass in over two seconds
+const Przycisk = styled.button`background: transparent;
+border-radius: 3px;
+border: 2px solid palevioletred;
+color: palevioletred;
+margin: 0 1em;
+padding: 0.25em 1em;
+
+${props => props.primary &&  css`
+    background: palevioletred;
+    color: white;
+  `};
+`
 
 function App() {
   return (
@@ -23,7 +40,14 @@ function App() {
             <ProjectCard title = "Acme Inc. Landing Page Design" />
             <ProjectCard title = "Office Renovation" />
             <AddProjectCard />
+            <Link to = "/userfetch">
+            <Przycisk>
+              Hello world
+            </Przycisk>
+            </Link>
+            
           </Route>
+          <Route path = "/userfetch" exact component = {UserFetch} />
           <Route path = "/add-project" exact component = {Detail} />
           <Route path = "/project/Acme_Inc._Landing_Page_Design" exact>
             <TopHeader title = "Acme_Inc._Landing_Page_Design" />
@@ -35,21 +59,7 @@ function App() {
           </Route>
           <Route path = "/" render = {() => <div>404</div>} />
         </Switch>
-
-
-
-
-        {/* ----first view----
-        <Header />
-        <ProjectCard title = "Acme Inc. Landing Page Design" />
-        <ProjectCard title = "Office Renovation" />
-        <AddProjectCard />
-        */}
-
-          {/* ----second view----
-          <Detail />
-          */}
-        </div>
+      </div>
     </BrowserRouter>
   );
 }
