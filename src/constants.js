@@ -1,4 +1,4 @@
-const API_ROOT = 'http://http://localhost:3000/'
+const API_ROOT = 'http://localhost:3000'
 
 const PROJECTS_ENDPOINT ='/projects'
 

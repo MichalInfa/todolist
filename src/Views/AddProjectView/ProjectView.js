@@ -1,5 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import {PROJECT_URL} from '../../constants';
+import {useState, useEffect} from 'react'
 import ProjectCard from './ProjectCard';
 import AddProjectCard from './AddProjectCard';
 import styled, {css} from 'styled-components';
@@ -20,6 +22,32 @@ const ProjectView = () => {
         color: white;
         `};
     `
+    const[project, setProject] = useState([]);
+
+
+    useEffect (() => {       
+        fetch(PROJECT_URL)
+        .then(resp => {
+            if(resp.status !== 200){
+                return null;
+            }else{
+                return resp.json();
+            }
+        })
+        .then(resp => {
+            if(!null){
+                console.log(resp);
+                setProject(resp)
+            }else{
+                console.log("Null!");
+            }
+        })
+        .catch(error => {
+            if(error.status === 401){ 
+                console.log("Blad: Zadany adres nie istnieje")
+            }
+        });      
+    },[]);
 
     return(
         <div>
