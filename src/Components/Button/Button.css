@@ -8,3 +8,18 @@
     border: 1px solid white;
     border-radius: 7px;
 }
+
+.Proper{
+    color: white;
+    background-color: rgb(102, 187, 102);
+    border: 1px solid rgb(102, 187, 102);
+}
+
+.Proper:hover{
+    background-color: rgb(81, 148, 81);
+}
+
+.NotProper{
+    color: black;
+    background-color: rgb(238, 238, 238);
+}

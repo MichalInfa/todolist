@@ -2,8 +2,8 @@ import React from 'react';
 import './ProjectDetailView.css';
 import ListCard from './ListCard';
 import {useState} from 'react';
-import Button from '../Button/Button'
-
+import Button from '../Button/Button';
+import TopHeader from '../TopHeader/TopHeader';
 
 const ProjectDetailView = () => {
     const[text, setText] = useState("");
@@ -22,30 +22,33 @@ const ProjectDetailView = () => {
     }
 
     return(
-        <div className = "Top">
-            <p className = "Heavy">
-                To-dos
-            </p>
-            <hr />
-            <div className = "MiddlePart">
-                <div>{renderListCards(todolists)}</div>
+        <div>
+            <TopHeader title = "1" />
+            <div className = "Top">
+                <p className = "Heavy"> To-dos </p>
+                <hr />
+                <div className = "MiddlePart">
+                    <div>
+                        {renderListCards(todolists)}
+                    </div>
                 
-                <div className = "ButtonWrapper">  
-                    <form onSubmit = {(event) => {event.preventDefault()}}>
-                        <label>
-                            <input className="NoOutline" type = "text" placeholder = "Name this list..."
-                            value = {text} onChange = {(event) => setText(event.target.value)}/>
-                        </label>
-                        <Button type = "submit" 
-                            disabledProperties = {text.trim().length  < 6}
-                            buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
-                            buttonText = {"Add on click"}
-                            onClickFunction = {() => {
-                                addItemToList()
-                                setText("")
-                            }
-                        }/>
-                    </form>
+                    <div className = "ButtonWrapper">  
+                        <form onSubmit = {(event) => event.preventDefault()}>
+                            <label>
+                                <input className="NoOutline" type = "text" placeholder = "Name this list..."
+                                value = {text} onChange = {(event) => setText(event.target.value)}/>
+                            </label>
+                            <Button type = "submit" 
+                                disabledProperties = {text.trim().length  < 6}
+                                buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
+                                buttonText = {"Add on click"}
+                                onClickFunction = {() => {
+                                    addItemToList()
+                                    setText("")
+                                }
+                            }/>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

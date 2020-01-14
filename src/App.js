@@ -4,17 +4,17 @@ import Header from './Components/AddProject/Header';
 import ProjectCard from './Components/AddProject/ProjectCard';
 import AddProjectCard from './Components/AddProject/AddProjectCard';
 import Detail from './Components/ProjectCard/Detail';
-import TopHeader from './Components/EmptyProject/TopHeader';
 import ProjectDetailView from './Components/EmptyProject/ProjectDetailView';
 import UserFetch from './Components/UserFetch/UserFetch';
 import styled, {css} from 'styled-components';
+import ToDos from './Components/EmptyProject/ToDos/ToDos';
 
 import {
   BrowserRouter,
   Switch,
   Route,
   Link
-} from "react-router-dom";
+} from 'react-router-dom';
 
 // Here we create a component that will rotate everything we pass in over two seconds
 const Przycisk = styled.button`background: transparent;
@@ -41,22 +41,15 @@ function App() {
             <ProjectCard title = "Office Renovation" />
             <AddProjectCard />
             <Link to = "/userfetch">
-            <Przycisk>
-              Hello world
-            </Przycisk>
-            </Link>
-            
+              <Przycisk>
+                Go to UserFetch section
+              </Przycisk>
+            </Link>   
           </Route>
           <Route path = "/userfetch" exact component = {UserFetch} />
           <Route path = "/add-project" exact component = {Detail} />
-          <Route path = "/project/Acme_Inc._Landing_Page_Design" exact>
-            <TopHeader title = "Acme_Inc._Landing_Page_Design" />
-            <ProjectDetailView title = "Acme_Inc._Landing_Page_Design"/>
-          </Route>
-          <Route path = "/project/Office_Renovation" exact>
-            <TopHeader title = "Office_Renovation" />
-            <ProjectDetailView title = "Office_Renovation"/>
-          </Route>
+          <Route path = "/project" exact component = {ProjectDetailView} />
+          <Route path = "/project/:id" exact component = {ToDos} />
           <Route path = "/" render = {() => <div>404</div>} />
         </Switch>
       </div>

@@ -6,7 +6,7 @@ import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 
 
-const Detail = (props) => {
+const Detail = () => {
     const[text, setText] = useState("");
 
     let history = useHistory();

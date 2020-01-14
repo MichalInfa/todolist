@@ -8,7 +8,8 @@ const Button = (props) => {
             type = "submit"
             className = {'Button ' + props.buttonClass}
             disabled = {props.disabledProperties}
-            onClick = {props.onClickFunction}>{props.buttonText}
+            onClick = {props.onClickFunction}>
+                {props.buttonText}
         </button>
         )
 }  

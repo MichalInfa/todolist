@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import UserList from './UserList'
-
 
 const UserFetch = () => {
     const[users, setUser] = useState([]);
@@ -20,8 +18,8 @@ const UserFetch = () => {
                 />)
         })
     }
-    useEffect (() => {   
-        
+
+    useEffect (() => {       
         fetch("https://api.github.com/users")
         .then(resp => {
             if(resp.status !== 200){
@@ -38,15 +36,14 @@ const UserFetch = () => {
             setUser(resp)
             }
             else{
-                console.log("Null!!!!");
+                console.log("Null!");
             }
         })
         .catch(error => {
             if(error.status === 401){ 
                 console.log("Blad: Zadany adres nie istnieje")
             }
-        });
-       
+        });      
     },[]);
 
     return(
@@ -55,12 +52,10 @@ const UserFetch = () => {
         <div>
             {renderListCards(users)}
             <br>
-            
             </br>
         </div>
         </div>
     )
-
 }
 
 export default UserFetch

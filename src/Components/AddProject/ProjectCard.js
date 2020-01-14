@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const ProjectCard  = (props) => {
     return(
-        <Link to = {"/project/" + (props.title).replace(/ /g,"_")}>
+        <Link to = "/project">
             <div className = "ProjectCard">
                 {props.title}
             </div>
