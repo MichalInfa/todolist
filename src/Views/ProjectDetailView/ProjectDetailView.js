@@ -2,8 +2,8 @@ import React from 'react';
 import './ProjectDetailView.css';
 import ListCard from './ListCard';
 import {useState} from 'react';
-import Button from '../Button/Button';
-import TopHeader from '../TopHeader/TopHeader';
+import Button from '../../Components/Button/Button';
+import TopHeader from '../../Components/TopHeader/TopHeader';
 
 const ProjectDetailView = () => {
     const[text, setText] = useState("");
@@ -23,7 +23,7 @@ const ProjectDetailView = () => {
 
     return(
         <div>
-            <TopHeader title = "1" />
+            <TopHeader title = "backtoproject" />
             <div className = "Top">
                 <p className = "Heavy"> To-dos </p>
                 <hr />

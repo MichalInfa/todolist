@@ -5,7 +5,12 @@ const TaskList = (props) =>{
 
     return (
         <div>
-                <input className = "CheckboxPosition" type = "checkbox"/>
+            <div>
+                <label className = "BoxContainer">
+                    <input className = "CheckboxPosition" type = "checkbox"/>
+                    <span className = "CheckMark"></span>
+                </label>
+            </div>
                 <p className = "Normal">
                     Task {props.value}
                 </p>

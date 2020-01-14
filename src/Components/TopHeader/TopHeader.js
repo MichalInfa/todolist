@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 
 const TopHeader = (props) => {
  
-    //console.log(props.title)
+    console.log(props.title)
     switch(props.title){
-        case "2":
+        case "backtodos":
             return(
                 <div className = "TopHeader">
                     <Link to = "../">back to Project </Link>

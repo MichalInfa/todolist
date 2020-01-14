@@ -1,12 +1,11 @@
 import React from 'react'
-import './Detail.css'
-import symbol_2 from '../../Images/symbol_2.png'
-import Button from '../Button/Button'
 import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
+import './NewProjectForm.css'
+import symbol_2 from '../../Images/symbol_2.png'
+import Button from '../../Components/Button/Button'
 
-
-const Detail = () => {
+const NewProjectForm = () => {
     const[text, setText] = useState("");
 
     let history = useHistory();
@@ -47,4 +46,4 @@ const Detail = () => {
     )
 }
 
-export default Detail
+export default NewProjectForm

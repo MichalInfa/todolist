@@ -1,9 +1,9 @@
 import React from 'react';
-import TopHeader from '../../TopHeader/TopHeader'
+import {useState} from 'react';
+import TopHeader from '../../Components/TopHeader/TopHeader';
+import Button from '../../Components/Button/Button';
 import './ToDos.css';
-import Button from '../../Button/Button'
-import {useState} from 'react'
-import TaskList from './TaskList'
+import TaskList from './TaskList';
 
 const ToDos = (props) => {
 
@@ -25,7 +25,7 @@ const ToDos = (props) => {
 
     return(
         <div>
-            <TopHeader title = "2" />
+            <TopHeader title = "backtodos" />
             <div className = "Top">
                 <p />
                 <div className = "MiddlePart">

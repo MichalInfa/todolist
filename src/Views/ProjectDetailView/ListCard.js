@@ -10,7 +10,6 @@ const ListCard = (props) =>{
                 <p className = "Light">
                     0/0 complete   
                 </p> 
-                
                 <Link to = {"/project/" + props.name}>
                     <p className = "BigFont">
                         {props.name} 
