@@ -4,24 +4,71 @@ import TopHeader from '../../Components/TopHeader/TopHeader';
 import Button from '../../Components/Button/Button';
 import './ToDos.css';
 import TaskList from './TaskList';
+import AddNewTask from './AddNewTask';
 
 const ToDos = (props) => {
 
     const[text, setText] = useState("");
+    const[description, setDescription] = useState("");
     const[tasklists, setTaskList] = useState([]);
+    const[visibleform, setVisible] = useState(false);
 
     const {id} = props.match.params
 
     const renderTaskList = (tasklists) => {
         return tasklists.map (taskList => {
-            return (<TaskList key = {taskList.id} name = {taskList.name} value = {taskList.id + 1}/>)
+            return (<TaskList 
+                key = {taskList.id} 
+                name = {taskList.name} 
+                descrip = {taskList.descrip}
+                checked = {tasklists.checked}
+                //onChildClick = {handleTaskList}
+                />)
         })
     }
 
     const addTaskToList = () => {
-        setTaskList([...tasklists, {id: tasklists.length, name: text}])
-        console.log(tasklists);
+        setTaskList([
+            ...tasklists, 
+            {
+                id: tasklists.length, 
+                name: text,  
+                descrip: description /* checked: false*/}])
     }
+ /*
+    const[donetaskslist, setDoneTask] = useState([]);
+
+    const handleTaskList = (done,chkd) => {
+        console.log("-------")
+        console.log(done)
+        console.log(chkd)
+        setTaskList([...tasklists, {id: done.length, name: done, checked: chkd}])
+    }
+*/
+
+    const renderForm = () => {
+        return (visibleform ?
+            <AddNewTask
+                inputText = {text} 
+                onInputChange = {(event) => {setText(event.target.value)}}
+                
+                inputDescription = {description}
+                onDescriptionChange = {(event) => {setDescription(event.target.value)}}
+            
+                buttonCondition = {text.length}
+                onClickAddTaskEvent = {() => {
+                    addTaskToList()
+                    setText("")
+                    setDescription("")
+                }}
+
+                onClickCancelButton = {() => {
+                    setVisible(visibleform => !visibleform);
+                } } 
+                />: null
+        )
+    } 
+
 
     return(
         <div>
@@ -41,27 +88,19 @@ const ToDos = (props) => {
                     <div>
                         <div>
                             {renderTaskList(tasklists)}
+                            {console.log(tasklists)}
                         </div>
                     </div>
-                    <br />
-                    <div className = "ButtonWrapper">
-                        <form onSubmit = {(event) => event.preventDefault()}>
-                            <label>
-                                <input className = "CheckboxPosition" type = "checkbox"/>
-                                <input className = "TextPosition" type = "text" placeholder = "Describe this to-do..."
-                                value = {text} onChange = {(event) => setText(event.target.value)}/>
-                            </label>
-                            <Button type = "submit" 
-                                disabledProperties = {text.trim().length  < 6}
-                                buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
-                                buttonText = {"Add a to-do"}
-                                onClickFunction = {() => {
-                                    addTaskToList()
-                                    setText("")
-                                }
-                            }/>
-                        </form>
+                    <div className = {visibleform ? "Hidden" : "Block"}>
+                        <Button 
+                            buttonText = "Add a to-do"
+                            buttonClass = "Proper"
+                            onClickFunction = {() => {
+                                setVisible(visibleform => !visibleform);
+                            }}
+                        />
                     </div>
+                    {renderForm()}
                 </div>
             </div>
         </div>

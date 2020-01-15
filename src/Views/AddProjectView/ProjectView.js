@@ -22,8 +22,13 @@ const ProjectView = () => {
         color: white;
         `};
     `
-    const[project, setProject] = useState([]);
+    const[projects, setProject] = useState([]);
 
+    const renderProjects = (projects) => {
+        return projects.map (projectCard => {
+            return (<ProjectCard key = {projectCard.id} name = {projectCard.name}/>)
+        })
+    }
 
     useEffect (() => {       
         fetch(PROJECT_URL)
@@ -56,6 +61,7 @@ const ProjectView = () => {
             </p>
             <ProjectCard title = "Acme Inc. Landing Page Design" />
             <ProjectCard title = "Office Renovation" />
+            {renderProjects(projects)}
             <AddProjectCard />
             <Link to = "/userfetch">
                 <Przycisk>

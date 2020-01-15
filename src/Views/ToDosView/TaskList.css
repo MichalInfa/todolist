@@ -1,4 +1,77 @@
 .Normal{
     font-size: 12px;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
+
+.Small{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 10px;
+    color: grey;
+}
+
+.Box{
+    margin-left: 11px;
+    display: block; 
+    position: relative; 
+    padding-left: 31px; 
+    cursor: pointer; 
+}   
+
+/* ukrycie defaulowego stylu chekcboxa*/ 
+.Box input[type = checkbox] { 
+    height: 0px;
+    width: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    visibility: hidden; 
+}
+ 
+.WhiteBox { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    height: 20px; 
+    width: 20px; 
+    border: 1px solid rgb(233, 227, 225);
+    background-color: white;
+    border-radius: 7px;
+}     
+
+.Box:hover input + .WhiteBox { 
+    border: 1px solid white;
+    background-color: rgb(222, 238, 222);
+}   
+
+.Box input:active + .WhiteBox { 
+    background-color: rgb(233, 227, 225); 
+} 
+
+.Box input:checked + .WhiteBox { 
+    background-color: rgb(102, 187, 102);
+} 
+
+.WhiteBox:after { 
+    content: ""; 
+    position: absolute; 
+    display: none; 
+} 
+
+/* wyswietlanie checkmarka */
+.Box input:checked + .WhiteBox:after { 
+    display: block; 
+}
+
+.Box .WhiteBox:after { 
+    left: 6px; 
+    bottom: 5px; 
+    width: 6px; 
+    height: 12px; 
+    border: solid rgb(233, 227, 225); 
+    border-width: 0 2px 2px 0; 
+    -webkit-transform: rotate(45deg); 
+    -ms-transform: rotate(45deg); 
+    transform: rotate(45deg); 
+} 
+

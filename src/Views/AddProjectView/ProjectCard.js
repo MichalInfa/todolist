@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const ProjectCard  = (props) => {
     return(
-        <Link to = "/project">
+        <Link to = "/projects">
             <div className = "ProjectCard">
                 {props.title}
             </div>

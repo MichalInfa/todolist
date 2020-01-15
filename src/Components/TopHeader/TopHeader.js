@@ -3,15 +3,14 @@ import './TopHeader.css'
 import {Link} from 'react-router-dom';
 
 const TopHeader = (props) => {
- 
-    console.log(props.title)
+
     switch(props.title){
         case "backtodos":
             return(
                 <div className = "TopHeader">
                     <Link to = "../">back to Project </Link>
                     >
-                    <Link to = "/Project"> back to To-Dos</Link>
+                    <Link to = "/projects"> back to To-Dos</Link>
                 </div>
             );
         default:

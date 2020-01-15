@@ -18,9 +18,9 @@ function App() {
       <div className = "App">
         <Switch>
           <Route path = "/" exact component = {ProjectView} /> 
-          <Route path = "/add-project" exact component = {NewProjectView} />
-          <Route path = "/project" exact component = {ProjectDetailView} />
-          <Route path = "/project/:id" exact component = {ToDosView} />
+          <Route path = "/projects/new" exact component = {NewProjectView} />
+          <Route path = "/projects" exact component = {ProjectDetailView} />
+          <Route path = "/projects/:id" exact component = {ToDosView} />
           <Route path = "/userfetch" exact component = {UserFetch} />
           <Route path = "/" render = {() => <div>404</div>} />
         </Switch>
