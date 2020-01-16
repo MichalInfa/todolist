@@ -1,17 +1,16 @@
 import React from 'react';
 import './ProjectDetailView.css';
 import ListCard from './ListCard';
+import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import Button from '../../Components/Button/Button';
-import TopHeader from '../../Components/TopHeader/TopHeader';
 
 const ProjectDetailView = (props) => {
     const[text, setText] = useState("");
     const[todolists, setTodolist] = useState([]);
     const {id} = props.match.params
 
-    useEffect (() => {       
-        
+    useEffect (() => {     
         fetch('http://localhost:3000/projects/'+ id + '/to_do_lists')
         .then(resp => {
             if(resp.status !== 200){
@@ -32,7 +31,7 @@ const ProjectDetailView = (props) => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });      
-    },[id]);
+    },[id,todolists]);
 
     const renderListCards = (todolists) => {
         return todolists.map (listCard => {
@@ -65,11 +64,12 @@ const ProjectDetailView = (props) => {
             console.log(res)
         })
     }
-    
 
     return(
         <div>
-            <TopHeader title = "backtoproject" />
+            <div className = "TopHeader">
+                <Link to = "../../">back to Project </Link>
+            </div>
             <div className = "Top">
                 <p className = "Heavy"> To-dos </p>
                 <hr />

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import TopHeader from '../../Components/TopHeader/TopHeader';
+import {Link} from 'react-router-dom';
 import Button from '../../Components/Button/Button';
 import './ToDosView.css';
 import TaskList from './TaskList';
@@ -91,22 +91,31 @@ useEffect(() => {
             if(error.status === 401){ 
                 console.log("Blad: Zadany adres nie istnieje")
             }
-        }); 
+        });
+},[id, taskid, tasklists])
 
-},[id, taskid])
+   function addToDoList(){
+        const obj = {
+            name: text,
+            description: descript,
+            project_id: id,
+            to_do_lists: taskid
+        };
 
- /*
-    const[donetaskslist, setDoneTask] = useState([]);
-
-    const handleTaskList = (done,chkd) => {
-        console.log("-------")
-        console.log(done)
-        console.log(chkd)
-        setTaskList([...tasklists, {id: done.length, name: done, checked: chkd}])
-    }
-*/
-
-
+        console.log(obj)
+        fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks', {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log("dodalem todolist:")
+            console.log(res)
+        })
+    } 
 
     const renderForm = () => {
         return (visibleform ?
@@ -119,7 +128,7 @@ useEffect(() => {
             
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
-                    addTaskToList()
+                    addToDoList()
                     setText("")
                     setDescription("")
                 }}
@@ -134,7 +143,11 @@ useEffect(() => {
 
     return(
         <div>
-            <TopHeader title = "backtodos" />
+            <div className = "TopHeader">
+                <Link to = "../../../../">back to Project </Link>
+                        >
+                <Link to = "../../"> back to To-Dos</Link>
+            </div>
             <div className = "Top">
                 <p />
                 <div className = "MiddlePart">

@@ -1,10 +1,9 @@
 import React from 'react'
 import {useState} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link} from 'react-router-dom'
 import './NewProjectForm.css'
 import symbol_2 from '../../Images/symbol_2.png'
 import Button from '../../Components/Button/Button'
-import TopHeader from '../../Components/TopHeader/TopHeader'
 
 const NewProjectForm = () => {
     const[projectname, setName] = useState("");
@@ -15,26 +14,22 @@ function addObject(){
         name: projectname,
         description: projectdescription
     };
-    //console.log(projectname,projectdescription)
-    //console.log(obj)
     fetch('http://localhost:3000/projects', {
-        method: "post",
+        method: "POST",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify(obj)
     })
     .then(res => res.json())
-    .then(res => {
-        //console.log("dodalem uzytkownika:")
-        //console.log(res)
-    })
 }
 
     let history = useHistory();
     return (
         <div>
-            <TopHeader title = "backtoproject"/>
+        <div className = "TopHeader">
+            <Link to = "../../">back to Project </Link>
+        </div>
         <div className = "Top">
             <div>
                 <img src = {symbol_2} alt = "" width = {200} height = {100}/>
