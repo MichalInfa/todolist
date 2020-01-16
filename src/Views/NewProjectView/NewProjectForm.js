@@ -1,9 +1,10 @@
 import React from 'react'
 import {useState} from 'react'
-import {useHistory, Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import './NewProjectForm.css'
 import symbol_2 from '../../Images/symbol_2.png'
 import Button from '../../Components/Button/Button'
+import TopHeader from '../../Components/TopHeader/TopHeader'
 
 const NewProjectForm = () => {
     const[projectname, setName] = useState("");
@@ -27,9 +28,7 @@ function addObject(){
     let history = useHistory();
     return (
         <div>
-        <div className = "TopHeader">
-            <Link to = "../../">back to Project </Link>
-        </div>
+            <TopHeader title = "backtoproject" />
         <div className = "Top">
             <div>
                 <img src = {symbol_2} alt = "" width = {200} height = {100}/>

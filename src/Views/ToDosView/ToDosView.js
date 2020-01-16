@@ -1,15 +1,18 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import Button from '../../Components/Button/Button';
 import './ToDosView.css';
 import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
+import TopHeader from '../../Components/TopHeader/TopHeader';
 
 const ToDos = (props) => {
 
     const[text, setText] = useState("");
+    const[subreddit, setSubreddit] = useState(text);
+
     const[descript, setDescription] = useState("");
+    const[subdesc, setDesc] = useState(descript);
     const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
 
@@ -29,19 +32,6 @@ const ToDos = (props) => {
 
                 />)
         })
-    }
-
-    const addTaskToList = () => {
-        setTaskList([
-            ...tasklists, 
-            {
-                id: tasklists.length, 
-                name: text,  
-                description: descript,
-                /*duedate: date,
-                position: pos,
-                donestatus: status,
-                 /*checked: false*/}])
     }
 
 useEffect(() => {
@@ -80,7 +70,6 @@ useEffect(() => {
         })
         .then(resp => {
             if(!null){
-                console.log(resp.name);
                 setName(resp.name);
             }
             else{
@@ -92,7 +81,7 @@ useEffect(() => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });
-},[id, taskid, tasklists])
+},[id,subreddit,taskid,setName,setTaskList,subdesc])
 
    function addToDoList(){
         const obj = {
@@ -101,8 +90,6 @@ useEffect(() => {
             project_id: id,
             to_do_lists: taskid
         };
-
-        console.log(obj)
         fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks', {
             method: "POST",
             headers: {
@@ -111,10 +98,6 @@ useEffect(() => {
             body: JSON.stringify(obj)
         })
         .then(res => res.json())
-        .then(res => {
-            console.log("dodalem todolist:")
-            console.log(res)
-        })
     } 
 
     const renderForm = () => {
@@ -130,7 +113,9 @@ useEffect(() => {
                 onClickAddTaskEvent = {() => {
                     addToDoList()
                     setText("")
+                    setSubreddit(text)
                     setDescription("")
+                    setDesc(descript)
                 }}
 
                 onClickCancelButton = {() => {
@@ -140,14 +125,9 @@ useEffect(() => {
         )
     } 
 
-
     return(
         <div>
-            <div className = "TopHeader">
-                <Link to = "../../../../">back to Project </Link>
-                        >
-                <Link to = "../../"> back to To-Dos</Link>
-            </div>
+            <TopHeader title = "backtodos" />
             <div className = "Top">
                 <p />
                 <div className = "MiddlePart">

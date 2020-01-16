@@ -1,16 +1,18 @@
 import React from 'react';
 import './ProjectDetailView.css';
 import ListCard from './ListCard';
-import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import Button from '../../Components/Button/Button';
+import TopHeader from '../../Components/TopHeader/TopHeader';
 
 const ProjectDetailView = (props) => {
     const[text, setText] = useState("");
+    const[subreddit, setSubreddit] = useState(text);
+
     const[todolists, setTodolist] = useState([]);
     const {id} = props.match.params
 
-    useEffect (() => {     
+    useEffect (() => {   
         fetch('http://localhost:3000/projects/'+ id + '/to_do_lists')
         .then(resp => {
             if(resp.status !== 200){
@@ -31,7 +33,7 @@ const ProjectDetailView = (props) => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });      
-    },[id,todolists]);
+    },[id,subreddit,setTodolist]);
 
     const renderListCards = (todolists) => {
         return todolists.map (listCard => {
@@ -43,33 +45,24 @@ const ProjectDetailView = (props) => {
         })
     }
 
-    function addToDoList(){
+    const addToDoList = () => {
         const obj = {
             name: text,
             project_id: id
         };
-        console.log("------obiekt dostarczany------")
-        console.log(text)
-        console.log(obj)
         fetch('http://localhost:3000/projects/' + id + '/to_do_lists', {
-            method: "post",
+            method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             },
             body: JSON.stringify(obj)
         })
         .then(res => res.json())
-        .then(res => {
-            console.log("dodalem todolist:")
-            console.log(res)
-        })
     }
 
     return(
         <div>
-            <div className = "TopHeader">
-                <Link to = "../../">back to Project </Link>
-            </div>
+            <TopHeader title = "backtoprojects" />
             <div className = "Top">
                 <p className = "Heavy"> To-dos </p>
                 <hr />
@@ -77,7 +70,6 @@ const ProjectDetailView = (props) => {
                     <div>
                         {renderListCards(todolists)}
                     </div>
-                
                     <div className = "ButtonWrapper">  
                         <form onSubmit = {(event) => event.preventDefault()}>
                             <label>
@@ -89,8 +81,9 @@ const ProjectDetailView = (props) => {
                                 buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
                                 buttonText = {"Add on click"}
                                 onClickFunction = {() => {
-                                    setText("")
                                     addToDoList()
+                                    setText("")
+                                    setSubreddit(text)
                                 }
                             }/>
                         </form>

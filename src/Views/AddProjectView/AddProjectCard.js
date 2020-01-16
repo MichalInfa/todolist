@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 const AddProjectCard = () => {
     return (
+        
         <div className = "AddProjectCard">
             <Link to = "/projects/new">
                 <img src = {plus} alt = "" />   
