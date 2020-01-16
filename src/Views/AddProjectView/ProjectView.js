@@ -26,7 +26,12 @@ const ProjectView = () => {
 
     const renderProjects = (projects) => {
         return projects.map (projectCard => {
-            return (<ProjectCard key = {projectCard.id} name = {projectCard.name}/>)
+            return (<ProjectCard 
+                key = {projectCard.id} 
+                name = {projectCard.name} 
+                description ={projectCard.description}
+                id = {projectCard.id}
+                />)
         })
     }
 
@@ -59,8 +64,8 @@ const ProjectView = () => {
             <p className = "Header">
                 Your Projects
             </p>
-            <ProjectCard title = "Acme Inc. Landing Page Design" />
-            <ProjectCard title = "Office Renovation" />
+            <ProjectCard name = "Acme Inc. Landing Page Design" />
+            <ProjectCard name = "Office Renovation" />
             {renderProjects(projects)}
             <AddProjectCard />
             <Link to = "/userfetch">

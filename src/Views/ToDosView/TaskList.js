@@ -19,7 +19,7 @@ const TaskList = (props) =>{
                         {props.name}
                     </p>
                     <p className = "Small">
-                        {props.descrip} 
+                        {props.description} 
                     </p> 
                         <input type = "checkbox" /*checked = {checked} onChange = {handleClick}*//> 
                         <span className="WhiteBox"></span> 

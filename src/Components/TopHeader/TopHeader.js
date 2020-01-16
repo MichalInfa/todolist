@@ -8,15 +8,15 @@ const TopHeader = (props) => {
         case "backtodos":
             return(
                 <div className = "TopHeader">
-                    <Link to = "../">back to Project </Link>
+                    <Link to = "../../../../">back to Project </Link>
                     >
-                    <Link to = "/projects"> back to To-Dos</Link>
+                    <Link to = "../../"> back to To-Dos</Link>
                 </div>
             );
         default:
             return(
                 <div className = "TopHeader">
-                    <Link to = "../">back to Project </Link>
+                    <Link to = "../../">back to Project </Link>
                 </div>
             );
     }

@@ -4,17 +4,17 @@ import {Link} from 'react-router-dom'
 
 const ListCard = (props) =>{
 
+   console.log(props)
     return (
         <div>
                 <p className = "Circle" />
                 <p className = "Light">
                     0/0 complete   
                 </p> 
-                <Link to = {"/projects/" + props.name}>
+                <Link to = {"/projects/" + props.projectid + "/to_do_lists/" + props.taskid + "/tasks"}>
                     <p className = "BigFont">
                         {props.name} 
                     </p>
-                    {console.log(props.name)}
                 </Link>
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import TopHeader from '../../Components/TopHeader/TopHeader';
 import Button from '../../Components/Button/Button';
 import './ToDos.css';
@@ -9,19 +9,20 @@ import AddNewTask from './AddNewTask';
 const ToDos = (props) => {
 
     const[text, setText] = useState("");
-    const[description, setDescription] = useState("");
+    const[descript, setDescription] = useState("");
     const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
 
     const {id} = props.match.params
+    const {taskid} = props.match.params;
 
     const renderTaskList = (tasklists) => {
         return tasklists.map (taskList => {
             return (<TaskList 
                 key = {taskList.id} 
                 name = {taskList.name} 
-                descrip = {taskList.descrip}
-                checked = {tasklists.checked}
+                description = {taskList.description}
+                //checked = {tasklists.checked}
                 //onChildClick = {handleTaskList}
                 />)
         })
@@ -33,8 +34,39 @@ const ToDos = (props) => {
             {
                 id: tasklists.length, 
                 name: text,  
-                descrip: description /* checked: false*/}])
+                description: descript,
+                /*duedate: date,
+                position: pos,
+                donestatus: status,
+                 /*checked: false*/}])
     }
+
+useEffect(() => {
+
+    fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks')
+    .then(resp => {
+        if(resp.status !== 200){
+            return null;
+        }else{
+            return resp.json();
+        }
+    })
+    .then(resp => {
+        if(!null){
+            setTaskList(resp)
+        }else{
+            console.log("Null!");
+        }
+    })
+    .catch(error => {
+        if(error.status === 401){ 
+            console.log("Blad: Zadany adres nie istnieje")
+        }
+    }); 
+
+
+},[id,taskid])
+
  /*
     const[donetaskslist, setDoneTask] = useState([]);
 
@@ -52,7 +84,7 @@ const ToDos = (props) => {
                 inputText = {text} 
                 onInputChange = {(event) => {setText(event.target.value)}}
                 
-                inputDescription = {description}
+                inputDescription = {descript}
                 onDescriptionChange = {(event) => {setDescription(event.target.value)}}
             
                 buttonCondition = {text.length}
@@ -82,13 +114,12 @@ const ToDos = (props) => {
                             0/0 complete   
                         </p> 
                         <p className = "BigFontToDoPoint">
-                            {id} 
+                            {taskid}
                         </p>
                     </div>
                     <div>
                         <div>
                             {renderTaskList(tasklists)}
-                            {console.log(tasklists)}
                         </div>
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>

@@ -29,7 +29,7 @@ const AddNewTask = (props) => {
                     
                 <Button 
                     buttonText = {"Cancel"}
-                    buttonClass = {"Button. " + "Cancel"}
+                    buttonClass = {"Button. Cancel"}
                     onClickFunction = {props.onClickCancelButton}
                 />
             </form>
