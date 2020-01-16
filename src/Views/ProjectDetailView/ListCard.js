@@ -3,8 +3,6 @@ import './ListCard.css'
 import {Link} from 'react-router-dom'
 
 const ListCard = (props) =>{
-
-   console.log(props)
     return (
         <div>
                 <p className = "Circle" />

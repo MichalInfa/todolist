@@ -9,6 +9,7 @@ const ProjectDetailView = (props) => {
     const[text, setText] = useState("");
     const[todolists, setTodolist] = useState([]);
     const {id} = props.match.params
+
     useEffect (() => {       
         
         fetch('http://localhost:3000/projects/'+ id + '/to_do_lists')
@@ -43,10 +44,28 @@ const ProjectDetailView = (props) => {
         })
     }
 
-    const addItemToList = () => {
-        setTodolist([ ...todolists, {id: todolists.length, name: text}]);
-        console.log(todolists);
+    function addToDoList(){
+        const obj = {
+            name: text,
+            project_id: id
+        };
+        console.log("------obiekt dostarczany------")
+        console.log(text)
+        console.log(obj)
+        fetch('http://localhost:3000/projects/' + id + '/to_do_lists', {
+            method: "post",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log("dodalem todolist:")
+            console.log(res)
+        })
     }
+    
 
     return(
         <div>
@@ -70,8 +89,8 @@ const ProjectDetailView = (props) => {
                                 buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
                                 buttonText = {"Add on click"}
                                 onClickFunction = {() => {
-                                    addItemToList()
                                     setText("")
+                                    addToDoList()
                                 }
                             }/>
                         </form>

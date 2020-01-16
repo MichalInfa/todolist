@@ -4,13 +4,38 @@ import {useHistory} from 'react-router-dom'
 import './NewProjectForm.css'
 import symbol_2 from '../../Images/symbol_2.png'
 import Button from '../../Components/Button/Button'
+import TopHeader from '../../Components/TopHeader/TopHeader'
 
 const NewProjectForm = () => {
-    const[text, setText] = useState("");
+    const[projectname, setName] = useState("");
+    const[projectdescription, setDescription] = useState("");
+
+function addObject(){
+    const obj = {
+        name: projectname,
+        description: projectdescription
+    };
+    //console.log(projectname,projectdescription)
+    //console.log(obj)
+    fetch('http://localhost:3000/projects', {
+        method: "post",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(obj)
+    })
+    .then(res => res.json())
+    .then(res => {
+        //console.log("dodalem uzytkownika:")
+        //console.log(res)
+    })
+}
 
     let history = useHistory();
     return (
-        <div className = "Detail">
+        <div>
+            <TopHeader title = "backtoproject"/>
+        <div className = "Top">
             <div>
                 <img src = {symbol_2} alt = "" width = {200} height = {100}/>
                 <p className = "Heavy">
@@ -24,25 +49,30 @@ const NewProjectForm = () => {
                             Name this project
                         </p>
                         <input type = "text" placeholder = "e.g. Office renovation"
-                         onChange = {(event) => setText(event.target.value)}/>
+                         onChange = {(event) => setName(event.target.value)}/>
                     </label>
                     <label>
                         <br />
                         <p className = "Default">
                             Add an optional descripiton
                         </p>
-                        <input type = "textarea" className="Description" placeholder = "e.g. Plans and scheduling for expanding office" />
+                        <input type = "textarea" className="Description"
+                        placeholder = "e.g. Plans and scheduling for expanding office" 
+                        onChange = {(event) => setDescription(event.target.value)}/>
                     </label>
                     <Button type = "submit"
-                        disabledProperties = {text.trim().length  < 6}
-                        buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
+                        disabledProperties = {projectname.trim().length  < 6}
+                        buttonClass = {projectname.trim().length  > 5 ? "Proper" : "NotProper"}
                         buttonText = {"Submit"}
-                        onClickFunction = {() => history.push("/")}/>
-                    
+                        onClickFunction = {() => {
+                            addObject()
+                            history.push("/")
+                            }
+                        }/>
                 </form>
             </div>
         </div>
-        
+    </div> 
     )
 }
 

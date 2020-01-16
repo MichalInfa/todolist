@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import TopHeader from '../../Components/TopHeader/TopHeader';
 import Button from '../../Components/Button/Button';
-import './ToDos.css';
+import './ToDosView.css';
 import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
 
@@ -12,6 +12,8 @@ const ToDos = (props) => {
     const[descript, setDescription] = useState("");
     const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
+
+    const[taskname,setName] = useState("");
 
     const {id} = props.match.params
     const {taskid} = props.match.params;
@@ -24,6 +26,7 @@ const ToDos = (props) => {
                 description = {taskList.description}
                 //checked = {tasklists.checked}
                 //onChildClick = {handleTaskList}
+
                 />)
         })
     }
@@ -64,8 +67,33 @@ useEffect(() => {
         }
     }); 
 
+    fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid)
+        .then(resp => {
+            if(resp.status !== 200)
+            {
+                return null;
+            }
+            else
+            {
+                return resp.json();
+            }
+        })
+        .then(resp => {
+            if(!null){
+                console.log(resp.name);
+                setName(resp.name);
+            }
+            else{
+                console.log("Null!");
+            }
+        })
+        .catch(error => {
+            if(error.status === 401){ 
+                console.log("Blad: Zadany adres nie istnieje")
+            }
+        }); 
 
-},[id,taskid])
+},[id, taskid])
 
  /*
     const[donetaskslist, setDoneTask] = useState([]);
@@ -77,6 +105,8 @@ useEffect(() => {
         setTaskList([...tasklists, {id: done.length, name: done, checked: chkd}])
     }
 */
+
+
 
     const renderForm = () => {
         return (visibleform ?
@@ -114,7 +144,7 @@ useEffect(() => {
                             0/0 complete   
                         </p> 
                         <p className = "BigFontToDoPoint">
-                            {taskid}
+                            {taskname}
                         </p>
                     </div>
                     <div>

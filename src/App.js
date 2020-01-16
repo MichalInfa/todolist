@@ -3,7 +3,7 @@ import './App.css';
 import NewProjectView from './Views/NewProjectView/NewProjectForm';
 import ProjectDetailView from './Views/ProjectDetailView/ProjectDetailView';
 import UserFetch from './Components/UserFetch/UserFetch';
-import ToDosView from './Views/ToDosView/ToDos';
+import ToDosView from './Views/ToDosView/ToDosView';
 import ProjectView from './Views/AddProjectView/ProjectView';
 
 import {
