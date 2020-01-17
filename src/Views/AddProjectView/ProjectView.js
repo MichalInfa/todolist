@@ -46,7 +46,6 @@ const ProjectView = () => {
         })
         .then(resp => {
             if(!null){
-                console.log(resp);
                 setProject(resp)
             }else{
                 console.log("Null!");

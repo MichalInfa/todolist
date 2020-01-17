@@ -9,10 +9,9 @@ import TopHeader from '../../Components/TopHeader/TopHeader';
 const ToDos = (props) => {
 
     const[text, setText] = useState("");
-    const[subreddit, setSubreddit] = useState(text);
 
     const[descript, setDescription] = useState("");
-    const[subdesc, setDesc] = useState(descript);
+
     const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
 
@@ -35,7 +34,6 @@ const ToDos = (props) => {
     }
 
 useEffect(() => {
-
     fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks')
     .then(resp => {
         if(resp.status !== 200){
@@ -81,23 +79,17 @@ useEffect(() => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });
-},[id,subreddit,taskid,setName,setTaskList,subdesc])
+},[id,taskid,setName,setTaskList])
 
-   function addToDoList(){
-        const obj = {
-            name: text,
-            description: descript,
-            project_id: id,
-            to_do_lists: taskid
-        };
-        fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks', {
+ async function addToDoList(listElement = {}){
+        const respond = await fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks', {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify(listElement)
         })
-        .then(res => res.json())
+        return respond.json();
     } 
 
     const renderForm = () => {
@@ -111,12 +103,20 @@ useEffect(() => {
             
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
-                    addToDoList()
+                    addToDoList({
+                        name: text,
+                        description: descript,
+                        project_id: id,
+                        to_do_lists: taskid
+                        }).then((element) => {
+                            setTaskList([
+                                ...tasklists,
+                                element
+                            ])})
                     setText("")
-                    setSubreddit(text)
                     setDescription("")
-                    setDesc(descript)
-                }}
+                    }
+                }
 
                 onClickCancelButton = {() => {
                     setVisible(visibleform => !visibleform);

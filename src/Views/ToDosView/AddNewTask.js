@@ -19,7 +19,7 @@ const AddNewTask = (props) => {
                     <input className = "TextPosition" type = "text" placeholder = "Details.."
                     value = {props.inputDescription} onChange = {props.onDescriptionChange}/>
                 </label> 
-                
+                <br />
                 <Button
                     disabledProperties = {props.inputText.length < 6}
                     buttonClass = {props.inputText.length > 5 ? "Proper" : "NotProper"}

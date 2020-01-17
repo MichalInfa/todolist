@@ -7,7 +7,6 @@ import TopHeader from '../../Components/TopHeader/TopHeader';
 
 const ProjectDetailView = (props) => {
     const[text, setText] = useState("");
-    const[subreddit, setSubreddit] = useState(text);
 
     const[todolists, setTodolist] = useState([]);
     const {id} = props.match.params
@@ -33,7 +32,7 @@ const ProjectDetailView = (props) => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });      
-    },[id,subreddit,setTodolist]);
+    },[id,setTodolist]);
 
     const renderListCards = (todolists) => {
         return todolists.map (listCard => {
@@ -45,20 +44,36 @@ const ProjectDetailView = (props) => {
         })
     }
 
-    const addToDoList = () => {
-        const obj = {
-            name: text,
-            project_id: id
-        };
-        fetch('http://localhost:3000/projects/' + id + '/to_do_lists', {
+ async function addToDoList(listElement = {}) {
+        
+        const resp = await fetch('http://localhost:3000/projects/' + id + '/to_do_lists',{
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify(listElement)
         })
-        .then(res => res.json())
-    }
+        return resp.json(); 
+    // const obj = {
+    //         name: text,
+    //         project_id: id
+    //     };
+    //     const res = fetch('http://localhost:3000/projects/' + id + '/to_do_lists', {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-type": "application/json; charset=UTF-8"
+    //         },
+    //         body: JSON.stringify(obj)
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(res => { 
+    //         setTodolist(
+    //             [
+    //                 ...todolists,
+    //                 res
+    //             ])
+    //     }) 
+    };
 
     return(
         <div>
@@ -81,9 +96,13 @@ const ProjectDetailView = (props) => {
                                 buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
                                 buttonText = {"Add on click"}
                                 onClickFunction = {() => {
-                                    addToDoList()
+                                    addToDoList({name: text}).then((element) => {
+                                        setTodolist([
+                                            ...todolists,
+                                            element
+                                        ])
+                                    })
                                     setText("")
-                                    setSubreddit(text)
                                 }
                             }/>
                         </form>
