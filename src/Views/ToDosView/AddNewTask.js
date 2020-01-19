@@ -7,7 +7,8 @@ const AddNewTask = (props) => {
         <div className = "FormWrapper">
             <form onSubmit = {(event) => event.preventDefault()}>
                 <label className = "Box">
-                    <input className = "CheckboxPosition" type = "checkbox"/>
+                    <input className = "CheckboxPosition" type = "checkbox" 
+                    checked = {props.inputDoneStatus} onChange = {props.onDoneStatusChange}/>
                     <span className = "WhiteBox"></span> 
                 </label>
                 <label className = "BoxDescript">

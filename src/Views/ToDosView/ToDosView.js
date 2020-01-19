@@ -12,6 +12,8 @@ const ToDos = (props) => {
 
     const[descript, setDescription] = useState("");
 
+    const[donestat, setDoneStatus] = useState(false);
+
     const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
 
@@ -26,9 +28,25 @@ const ToDos = (props) => {
                 key = {taskList.id} 
                 name = {taskList.name} 
                 description = {taskList.description}
-                //checked = {tasklists.checked}
-                //onChildClick = {handleTaskList}
+                done_status = {taskList.done_status}
 
+                onStatusChange = {(event) => {
+                    addToDoList({
+                    key: taskList.id,
+                    name: taskList.name,
+                    description: taskList.description,
+                    project_id: id,
+                    to_do_lists: taskid,
+                    done_status: event.target.checked
+                    }).then((element) => {
+                        setTaskList([
+                            ...tasklists,
+                            element
+                        ])})               
+                }
+                }
+                
+                
                 />)
         })
     }
@@ -101,13 +119,17 @@ useEffect(() => {
                 inputDescription = {descript}
                 onDescriptionChange = {(event) => {setDescription(event.target.value)}}
             
+                inputDoneStatus = {donestat}
+                onDoneStatusChange = {(event) => {setDoneStatus(event.target.value)}}
+
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
                     addToDoList({
                         name: text,
                         description: descript,
                         project_id: id,
-                        to_do_lists: taskid
+                        to_do_lists: taskid,
+                        done_status: donestat
                         }).then((element) => {
                             setTaskList([
                                 ...tasklists,
@@ -115,6 +137,7 @@ useEffect(() => {
                             ])})
                     setText("")
                     setDescription("")
+                    setDoneStatus(false)
                     }
                 }
 
@@ -132,9 +155,10 @@ useEffect(() => {
                 <p />
                 <div className = "MiddlePart">
                     <div>
-                        <p className = "Circle" />
+                        <p className = "Circle" /> 
                         <p className = "Light">
-                            0/0 complete   
+                            {tasklists.filter(tasklists => tasklists.done_status === true).length}/
+                            {(tasklists.length)} complete
                         </p> 
                         <p className = "BigFontToDoPoint">
                             {taskname}
@@ -142,7 +166,9 @@ useEffect(() => {
                     </div>
                     <div>
                         <div>
-                            {renderTaskList(tasklists)}
+                            {
+                            renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))
+                            }
                         </div>
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>
@@ -154,7 +180,13 @@ useEffect(() => {
                             }}
                         />
                     </div>
-                    {renderForm()}
+                    <div>
+                        {renderForm()}
+                        {
+                        renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true))
+                        }
+                            
+                    </div>
                 </div>
             </div>
         </div>

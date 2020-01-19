@@ -40,7 +40,10 @@ const ProjectDetailView = (props) => {
                 key = {listCard.id}
                 name = {listCard.name}
                 projectid = {id}
-                taskid = {listCard.id}/>)
+                taskid = {listCard.id}            
+                />)
+                
+                
         })
     }
 
@@ -54,25 +57,6 @@ const ProjectDetailView = (props) => {
             body: JSON.stringify(listElement)
         })
         return resp.json(); 
-    // const obj = {
-    //         name: text,
-    //         project_id: id
-    //     };
-    //     const res = fetch('http://localhost:3000/projects/' + id + '/to_do_lists', {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-type": "application/json; charset=UTF-8"
-    //         },
-    //         body: JSON.stringify(obj)
-    //     })
-    //     .then(resp => resp.json())
-    //     .then(res => { 
-    //         setTodolist(
-    //             [
-    //                 ...todolists,
-    //                 res
-    //             ])
-    //     }) 
     };
 
     return(
