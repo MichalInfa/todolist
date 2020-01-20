@@ -6,6 +6,9 @@
 .Form{
     margin: 15px 25px;
 }
+.FullSize{
+    width: 100%;
+}
 
 .Default{
     text-align: left;
@@ -14,11 +17,14 @@
 }
 input[type = text]{ 
     text-align: left;
-    width: 100%;
 }
 
 input[type = textarea]{
     height: 100px;
     width: 100%;
     text-align: left;
+}
+
+.Description{
+    margin-bottom: 10px;
 }

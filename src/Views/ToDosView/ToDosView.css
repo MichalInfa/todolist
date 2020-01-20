@@ -10,5 +10,14 @@
     display: none;
 }
 .Block{
+    margin-left: 21px;
+    margin-bottom: 10px;
     display: block;
+}
+.MiddleToDoPart{
+    margin-top: 40px;
+    width: 75%;
+    display: inline-block;
+    text-align: left;
+    word-wrap: break-word; 
 }

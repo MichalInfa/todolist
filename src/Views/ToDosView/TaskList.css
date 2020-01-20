@@ -2,6 +2,7 @@
     font-size: 12px;
     margin-bottom: 0px;
     margin-top: 0px;
+    margin-left: 31px; 
 }
 
 .Small{
@@ -9,13 +10,18 @@
     margin-top: 0px;
     font-size: 10px;
     color: grey;
+    margin-left: 31px;
+}
+
+.BoxContainter{
+    margin-left: 23px;
+    height: 45px;
+    box-sizing: border-box;
 }
 
 .Box{
-    margin-left: 11px;
     display: block; 
     position: relative; 
-    padding-left: 31px; 
     cursor: pointer; 
 }   
 
@@ -24,13 +30,12 @@
     height: 0px;
     width: 0px;
     margin-bottom: 0px;
-    margin-top: 0px;
-    visibility: hidden; 
+    visibility: hidden;
 }
  
-.WhiteBox { 
+.WhiteBox {
     position: absolute; 
-    top: 0; 
+    top: 3px; 
     left: 0; 
     height: 20px; 
     width: 20px; 

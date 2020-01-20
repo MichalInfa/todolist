@@ -11,23 +11,20 @@ const TaskList = (props) =>{
     }
 */
     return (
-        <div>
-            <div>
+            <div className = "BoxContainter">
                 <form>
                     <label className="Box">
-                    <p className = "Normal">
+                    <div className = "Normal">
                         {props.name}
-                    </p>
-                    <p className = "Small">
+                    </div>
+                    <div className = "Small">
                         {props.description} 
-                    </p> 
+                    </div> 
                         <input type = "checkbox" checked = {props.done_status} onChange = {props.onStatusChange}/> 
                         <span className="WhiteBox"></span> 
                     </label>
                 </form> 
             </div>
-                
-        </div>
     )
 }
 

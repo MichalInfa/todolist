@@ -45,8 +45,6 @@ const ToDos = (props) => {
                         ])})               
                 }
                 }
-                
-                
                 />)
         })
     }
@@ -118,9 +116,9 @@ useEffect(() => {
                 
                 inputDescription = {descript}
                 onDescriptionChange = {(event) => {setDescription(event.target.value)}}
-            
+               
                 inputDoneStatus = {donestat}
-                onDoneStatusChange = {(event) => {setDoneStatus(event.target.value)}}
+                onDoneStatusChange = {(event) => {setDoneStatus(event.target.checked)}}
 
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
@@ -152,8 +150,7 @@ useEffect(() => {
         <div>
             <TopHeader title = "backtodos" />
             <div className = "Top">
-                <p />
-                <div className = "MiddlePart">
+                <div className = "MiddleToDoPart">
                     <div>
                         <p className = "Circle" /> 
                         <p className = "Light">
@@ -165,15 +162,11 @@ useEffect(() => {
                         </p>
                     </div>
                     <div>
-                        <div>
-                            {
-                            renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))
-                            }
-                        </div>
+                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))}
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>
                         <Button 
-                            buttonText = "Add a to-do"
+                            buttonText = "Add this to-do"
                             buttonClass = "Proper"
                             onClickFunction = {() => {
                                 setVisible(visibleform => !visibleform);
@@ -182,10 +175,7 @@ useEffect(() => {
                     </div>
                     <div>
                         {renderForm()}
-                        {
-                        renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true))
-                        }
-                            
+                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true))}
                     </div>
                 </div>
             </div>

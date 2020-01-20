@@ -41,9 +41,7 @@ const ProjectDetailView = (props) => {
                 name = {listCard.name}
                 projectid = {id}
                 taskid = {listCard.id}            
-                />)
-                
-                
+                />)               
         })
     }
 
@@ -65,7 +63,7 @@ const ProjectDetailView = (props) => {
             <div className = "Top">
                 <p className = "Heavy"> To-dos </p>
                 <hr />
-                <div className = "MiddlePart">
+                <div className = "MiddleDetailViewPart">
                     <div>
                         {renderListCards(todolists)}
                     </div>
@@ -75,6 +73,7 @@ const ProjectDetailView = (props) => {
                                 <input className="NoOutline" type = "text" placeholder = "Name this list..."
                                 value = {text} onChange = {(event) => setText(event.target.value)}/>
                             </label>
+                            <div className = "ButtonsFormPosition">
                             <Button type = "submit" 
                                 disabledProperties = {text.trim().length  < 6}
                                 buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
@@ -89,6 +88,7 @@ const ProjectDetailView = (props) => {
                                     setText("")
                                 }
                             }/>
+                            </div>
                         </form>
                     </div>
                 </div>

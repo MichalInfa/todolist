@@ -42,7 +42,7 @@ function addObject(){
                         <p className = "Default">
                             Name this project
                         </p>
-                        <input type = "text" placeholder = "e.g. Office renovation"
+                        <input className = "FullSize" type = "text" placeholder = "e.g. Office renovation"
                          onChange = {(event) => setName(event.target.value)}/>
                     </label>
                     <label>
@@ -57,7 +57,7 @@ function addObject(){
                     <Button type = "submit"
                         disabledProperties = {projectname.trim().length  < 6}
                         buttonClass = {projectname.trim().length  > 5 ? "Proper" : "NotProper"}
-                        buttonText = {"Submit"}
+                        buttonText = {"Create this project"}
                         onClickFunction = {() => {
                             addObject()
                             history.push("/")
