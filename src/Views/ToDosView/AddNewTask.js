@@ -1,8 +1,8 @@
 import React from 'react'
 import './AddNewTask.css'
 import Button from '../../Components/Button/Button'
-const AddNewTask = (props) => {
 
+const AddNewTask = (props) => {
     return (
         <div className = "FormWrapper">
             <form onSubmit = {(event) => event.preventDefault()}>

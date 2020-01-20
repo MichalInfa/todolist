@@ -1,12 +1,13 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import {useParams} from 'react-router';
 import Button from '../../Components/Button/Button';
 import './ToDosView.css';
 import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
 import TopHeader from '../../Components/TopHeader/TopHeader';
 
-const ToDos = (props) => {
+const ToDos = () => {
 
     const[text, setText] = useState("");
 
@@ -19,9 +20,10 @@ const ToDos = (props) => {
 
     const[taskname,setName] = useState("");
 
-    const {id} = props.match.params
-    const {taskid} = props.match.params;
+    let {projectid} = useParams()
+    let {listid} = useParams()
 
+    console.log(listid)
     const renderTaskList = (tasklists) => {
         return tasklists.map (taskList => {
             return (<TaskList 
@@ -31,12 +33,10 @@ const ToDos = (props) => {
                 done_status = {taskList.done_status}
 
                 onStatusChange = {(event) => {
-                    addToDoList({
+                    addToDoList(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
                     key: taskList.id,
                     name: taskList.name,
                     description: taskList.description,
-                    project_id: id,
-                    to_do_lists: taskid,
                     done_status: event.target.checked
                     }).then((element) => {
                         setTaskList([
@@ -50,7 +50,7 @@ const ToDos = (props) => {
     }
 
 useEffect(() => {
-    fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks')
+    fetch(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`)
     .then(resp => {
         if(resp.status !== 200){
             return null;
@@ -71,7 +71,7 @@ useEffect(() => {
         }
     }); 
 
-    fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid)
+    fetch(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}`)
         .then(resp => {
             if(resp.status !== 200)
             {
@@ -95,10 +95,10 @@ useEffect(() => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });
-},[id,taskid,setName,setTaskList])
+},[projectid,listid,setName,setTaskList])
 
- async function addToDoList(listElement = {}){
-        const respond = await fetch('http://localhost:3000/projects/'+ id + '/to_do_lists/' + taskid + '/tasks', {
+ async function addToDoList(url = '', listElement = {}){
+        const respond = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -122,11 +122,9 @@ useEffect(() => {
 
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
-                    addToDoList({
+                    addToDoList(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,
-                        project_id: id,
-                        to_do_lists: taskid,
                         done_status: donestat
                         }).then((element) => {
                             setTaskList([
@@ -140,6 +138,9 @@ useEffect(() => {
                 }
 
                 onClickCancelButton = {() => {
+                    setText("")
+                    setDescription("")
+                    setDoneStatus(false)
                     setVisible(visibleform => !visibleform);
                 } } 
                 />: null
@@ -155,14 +156,14 @@ useEffect(() => {
                         <p className = "Circle" /> 
                         <p className = "Light">
                             {tasklists.filter(tasklists => tasklists.done_status === true).length}/
-                            {(tasklists.length)} complete
+                            {(tasklists.length)} complete 
                         </p> 
                         <p className = "BigFontToDoPoint">
                             {taskname}
                         </p>
                     </div>
                     <div>
-                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))}
+                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))} 
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>
                         <Button 

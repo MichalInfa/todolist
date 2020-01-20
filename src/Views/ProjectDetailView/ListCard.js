@@ -17,6 +17,7 @@ const ListCard = (props) =>{
         })
         .then(resp => {
             if(!null){
+                console.log(resp)
                 setTaskList(resp)
             }else{
                 console.log("Null!");

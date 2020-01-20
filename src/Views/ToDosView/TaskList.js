@@ -3,13 +3,6 @@ import './TaskList.css'
 
 const TaskList = (props) =>{
 
-    
-/*
-    const handleClick = (event) => {      
-        console.log(name, event.target.checked)
-        onChildClick(name, event.target.checked)
-    }
-*/
     return (
             <div className = "BoxContainter">
                 <form>

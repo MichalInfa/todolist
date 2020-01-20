@@ -2,17 +2,19 @@ import React from 'react';
 import './ProjectDetailView.css';
 import ListCard from './ListCard';
 import {useState, useEffect} from 'react';
+import {useParams} from 'react-router';
 import Button from '../../Components/Button/Button';
 import TopHeader from '../../Components/TopHeader/TopHeader';
 
-const ProjectDetailView = (props) => {
+const ProjectDetailView = () => {
     const[text, setText] = useState("");
 
     const[todolists, setTodolist] = useState([]);
-    const {id} = props.match.params
+    
+    let {projectid} = useParams();
 
     useEffect (() => {   
-        fetch('http://localhost:3000/projects/'+ id + '/to_do_lists')
+        fetch(`http://localhost:3000/projects/${projectid}/to_do_lists`)
         .then(resp => {
             if(resp.status !== 200){
                 return null;
@@ -32,14 +34,14 @@ const ProjectDetailView = (props) => {
                 console.log("Blad: Zadany adres nie istnieje")
             }
         });      
-    },[id,setTodolist]);
+    },[projectid,setTodolist]);
 
     const renderListCards = (todolists) => {
         return todolists.map (listCard => {
             return (<ListCard 
                 key = {listCard.id}
                 name = {listCard.name}
-                projectid = {id}
+                projectid = {projectid}
                 taskid = {listCard.id}            
                 />)               
         })
@@ -47,7 +49,7 @@ const ProjectDetailView = (props) => {
 
  async function addToDoList(listElement = {}) {
         
-        const resp = await fetch('http://localhost:3000/projects/' + id + '/to_do_lists',{
+        const resp = await fetch(`http://localhost:3000/projects/${projectid}/to_do_lists`,{
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
