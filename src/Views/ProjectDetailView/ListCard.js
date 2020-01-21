@@ -17,17 +17,14 @@ const ListCard = (props) =>{
         })
         .then(resp => {
             if(!null){
-                console.log(resp)
                 setTaskList(resp)
             }else{
                 console.log("Null!");
             }
         })
         .catch(error => {
-            if(error.status === 401){ 
-                console.log("Blad: Zadany adres nie istnieje")
-            }
-        }); 
+            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
+        });
     },[props.projectid,props.taskid,setTaskList])
  
     return (

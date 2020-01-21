@@ -23,7 +23,6 @@ const ToDos = () => {
     let {projectid} = useParams()
     let {listid} = useParams()
 
-    console.log(listid)
     const renderTaskList = (tasklists) => {
         return tasklists.map (taskList => {
             return (<TaskList 
@@ -66,10 +65,8 @@ useEffect(() => {
         }
     })
     .catch(error => {
-        if(error.status === 401){ 
-            console.log("Blad: Zadany adres nie istnieje")
-        }
-    }); 
+        return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
+    });
 
     fetch(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}`)
         .then(resp => {
@@ -91,13 +88,11 @@ useEffect(() => {
             }
         })
         .catch(error => {
-            if(error.status === 401){ 
-                console.log("Blad: Zadany adres nie istnieje")
-            }
+            return alert("Failed GET request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
         });
 },[projectid,listid,setName,setTaskList])
 
- async function addToDoList(url = '', listElement = {}){
+    async function addToDoList(url = '', listElement = {}){
         const respond = await fetch(url, {
             method: "POST",
             headers: {
@@ -122,15 +117,21 @@ useEffect(() => {
 
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
+                    
                     addToDoList(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,
                         done_status: donestat
-                        }).then((element) => {
-                            setTaskList([
-                                ...tasklists,
-                                element
-                            ])})
+                        })
+                    .then((element) => {
+                        setTaskList([
+                            ...tasklists,
+                            element
+                        ])})
+                    .catch(error => {
+                        return alert("Failed POST request from ToDosView. \nDetailed error: \"" + error + "\"");
+                    })
+                            
                     setText("")
                     setDescription("")
                     setDoneStatus(false)

@@ -29,11 +29,9 @@ const ProjectDetailView = () => {
                 console.log("Null!");
             }
         })
-        .catch(error => {
-            if(error.status === 401){ 
-                console.log("Blad: Zadany adres nie istnieje")
-            }
-        });      
+        .catch(error => {   
+            return alert("Failed GET request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
+        });          
     },[projectid,setTodolist]);
 
     const renderListCards = (todolists) => {
@@ -48,16 +46,15 @@ const ProjectDetailView = () => {
     }
 
  async function addToDoList(listElement = {}) {
-        
-        const resp = await fetch(`http://localhost:3000/projects/${projectid}/to_do_lists`,{
-            method: "POST",
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify(listElement)
-        })
-        return resp.json(); 
-    };
+    const resp = await fetch(`http://localhost:3000/projects/${projectid}/to_do_lists`,{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(listElement)
+    })
+    return resp.json(); 
+};
 
     return(
         <div>
@@ -81,11 +78,16 @@ const ProjectDetailView = () => {
                                 buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}
                                 buttonText = {"Add on click"}
                                 onClickFunction = {() => {
-                                    addToDoList({name: text}).then((element) => {
+                                    
+                                    addToDoList({name: text})
+                                    .then((element) => {
                                         setTodolist([
                                             ...todolists,
                                             element
                                         ])
+                                    })
+                                    .catch(error => {
+                                        return alert("Failed POST request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
                                     })
                                     setText("")
                                 }

@@ -36,9 +36,7 @@ const ProjectView = () => {
             }
         })
         .catch(error => {
-            if(error.status === 401){ 
-                console.log("Blad: Zadany adres nie istnieje")
-            }
+            return alert("Failed GET request from ProjectView. \nDetailed error: \"" + error + "\"");
         });      
     },[]);
 
@@ -47,8 +45,6 @@ const ProjectView = () => {
             <p className = "Header">
                 Your Projects
             </p>
-            <ProjectCard name = "Acme Inc. Landing Page Design" />
-            <ProjectCard name = "Office Renovation" />
             {renderProjects(projects)}
             <AddProjectCard />
         </div> 

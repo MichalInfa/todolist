@@ -23,6 +23,9 @@ function addObject(){
         body: JSON.stringify(obj)
     })
     .then(res => res.json())
+    .catch(error => {
+        return alert("Failed POST request from NewProjectView. \nDetailed error: \"" + error + "\"");
+    })
 }
 
     let history = useHistory();
