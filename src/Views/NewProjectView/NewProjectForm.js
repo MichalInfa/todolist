@@ -8,6 +8,7 @@ import TopHeader from '../../Components/TopHeader/TopHeader'
 
 const NewProjectForm = () => {
     const[projectname, setName] = useState("");
+    
     const[projectdescription, setDescription] = useState("");
 
 function addObject(){
@@ -15,7 +16,9 @@ function addObject(){
         name: projectname,
         description: projectdescription
     };
-    fetch('http://localhost:3000/projects', {
+
+
+    fetch('http://139.162.159.44:3000/projects', {
         method: "POST",
         headers: {
             "Content-type": "application/json; charset=UTF-8"

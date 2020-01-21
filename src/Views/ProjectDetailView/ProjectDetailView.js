@@ -14,7 +14,7 @@ const ProjectDetailView = () => {
     let {projectid} = useParams();
 
     useEffect (() => {   
-        fetch(`http://localhost:3000/projects/${projectid}/to_do_lists`)
+        fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists`)
         .then(resp => {
             if(resp.status !== 200){
                 return null;
@@ -46,7 +46,7 @@ const ProjectDetailView = () => {
     }
 
  async function addToDoList(listElement = {}) {
-    const resp = await fetch(`http://localhost:3000/projects/${projectid}/to_do_lists`,{
+    const resp = await fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists`,{
         method: "POST",
         headers: {
             "Content-type": "application/json; charset=UTF-8"

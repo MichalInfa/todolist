@@ -32,7 +32,7 @@ const ToDos = () => {
                 done_status = {taskList.done_status}
 
                 onStatusChange = {(event) => {
-                    addToDoList(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
+                    addToDoList(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
                     key: taskList.id,
                     name: taskList.name,
                     description: taskList.description,
@@ -49,7 +49,7 @@ const ToDos = () => {
     }
 
 useEffect(() => {
-    fetch(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`)
+    fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}/tasks`)
     .then(resp => {
         if(resp.status !== 200){
             return null;
@@ -68,7 +68,7 @@ useEffect(() => {
         return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
     });
 
-    fetch(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}`)
+    fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}`)
         .then(resp => {
             if(resp.status !== 200)
             {
@@ -118,7 +118,7 @@ useEffect(() => {
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
                     
-                    addToDoList(`http://localhost:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
+                    addToDoList(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,
                         done_status: donestat

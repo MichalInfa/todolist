@@ -7,7 +7,7 @@ const ListCard = (props) =>{
     const[tasklists, setTaskList] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/projects/'+ props.projectid + '/to_do_lists/' + props.taskid + '/tasks')
+        fetch('http://139.162.159.44:3000/projects/'+ props.projectid + '/to_do_lists/' + props.taskid + '/tasks')
         .then(resp => {
             if(resp.status !== 200){
                 return null;
