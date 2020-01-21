@@ -57,7 +57,7 @@ async function addObject(url = '', listElement = {}){
                         buttonText = {"Create this project"}
                         onClickFunction = {() => {
 
-                            addObject(`http://localhost:3000/projects`,{
+                            addObject(`http://139.162.159.44:3000/projects`,{
                                 name: projectname,
                                 description: projectdescription
                                 })
