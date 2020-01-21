@@ -11,25 +11,16 @@ const NewProjectForm = () => {
     
     const[projectdescription, setDescription] = useState("");
 
-function addObject(){
-    const obj = {
-        name: projectname,
-        description: projectdescription
-    };
-
-
-    fetch('http://139.162.159.44:3000/projects', {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify(obj)
-    })
-    .then(res => res.json())
-    .catch(error => {
-        return alert("Failed POST request from NewProjectView. \nDetailed error: \"" + error + "\"");
-    })
-}
+async function addObject(url = '', listElement = {}){
+        const respond = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(listElement)
+        })
+        return respond.json()
+    } 
 
     let history = useHistory();
     return (
@@ -65,8 +56,19 @@ function addObject(){
                         buttonClass = {projectname.trim().length  > 5 ? "Proper" : "NotProper"}
                         buttonText = {"Create this project"}
                         onClickFunction = {() => {
-                            addObject()
-                            history.push("/")
+
+                            addObject(`http://localhost:3000/projects`,{
+                                name: projectname,
+                                description: projectdescription
+                                })
+                            .then(respond => {
+                                if(respond != null){
+                                history.push("/")
+                                }
+                            })
+                            .catch(error => {
+                                return alert("Failed POST request from NewProjectView. \nDetailed error: \"" + error + "\"");    
+                            })
                             }
                         }/>
                 </form>
