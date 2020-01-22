@@ -31,6 +31,7 @@ textarea{
 }
 
 .Description{
+    padding-top: 6px;
     border: none;
     resize: none;
 }
@@ -39,11 +40,16 @@ textarea{
     width: 200px;
     height: 100px;
 }
+/*233, 227, 225*/
 
 .BorderForm{
-    border: 1px solid rgb(233, 227, 225);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-shadow: 
+        0 0 1px rgba(0,0,0,.25),
+        0 1px 3px rgba(0,0,0,.1);
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 @media screen and (max-width: 420px){

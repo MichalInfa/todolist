@@ -6,9 +6,11 @@
     min-height: 120px;
     margin: 10px 20%;
     padding: 10px;
-    border: 1px solid rgb(233, 227, 225);
     background-color: white;
     border-radius: 7px;
+    box-shadow: 
+        0 0 1px rgba(0,0,0,.25),
+        0 1px 3px rgba(0,0,0,.1);
     word-wrap: break-word;
 }
 

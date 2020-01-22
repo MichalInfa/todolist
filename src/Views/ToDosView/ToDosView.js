@@ -26,8 +26,8 @@ const ToDos = () => {
     let {projectid} = useParams()
     let {listid} = useParams()
 
-    const renderTaskList = (tasklists) => {
-        return tasklists.map (taskList => {
+    const renderTaskList = (tasklistfiltered) => {
+        return tasklistfiltered.map (taskList => {
             return (<TaskList 
                 key = {taskList.id} 
                 name = {taskList.name} 
@@ -35,18 +35,18 @@ const ToDos = () => {
                 done_status = {taskList.done_status}
 
                 onStatusChange = {(event) => {
-                    addToDoList(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`,{
-                    key: taskList.id,
-                    name: taskList.name,
-                    description: taskList.description,
+                    updateDoneStatus(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks/${taskList.id}`,{
                     done_status: event.target.checked
-                    }).then((element) => {
+                    })
+                    .then((element) => {
+                        tasklists.splice(indexOfElement(taskList.id),1)
                         setTaskList([
                             ...tasklists,
                             element
-                        ])})               
+                        ])
+                    })}   
                 }
-                }
+
                 />)
         })
     }
@@ -106,6 +106,26 @@ useEffect(() => {
         return respond.json();
     } 
 
+    async function updateDoneStatus(url = '', listElement = {}){
+        const respond = await fetch(url, {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(listElement)
+        })
+        return respond.json();
+    }
+
+    const indexOfElement = (itemId) => {
+        for(let i = 0; i < tasklists.length; i++)
+        {
+            if(tasklists[i].id === itemId)
+                return i;
+        }
+        return null;
+    }
+
     const renderForm = () => {
         return (visibleform ?
             <AddNewTask
@@ -117,7 +137,7 @@ useEffect(() => {
                
                 inputDoneStatus = {donestat}
                 onDoneStatusChange = {(event) => {setDoneStatus(event.target.checked)}}
-
+                
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
                     
@@ -167,7 +187,8 @@ useEffect(() => {
                         </p>
                     </div>
                     <div>
-                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))} 
+                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))
+                        } 
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>
                         <Button 
@@ -180,7 +201,8 @@ useEffect(() => {
                     </div>
                     <div>
                         {renderForm()}
-                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true))}
+                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true))
+                        }
                     </div>
                 </div>
             </div>

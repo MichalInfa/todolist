@@ -21,7 +21,9 @@ input.TextPosition{
 
 .FormWrapper{
     margin-bottom: 15px;
-    border: 1px solid rgb(211, 208, 208);
+    box-shadow: 
+        0 0 1px rgba(0,0,0,.25),
+        0 1px 3px rgba(0,0,0,.1);
     border-radius: 2px;
     box-sizing: border-box;
 }

@@ -9,7 +9,6 @@
 .Proper{
     color: white;
     background-color: rgb(102, 187, 102);
-    border: 1px solid rgb(102, 187, 102);
 }
 
 .Proper:hover{
@@ -24,5 +23,4 @@
 .Cancel{
     color: white;
     background-color: rgb(102, 187, 102);
-    border: 1px solid rgb(102, 187, 102);
 }
