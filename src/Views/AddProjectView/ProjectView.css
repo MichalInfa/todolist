@@ -3,3 +3,11 @@
     font-weight: 700;
     color: rgb(66, 64, 64);
 }
+
+@media screen and (max-width: 420px)
+{
+    .Header{
+        font-size: 15px;
+        font-weight: 700;
+    }
+}

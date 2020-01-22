@@ -2,12 +2,14 @@ import React from 'react'
 import {useState,useEffect} from 'react'
 import './ListCard.css'
 import {Link} from 'react-router-dom'
+import {PROJECT_URL} from '../../constants'
+
 
 const ListCard = (props) =>{
     const[tasklists, setTaskList] = useState([]);
 
     useEffect(() => {
-        fetch('http://139.162.159.44:3000/projects/'+ props.projectid + '/to_do_lists/' + props.taskid + '/tasks')
+        fetch(PROJECT_URL + '/' + props.projectid + '/to_do_lists/' + props.taskid + '/tasks')
         .then(resp => {
             if(resp.status !== 200){
                 return null;

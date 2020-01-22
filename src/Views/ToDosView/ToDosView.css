@@ -1,3 +1,12 @@
+.ToDoCircle{
+    margin-bottom: 0px;
+    margin-top: 18px;
+    width: 15px;
+    height: 15px;
+    background: rgb(82, 167, 82);
+    border-radius: 10px;
+    float: left;
+}
 
 .BigFontToDoPoint{
     margin-bottom: 20px;
@@ -20,4 +29,21 @@
     display: inline-block;
     text-align: left;
     word-wrap: break-word; 
+}
+
+@media screen and (max-width: 580px){
+    .BigFontToDoPoint{
+        font-size: 15px;
+    }
+
+    .Block{
+        margin-left: 11px;
+    }
+
+    .MiddleToDoPart{
+        width: 85%;
+    }
+    .ToDoCircle{
+        margin-top: 15px;
+    }
 }

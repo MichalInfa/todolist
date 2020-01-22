@@ -6,6 +6,7 @@ import AddProjectCard from './AddProjectCard';
 import './ProjectView.css'
 
 const ProjectView = () => {
+    document.title = `Your Projects`
     const[projects, setProject] = useState([]);
 
     const renderProjects = (projects) => {

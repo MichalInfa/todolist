@@ -8,3 +8,18 @@
     color: rgb(66, 64, 64);
     background-color: white;
 }
+
+.SmallAddLogo{
+    width: 100px;
+    height: 100px;
+}
+
+@media screen and (max-width: 420px){
+    .AddProjectCard{
+        font-size: 10px;
+    }
+    .SmallAddLogo{
+        width: 60px;
+        height: 60px;
+    }
+}

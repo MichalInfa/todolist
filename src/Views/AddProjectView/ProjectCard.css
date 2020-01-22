@@ -9,7 +9,7 @@
     border: 1px solid rgb(233, 227, 225);
     background-color: white;
     border-radius: 7px;
-    
+    word-wrap: break-word;
 }
 
 .ProjectCardDescription{
@@ -17,4 +17,19 @@
     margin-left: 20px;
     text-align: left;
     font-size: 12px;
+}
+
+@media screen and (max-width: 420px)
+{
+    .ProjectCard{
+        min-height: 60px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .ProjectCardDescription{
+        font-size: 9px;
+        margin-top: 10px;
+        margin-left: 15px;
+    }
 }

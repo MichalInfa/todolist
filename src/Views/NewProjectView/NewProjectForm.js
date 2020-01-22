@@ -5,8 +5,10 @@ import './NewProjectForm.css'
 import symbol_2 from '../../Images/symbol_2.png'
 import Button from '../../Components/Button/Button'
 import TopHeader from '../../Components/TopHeader/TopHeader'
+import {PROJECT_URL} from '../../constants'
 
 const NewProjectForm = () => {
+    document.title = `Add project`
     const[projectname, setName] = useState("");
     
     const[projectdescription, setDescription] = useState("");
@@ -28,10 +30,10 @@ async function addObject(url = '', listElement = {}){
             <TopHeader title = "backtoproject" />
         <div className = "Top">
             <div>
-                <img src = {symbol_2} alt = "" width = {200} height = {100}/>
-                <p className = "Heavy">
+                <img className = "SmallLogo" src = {symbol_2} alt = ""/>
+                <div className = "HeavyTitle">
                     All right, let's get your project started!<br />
-                </p>
+                </div>
             </div>
             <div className = "Form">
                 <form onSubmit = {(event) => event.preventDefault()}>
@@ -39,17 +41,20 @@ async function addObject(url = '', listElement = {}){
                         <p className = "Default">
                             Name this project
                         </p>
-                        <input className = "FullSize" type = "text" placeholder = "e.g. Office renovation"
-                         onChange = {(event) => setName(event.target.value)}/>
+                        <div className = "BorderForm">
+                            <input className = "FullSize" type = "text" placeholder = "e.g. Office renovation"
+                            onChange = {(event) => setName(event.target.value)}/>
+                         </div>
                     </label>
                     <label>
-                        <br />
                         <p className = "Default">
                             Add an optional descripiton
                         </p>
-                        <input type = "textarea" className="Description"
-                        placeholder = "e.g. Plans and scheduling for expanding office" 
-                        onChange = {(event) => setDescription(event.target.value)}/>
+                        <div className = "BorderForm">
+                        <textarea className="Description"
+                            placeholder = "e.g. Plans and scheduling for expanding office" 
+                            onChange = {(event) => setDescription(event.target.value)}/>
+                        </div>
                     </label>
                     <Button type = "submit"
                         disabledProperties = {projectname.trim().length  < 6}
@@ -57,7 +62,7 @@ async function addObject(url = '', listElement = {}){
                         buttonText = {"Create this project"}
                         onClickFunction = {() => {
 
-                            addObject(`http://139.162.159.44:3000/projects`,{
+                            addObject(PROJECT_URL,{
                                 name: projectname,
                                 description: projectdescription
                                 })

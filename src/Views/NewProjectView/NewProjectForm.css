@@ -1,4 +1,4 @@
-.Heavy{
+.HeavyTitle{
     font-size: 20px;
     font-weight: 700;
 }
@@ -6,25 +6,58 @@
 .Form{
     margin: 15px 25px;
 }
-.FullSize{
-    width: 100%;
+
+input.FullSize{
+    width: 90%;
+    border: none;
+    outline: none;
 }
 
 .Default{
     text-align: left;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: 700;
 }
+
 input[type = text]{ 
     text-align: left;
 }
 
-input[type = textarea]{
-    height: 100px;
-    width: 100%;
+textarea{
+    min-height: 100px;
+    width: 90%;
     text-align: left;
+    outline: none;
 }
 
 .Description{
+    border: none;
+    resize: none;
+}
+
+.SmallLogo{
+    width: 200px;
+    height: 100px;
+}
+
+.BorderForm{
+    border: 1px solid rgb(233, 227, 225);
+    box-sizing: border-box;
     margin-bottom: 10px;
+}
+
+@media screen and (max-width: 420px){
+    .HeavyTitle{
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    .Default{
+        font-size: 10px;
+        font-weight: 700;
+    }
+    .SmallLogo{
+        width: 100px;
+        height: 50px;
+    }
 }

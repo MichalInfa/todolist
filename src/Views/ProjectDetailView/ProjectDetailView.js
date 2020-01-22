@@ -5,8 +5,13 @@ import {useState, useEffect} from 'react';
 import {useParams} from 'react-router';
 import Button from '../../Components/Button/Button';
 import TopHeader from '../../Components/TopHeader/TopHeader';
+import {PROJECT_URL} from '../../constants'
+
 
 const ProjectDetailView = () => {
+    
+    document.title = `To-Do List`
+
     const[text, setText] = useState("");
 
     const[todolists, setTodolist] = useState([]);
@@ -14,7 +19,7 @@ const ProjectDetailView = () => {
     let {projectid} = useParams();
 
     useEffect (() => {   
-        fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists`)
+        fetch(PROJECT_URL + `/${projectid}/to_do_lists`)
         .then(resp => {
             if(resp.status !== 200){
                 return null;
@@ -46,7 +51,7 @@ const ProjectDetailView = () => {
     }
 
  async function addToDoList(listElement = {}) {
-    const resp = await fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists`,{
+    const resp = await fetch(PROJECT_URL + `/${projectid}/to_do_lists`,{
         method: "POST",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -60,7 +65,7 @@ const ProjectDetailView = () => {
         <div>
             <TopHeader title = "backtoprojects" />
             <div className = "Top">
-                <p className = "Heavy"> To-dos </p>
+                <div className = "Heavy"> To-dos </div>
                 <hr />
                 <div className = "MiddleDetailViewPart">
                     <div>

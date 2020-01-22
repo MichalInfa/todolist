@@ -6,8 +6,11 @@ import './ToDosView.css';
 import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
 import TopHeader from '../../Components/TopHeader/TopHeader';
+import {PROJECT_URL} from '../../constants'
 
 const ToDos = () => {
+
+    document.title = `Task List`
 
     const[text, setText] = useState("");
 
@@ -32,7 +35,7 @@ const ToDos = () => {
                 done_status = {taskList.done_status}
 
                 onStatusChange = {(event) => {
-                    addToDoList(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
+                    addToDoList(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`,{
                     key: taskList.id,
                     name: taskList.name,
                     description: taskList.description,
@@ -49,7 +52,7 @@ const ToDos = () => {
     }
 
 useEffect(() => {
-    fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}/tasks`)
+    fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
     .then(resp => {
         if(resp.status !== 200){
             return null;
@@ -68,7 +71,7 @@ useEffect(() => {
         return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
     });
 
-    fetch(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}`)
+    fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}`)
         .then(resp => {
             if(resp.status !== 200)
             {
@@ -118,7 +121,7 @@ useEffect(() => {
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
                     
-                    addToDoList(`http://139.162.159.44:3000/projects/${projectid}/to_do_lists/${listid}/tasks`,{
+                    addToDoList(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,
                         done_status: donestat
@@ -154,7 +157,7 @@ useEffect(() => {
             <div className = "Top">
                 <div className = "MiddleToDoPart">
                     <div>
-                        <p className = "Circle" /> 
+                        <p className = "ToDoCircle" /> 
                         <p className = "Light">
                             {tasklists.filter(tasklists => tasklists.done_status === true).length}/
                             {(tasklists.length)} complete 

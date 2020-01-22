@@ -15,8 +15,9 @@
 
 .BoxContainter{
     margin-left: 23px;
-    height: 45px;
+    min-height: 45px;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 .Box{
@@ -80,3 +81,9 @@
     transform: rotate(45deg); 
 } 
 
+@media screen and (max-width: 580px){
+    .BoxContainter{
+        margin-left: 11px;
+    }
+
+}

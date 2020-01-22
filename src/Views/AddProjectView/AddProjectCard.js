@@ -8,7 +8,7 @@ const AddProjectCard = () => {
         
         <div className = "AddProjectCard">
             <Link to = "/projects/new">
-                <img src = {plus} alt = "" />   
+                <img className = "SmallAddLogo" src = {plus} alt = "" />   
             </Link >
             <br />
             Add another project
