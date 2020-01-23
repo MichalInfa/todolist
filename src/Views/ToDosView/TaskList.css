@@ -1,14 +1,19 @@
 .Normal{
     font-size: 12px;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    font-weight: 500;
     margin-left: 31px; 
 }
 
 .Small{
-    margin-bottom: 0px;
-    margin-top: 0px;
+    margin-left: 31px;
     font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+    color: grey; 
+}
+.SmallDate{
+    font-size: 10px;
+    font-weight: 400;
     color: grey;
     margin-left: 31px;
 }
@@ -17,6 +22,7 @@
     margin-left: 23px;
     min-height: 45px;
     box-sizing: border-box;
+    margin-bottom: 10px;
     overflow: auto;
 }
 
@@ -32,6 +38,7 @@
     width: 0px;
     margin-bottom: 0px;
     visibility: hidden;
+    position: absolute;
 }
  
 .WhiteBox {
@@ -71,7 +78,7 @@
 
 .Box .WhiteBox:after { 
     left: 6px; 
-    bottom: 5px; 
+    bottom: 4px; 
     width: 6px; 
     height: 12px; 
     border: solid rgb(233, 227, 225); 

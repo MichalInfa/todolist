@@ -1,11 +1,11 @@
 .ProjectCard{
     text-align: left;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     color: rgb(66, 64, 64);
     min-height: 120px;
     margin: 10px 20%;
-    padding: 10px;
+    padding: 20px;
     background-color: white;
     border-radius: 7px;
     box-shadow: 
@@ -15,10 +15,13 @@
 }
 
 .ProjectCardDescription{
-    margin-top: 20px;
-    margin-left: 20px;
     text-align: left;
+    padding-top: 10px;
     font-size: 12px;
+    font-weight: 700;
+    font-style: italic;
+    color: rgb(104, 104, 104);
+    
 }
 
 @media screen and (max-width: 420px)
@@ -31,7 +34,5 @@
 
     .ProjectCardDescription{
         font-size: 9px;
-        margin-top: 10px;
-        margin-left: 15px;
     }
 }

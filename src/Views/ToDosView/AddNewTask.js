@@ -23,18 +23,6 @@ const AddNewTask = (props) => {
                 <hr className="Line"/>
                 <div className = "FormContainer">
                     <div className = "FormText">
-                        Assigned to
-                    </div>
-                    <div className = "FormTextLine">
-                        <label>      
-                            <input className = "TextPosition" type = "text" placeholder = "Type names to assign.."/>
-                        </label> 
-                    </div>
-                </div>
-
-                <hr className="Line"/>
-                <div className = "FormContainer">
-                    <div className = "FormText">
                         Due on
                     </div>
                     <div className = "FormTextLine">

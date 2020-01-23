@@ -3,6 +3,7 @@ import {PROJECT_URL} from '../../constants';
 import {useState, useEffect} from 'react'
 import ProjectCard from './ProjectCard';
 import AddProjectCard from './AddProjectCard';
+import {Link} from 'react-router-dom';
 import './ProjectView.css'
 
 const ProjectView = () => {
@@ -48,6 +49,9 @@ const ProjectView = () => {
             </p>
             {renderProjects(projects)}
             <AddProjectCard />
+            <Link to = "/Calendar">
+                Click me
+            </Link>
         </div> 
     )
 }

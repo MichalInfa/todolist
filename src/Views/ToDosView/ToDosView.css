@@ -1,6 +1,6 @@
 .ToDoCircle{
     margin-bottom: 0px;
-    margin-top: 18px;
+    margin-top: 19px;
     width: 15px;
     height: 15px;
     background: rgb(82, 167, 82);
@@ -12,10 +12,11 @@
 }
 
 .BigFontToDoPoint{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 0px;
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 15px;
+    font-weight: 600;
     color: black;
 }
 .Hidden{
@@ -45,8 +46,5 @@
 
     .MiddleToDoPart{
         width: 85%;
-    }
-    .ToDoCircle{
-        margin-top: 15px;
     }
 }

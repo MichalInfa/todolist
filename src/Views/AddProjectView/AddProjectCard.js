@@ -5,14 +5,13 @@ import {Link} from "react-router-dom";
 
 const AddProjectCard = () => {
     return (
-        
-        <div className = "AddProjectCard">
-            <Link to = "/projects/new">
+        <Link to = "/projects/new">
+            <div className = "AddProjectCard">
                 <img className = "SmallAddLogo" src = {plus} alt = "" />   
-            </Link >
-            <br />
-            Add another project
-        </div>
+                <br />
+                Add another project
+            </div>
+        </Link >
     )
 }
 

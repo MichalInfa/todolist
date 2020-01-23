@@ -8,7 +8,7 @@
 }
 
 input.FullSize{
-    width: 90%;
+    width: 100%;
     border: none;
     outline: none;
 }
@@ -25,13 +25,13 @@ input[type = text]{
 
 textarea{
     min-height: 100px;
-    width: 90%;
+    width: 100%;
     text-align: left;
     outline: none;
+    font-family:Arial;
 }
 
 .Description{
-    padding-top: 6px;
     border: none;
     resize: none;
 }
@@ -43,8 +43,7 @@ textarea{
 /*233, 227, 225*/
 
 .BorderForm{
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding: 6px;
     box-shadow: 
         0 0 1px rgba(0,0,0,.25),
         0 1px 3px rgba(0,0,0,.1);

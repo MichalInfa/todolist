@@ -12,7 +12,8 @@ const TaskList = (props) =>{
                     </div>
                     <div className = "Small">
                         {props.description} 
-                        <br />
+                    </div>
+                    <div className = "SmallDate">
                         {props.due_date}
                     </div>
                         <input type = "checkbox" checked = {props.done_status} onChange = {props.onStatusChange}/> 

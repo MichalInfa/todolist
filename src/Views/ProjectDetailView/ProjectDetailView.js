@@ -66,7 +66,6 @@ const ProjectDetailView = () => {
             <TopHeader title = "backtoprojects" />
             <div className = "Top">
                 <div className = "Heavy"> To-dos </div>
-                <hr />
                 <div className = "MiddleDetailViewPart">
                     <div>
                         {renderListCards(todolists)}
