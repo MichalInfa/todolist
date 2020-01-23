@@ -4,15 +4,14 @@ import {Link} from 'react-router-dom';
 
 const ProjectCard  = (props) => {
     return(
-        <div className = "ProjectCard">
-            <Link to = {"/projects/" + props.id}>
+        <Link to = {"/projects/" + props.id}>
+            <div className = "ProjectCard">
                 {props.name}
                 <div className = "ProjectCardDescription">
                     {props.description}
                 </div>
-            </Link>
-        </div>
-        
+            </div>
+        </Link>
     )
 }
 

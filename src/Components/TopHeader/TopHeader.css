@@ -1,8 +1,7 @@
 .TopHeader{
     text-align: center;
     font-size: 10px;
-    font-weight: 500;
-    color: rgb(52, 110, 165);
+    font-weight: 700;
     width: 50%;
     height: 20%;
     margin-top: 10px;
@@ -14,4 +13,17 @@
     border-top-right-radius: 3px;
     display: inline-block;
     padding: 10px;
+    
+}
+
+.Underline{
+    color: rgb(113, 113, 235);
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.NoUnderline{
+    color: black;
+    display: inline-block;
+    text-decoration: none;
 }

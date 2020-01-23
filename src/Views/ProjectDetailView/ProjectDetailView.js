@@ -77,7 +77,7 @@ const ProjectDetailView = () => {
                                 <input className="NoOutline" type = "text" placeholder = "Name this list..."
                                 value = {text} onChange = {(event) => setText(event.target.value)}/>
                             </label>
-                            <div className = "ButtonsFormPosition">
+                            <div className = "ButtonForm">
                             <Button type = "submit" 
                                 disabledProperties = {text.trim().length  < 6}
                                 buttonClass = {text.trim().length  > 5 ? "Proper" : "NotProper"}

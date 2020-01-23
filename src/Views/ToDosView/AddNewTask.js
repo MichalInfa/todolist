@@ -58,7 +58,7 @@ const AddNewTask = (props) => {
                     </div>
                 </div>
 
-                <div className = "ButtonsFormPosition">
+                <div className = "ButtonAddFormPosition">
                 <Button
                     disabledProperties = {props.inputText.length < 6}
                     buttonClass = {props.inputText.length > 5 ? "Proper" : "NotProper"}
@@ -66,7 +66,7 @@ const AddNewTask = (props) => {
                     onClickFunction = {props.onClickAddTaskEvent}
                 />
                 </div> 
-                <div className = "ButtonsFormPosition">
+                <div className = "ButtonCancelFormPosition">
                 <Button 
                     buttonText = {"Cancel"}
                     buttonClass = {"Button. Cancel"}

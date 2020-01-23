@@ -66,9 +66,15 @@ input.TextPosition{
     width: 68%;
 }
 
-.ButtonsFormPosition{
+.ButtonAddFormPosition{
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 22px;
+    margin-top: 5px;
+}
+
+.ButtonCancelFormPosition{
+    display: inline-block;
+    margin-left: 5px;
     margin-top: 5px;
 }
 
@@ -89,7 +95,11 @@ input.TextPosition{
     .FormTextLine{
         width: 100%;
     }
-    .ButtonsFormPosition{
+    .ButtonAddFormPosition{
+        font-size: 12px;
+        margin-left: 7px;
+    }
+    .ButtonCancelFormPosition{
         font-size: 12px;
         margin-left: 7px;
     }
