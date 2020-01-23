@@ -39,7 +39,8 @@ const AddNewTask = (props) => {
                     </div>
                     <div className = "FormTextLine">
                         <label>          
-                            <input className = "TextPosition" type = "text" placeholder = "Select a date..."/>
+                            <input className = "TextPosition" type = "text" placeholder = "Select a date..."
+                            value = {props.dateText} onChange = {props.onDateChange}/>
                         </label> 
                     </div>
                 </div>

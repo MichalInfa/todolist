@@ -16,6 +16,8 @@ const ToDos = () => {
 
     const[descript, setDescription] = useState("");
 
+    const[date, setDate] = useState("");
+
     const[donestat, setDoneStatus] = useState(false);
 
     const[tasklists, setTaskList] = useState([]);
@@ -32,6 +34,7 @@ const ToDos = () => {
                 key = {taskList.id} 
                 name = {taskList.name} 
                 description = {taskList.description}
+                due_date = {taskList.due_date}
                 done_status = {taskList.done_status}
 
                 onStatusChange = {(event) => {
@@ -135,15 +138,18 @@ useEffect(() => {
                 inputDescription = {descript}
                 onDescriptionChange = {(event) => {setDescription(event.target.value)}}
                
+                dateText = {date}
+                onDateChange = {(event) => {setDate(event.target.value)}}
+
                 inputDoneStatus = {donestat}
                 onDoneStatusChange = {(event) => {setDoneStatus(event.target.checked)}}
                 
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
-                    
                     addToDoList(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,
+                        due_date: date,
                         done_status: donestat
                         })
                     .then((element) => {
@@ -157,6 +163,7 @@ useEffect(() => {
                             
                     setText("")
                     setDescription("")
+                    setDate("")
                     setDoneStatus(false)
                     }
                 }
@@ -164,12 +171,23 @@ useEffect(() => {
                 onClickCancelButton = {() => {
                     setText("")
                     setDescription("")
+                    setDate("")
                     setDoneStatus(false)
                     setVisible(visibleform => !visibleform);
                 } } 
                 />: null
         )
     } 
+
+const compare = (a,b) => {
+    if(a.due_date < b.due_date){
+        return -1;
+    }
+    if(a.due_date > b.due_date){
+        return 1;
+    }
+    return 0;
+}
 
     return(
         <div>
@@ -187,12 +205,14 @@ useEffect(() => {
                         </p>
                     </div>
                     <div>
-                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false))
+                        {
+                        renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false)
+                        .sort(compare))
                         } 
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>
                         <Button 
-                            buttonText = "Add this to-do"
+                            buttonText = "Add a to-do"
                             buttonClass = "Proper"
                             onClickFunction = {() => {
                                 setVisible(visibleform => !visibleform);
@@ -201,7 +221,9 @@ useEffect(() => {
                     </div>
                     <div>
                         {renderForm()}
-                        {renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true))
+                        {
+                        renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true)
+                        .sort(compare))
                         }
                     </div>
                 </div>
