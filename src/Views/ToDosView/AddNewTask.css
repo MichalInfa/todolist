@@ -16,7 +16,8 @@ input.TextPosition{
 
 .MiddleText{
     margin-top: 4px;
-    margin-left: 26px;
+    margin-left: 32px;
+    margin-right: 4%;
 }
 
 .FormWrapper{
@@ -28,11 +29,17 @@ input.TextPosition{
     box-sizing: border-box;
 }
 
-.FormContainter{
+.TopFormContainter{
     padding-top: 5px;
     padding-right: 5px;
     padding-left: 22px;
     padding-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.FormContainer{
+    margin-left: 4%;
+    margin-right: 4%;
     box-sizing: border-box;
 }
 
@@ -46,16 +53,17 @@ input.TextPosition{
 
 .FormText{
     display: inline-block;
-    width: 120px;
-    padding: 5px;
+    width: 30%;
+    padding-right: 5px;
     font-size: 12px;
     text-align: right;
 }
 
 .FormTextLine{
-    margin-left: 0px;
     display: inline-block;
     box-sizing: border-box;
+    font-size: 12px;
+    width: 68%;
 }
 
 .ButtonsFormPosition{
@@ -64,22 +72,25 @@ input.TextPosition{
     margin-top: 5px;
 }
 
-@media screen and (max-width: 580px){
+@media screen and (max-width: 600px){
+    .TopFormContainter{
+        padding-left: 10px;
+    }
+    
     .FormText{
         text-align: left;
-        margin-left: 5px;
         width: 60%;
     }
     
     .FormContainter{
-        padding-left: 10px;
-    }
-
-    input.TextPosition{
-        width: 90%;
+        padding-left: 15px;
     }
 
     .FormTextLine{
-        margin-left: 10px;
+        width: 100%;
+    }
+    .ButtonsFormPosition{
+        font-size: 12px;
+        margin-left: 7px;
     }
 }

@@ -6,7 +6,7 @@ const AddNewTask = (props) => {
     return (
         <div className = "FormWrapper">
             <form onSubmit = {(event) => event.preventDefault()}>
-                <div className = "FormContainter">
+                <div className = "TopFormContainter">
                     <label className = "Box">
                         <input className = "CheckboxPosition" type = "checkbox" 
                         checked = {props.inputDoneStatus} onChange = {props.onDoneStatusChange}/>
@@ -28,18 +28,6 @@ const AddNewTask = (props) => {
                     <div className = "FormTextLine">
                         <label>      
                             <input className = "TextPosition" type = "text" placeholder = "Type names to assign.."/>
-                        </label> 
-                    </div>
-                </div>
-
-                <hr className="Line"/>
-                <div className = "FormContainer">
-                    <div className = "FormText">
-                        When done, notify
-                    </div>
-                    <div className = "FormTextLine">
-                        <label>          
-                            <input className = "TextPosition" type = "text" placeholder = "Type names to notify..."/>
                         </label> 
                     </div>
                 </div>

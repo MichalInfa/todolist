@@ -81,7 +81,7 @@
     transform: rotate(45deg); 
 } 
 
-@media screen and (max-width: 580px){
+@media screen and (max-width: 600px){
     .BoxContainter{
         margin-left: 11px;
     }
