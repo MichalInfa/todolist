@@ -1,8 +1,27 @@
 import React from 'react'
+import {useState} from 'react'
 import './AddNewTask.css'
 import Button from '../../Components/Button/Button'
+import CalendarView from '../CalendarView/CalendarView'
+import {format} from 'date-fns'
 
 const AddNewTask = (props) => {
+
+    const[selectedDate, setSelectedDate] = useState("")
+    const[visibleCalendar, setVisibleCalendar] = useState(false)
+
+    const renderCalendar = () =>{
+        const typeDate = 'yyyy-MM-dd'
+        return (visibleCalendar ? 
+            <div className = "CalendarPosition">
+                <CalendarView 
+                    onDateRespond = {(day) => setSelectedDate(format(day,typeDate).toString())}
+                /> 
+                {console.log(selectedDate)}
+            </div>
+            : null
+        )
+    }
     return (
         <div className = "FormWrapper">
             <form onSubmit = {(event) => event.preventDefault()}>
@@ -19,8 +38,9 @@ const AddNewTask = (props) => {
                         </label>
                     </div>
                 </div>
-
+                
                 <hr className="Line"/>
+                
                 <div className = "FormContainer">
                     <div className = "FormText">
                         Due on
@@ -28,12 +48,23 @@ const AddNewTask = (props) => {
                     <div className = "FormTextLine">
                         <label>          
                             <input className = "TextPosition" type = "text" placeholder = "Select a date..."
-                            value = {props.dateText} onChange = {props.onDateChange}/>
+                            value = {selectedDate} onChange = {props.onDateChange(selectedDate)} readOnly/>
                         </label> 
                     </div>
+                    <div className = {visibleCalendar ? "Hidden" : ""}>
+                        <Button 
+                            buttonText = "Choose a date"
+                            buttonClass = "ShowCalendar"
+                            onClickFunction = {() => {
+                                setVisibleCalendar(true);
+                            }}
+                        />
+                    </div>
+                    {renderCalendar()}
                 </div>
-
+                
                 <hr className="Line"/>
+                
                 <div className = "FormContainer">
                     <div className = "FormText">
                         Notes

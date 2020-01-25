@@ -1,0 +1,42 @@
+.TopCalendarBar{
+    padding: 8px;
+    background-color: rgb(140, 140, 140);
+    box-shadow: 
+        0 0 1px rgba(0,0,0,.25),
+        0 1px 3px rgba(0,0,0,.1);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: white;
+    text-align: center;
+}
+
+.LeftArrow{
+    display: inline-block;
+    width: 20%;
+}
+
+.RightArrow{
+    display: inline-block;
+    width: 20%;
+}
+
+.DateDisplay{
+    font-size: 15px;
+    font-weight: 700;
+    display: inline-block;
+    width: 58%;
+}
+
+.WhiteArrow{
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+.WhiteArrow:hover{
+    transform: scale(1.75);
+    transition: .25s ease-out;
+    color: black;
+    }
+    

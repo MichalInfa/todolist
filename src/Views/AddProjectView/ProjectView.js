@@ -47,11 +47,10 @@ const ProjectView = () => {
             <p className = "Header">
                 Your Projects
             </p>
+            <div className = "ProjectMiddle">
             {renderProjects(projects)}
             <AddProjectCard />
-            <Link to = "/Calendar">
-                Click me
-            </Link>
+            </div>
         </div> 
     )
 }

@@ -139,13 +139,14 @@ useEffect(() => {
                 onDescriptionChange = {(event) => {setDescription(event.target.value)}}
                
                 dateText = {date}
-                onDateChange = {(event) => {setDate(event.target.value)}}
+                onDateChange = {(day) => setDate(day)}
 
                 inputDoneStatus = {donestat}
                 onDoneStatusChange = {(event) => {setDoneStatus(event.target.checked)}}
                 
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
+                    console.log(date)
                     addToDoList(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,

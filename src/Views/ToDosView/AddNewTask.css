@@ -29,6 +29,7 @@ input.TextPosition{
     box-sizing: border-box;
     font-size: 12px;
     font-weight: 500;
+    position: relative;
 }
 
 .TopFormContainter{
@@ -78,6 +79,27 @@ input.TextPosition{
 .ButtonCancelFormPosition{
     display: inline-block;
     margin-left: 5px;
+}
+
+.CalendarPosition{
+    position: absolute;
+    left: 50%;
+    width: 250px;
+    z-index: 1;
+}
+
+.CloseCalendar{
+    font-size: 12px;
+    font-weight: 700;
+    width: 20%;
+    text-align: right;
+    padding-bottom: 10px;
+    text-align: right;
+    background-color: white;
+    box-shadow: 
+        0 0 1px rgba(0,0,0,.25),
+        0 1px 3px rgba(0,0,0,.1);
+    border-radius: 7px;
 }
 
 @media screen and (max-width: 600px){

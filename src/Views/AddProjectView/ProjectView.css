@@ -9,6 +9,10 @@ a{
     text-decoration: none;
 }
 
+.ProjectMiddle{
+    margin: 0 20%;
+}
+
 @media screen and (max-width: 420px)
 {
     .Header{

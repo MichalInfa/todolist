@@ -5,6 +5,7 @@ import ProjectDetailView from './Views/ProjectDetailView/ProjectDetailView';
 import UserFetch from './Components/UserFetch/UserFetch';
 import ToDosView from './Views/ToDosView/ToDosView';
 import ProjectView from './Views/AddProjectView/ProjectView';
+import CalendarView from './Views/CalendarView/CalendarView';
 
 import {
   BrowserRouter,
