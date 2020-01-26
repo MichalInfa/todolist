@@ -58,7 +58,7 @@ input.TextPosition{
 
 .FormText{
     display: inline-block;
-    width: 30%;
+    width: calc(100%/3);
     padding-right: 5px;
     font-size: 12px;
     text-align: right;
@@ -68,7 +68,13 @@ input.TextPosition{
     display: inline-block;
     box-sizing: border-box;
     font-size: 12px;
-    width: 68%;
+    width: 30%;
+}
+
+.FormTextButton{
+    display: inline-block;
+    width: calc(100%/3);
+    text-align: right;
 }
 
 .ButtonAddFormPosition{
@@ -83,9 +89,9 @@ input.TextPosition{
 
 .CalendarPosition{
     position: absolute;
-    left: 50%;
+    left: 100%;
+    top: 0%;
     width: 250px;
-    z-index: 1;
 }
 
 .CloseCalendar{

@@ -18,6 +18,7 @@ const CalendarCells = (props) => {
     const endDate = endOfWeek(monthEnd);
     const dateFormat = 'd';
     const rows = [];
+    const currentDate = new Date();
 
     let days = [];
     let day = startDate;
@@ -31,8 +32,8 @@ const CalendarCells = (props) => {
             days.push(
                 <div className = {
                     `DayCell 
-                        ${!isSameMonth(day, monthStart) ? "Disabled" : 
-                            isSameDay(day, props.todayDate) ? "RedDay" : ""}
+                        ${!isSameMonth(day, monthStart) ? "Disabled" :
+                           isSameDay(day, currentDate) ? "RedDay" : ""}
                     `} 
                     key = {day}
                     onClick = {() => props.onDateClick(constDay)}>

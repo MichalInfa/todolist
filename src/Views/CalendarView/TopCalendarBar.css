@@ -21,7 +21,7 @@
 }
 
 .DateDisplay{
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
     display: inline-block;
     width: 58%;
@@ -29,7 +29,7 @@
 
 .WhiteArrow{
     display: inline-block;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
     color: white;
     cursor: pointer;

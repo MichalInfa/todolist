@@ -161,7 +161,7 @@ useEffect(() => {
                     .catch(error => {
                         return alert("Failed POST request from ToDosView. \nDetailed error: \"" + error + "\"");
                     })
-                            
+
                     setText("")
                     setDescription("")
                     setDate("")

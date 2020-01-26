@@ -17,11 +17,23 @@ const AddNewTask = (props) => {
                 <CalendarView 
                     onDateRespond = {(day) => setSelectedDate(format(day,typeDate).toString())}
                 /> 
-                {console.log(selectedDate)}
             </div>
             : null
         )
     }
+
+    const renderCancelButton = () => {
+        return (visibleCalendar ?
+            <Button
+                buttonText = "Hide date selection"
+                buttonClass = "ShowCalendar"
+                onClickFunction = {() => {
+                    setVisibleCalendar(false);
+                }}                
+            /> : null
+            )
+    }
+
     return (
         <div className = "FormWrapper">
             <form onSubmit = {(event) => event.preventDefault()}>
@@ -51,14 +63,17 @@ const AddNewTask = (props) => {
                             value = {selectedDate} onChange = {props.onDateChange(selectedDate)} readOnly/>
                         </label> 
                     </div>
-                    <div className = {visibleCalendar ? "Hidden" : ""}>
-                        <Button 
-                            buttonText = "Choose a date"
-                            buttonClass = "ShowCalendar"
-                            onClickFunction = {() => {
-                                setVisibleCalendar(true);
-                            }}
-                        />
+                    <div className = "FormTextButton">
+                        <div className = {visibleCalendar ? "Hidden" : ""}>
+                            <Button 
+                                buttonText = "Choose a date"
+                                buttonClass = "ShowCalendar"
+                                onClickFunction = {() => {
+                                    setVisibleCalendar(true);
+                                }}
+                            />
+                        </div>
+                        {renderCancelButton()}
                     </div>
                     {renderCalendar()}
                 </div>
@@ -82,14 +97,18 @@ const AddNewTask = (props) => {
                     disabledProperties = {props.inputText.length < 6}
                     buttonClass = {props.inputText.length > 5 ? "Proper" : "NotProper"}
                     buttonText = {"Add this to-do"}
-                    onClickFunction = {props.onClickAddTaskEvent}
+                    onClickFunction = {
+                        props.onClickAddTaskEvent
+                    }
                 />
                 </div> 
                 <div className = "ButtonCancelFormPosition">
                 <Button 
                     buttonText = {"Cancel"}
                     buttonClass = {"Button. Cancel"}
-                    onClickFunction = {props.onClickCancelButton}
+                    onClickFunction = {
+                        props.onClickCancelButton
+                    }
                 />
                 </div>
             </form>

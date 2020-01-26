@@ -13,8 +13,7 @@ import './CalendarView.css'
 const CalendarView = (props) => {
     
     const [viewedDate, setViewedDate] = useState(new Date());
-    const currentDate = new Date();
-
+    
 return (
    <div className="Calendar">
       <TopCalendarBar 
@@ -26,7 +25,6 @@ return (
       
       <CalendarCells 
         viewDate = {viewedDate}
-        todayDate = {currentDate}
         onDateClick = {props.onDateRespond}
       />
    </div>

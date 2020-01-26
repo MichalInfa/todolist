@@ -1,5 +1,4 @@
 .Button{
-    margin-bottom: 10px;
     text-align: center;
     border: 1px solid white;
     border-radius: 7px;
@@ -9,27 +8,33 @@
 .Proper{
     color: white;
     background-color: rgb(102, 187, 102);
+    margin-bottom: 10px;
 }
 
-.Proper:hover{
+.Proper:hover, .Cancel:hover{
+    background-color: rgb(81, 148, 81);
+    margin-bottom: 10px;
+}
+
+.ShowCalendar:hover{
     background-color: rgb(81, 148, 81);
 }
 
 .NotProper{
     color: black;
     background-color: rgb(238, 238, 238);
+    margin-bottom: 10px;
 }
 
 .Cancel{
     color: white;
     background-color: rgb(102, 187, 102);
+    margin-bottom: 10px;
 }
 
-.ShowCalendar{   
-    position: relative;
-    left: 66%;
-    bottom: 45%;
+
+.ShowCalendar{ 
     color: white;
     background-color: rgb(102, 187, 102);
-    z-index: 1;
+    outline: none;
 }
