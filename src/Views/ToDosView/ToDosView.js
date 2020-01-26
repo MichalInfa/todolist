@@ -146,7 +146,6 @@ useEffect(() => {
                 
                 buttonCondition = {text.length}
                 onClickAddTaskEvent = {() => {
-                    console.log(date)
                     addToDoList(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`,{
                         name: text,
                         description: descript,

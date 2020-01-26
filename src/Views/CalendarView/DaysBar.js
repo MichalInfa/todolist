@@ -7,7 +7,7 @@ import {
 import './DaysBar.css'
 
 const DaysBar = (props) => {
-    const dateFormat = 'eee';
+    const dateFormat = 'eeeeee';
     const days = [];
     let startDate = startOfWeek(props.viewDate);
     

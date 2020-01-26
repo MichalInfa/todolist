@@ -97,8 +97,12 @@ const AddNewTask = (props) => {
                     disabledProperties = {props.inputText.length < 6}
                     buttonClass = {props.inputText.length > 5 ? "Proper" : "NotProper"}
                     buttonText = {"Add this to-do"}
-                    onClickFunction = {
-                        props.onClickAddTaskEvent
+                    onClickFunction = {(event) => {
+                            setVisibleCalendar(false)
+                            props.onClickAddTaskEvent(event)
+                            setSelectedDate("")
+                            event.preventDefault()
+                        }
                     }
                 />
                 </div> 
@@ -106,8 +110,12 @@ const AddNewTask = (props) => {
                 <Button 
                     buttonText = {"Cancel"}
                     buttonClass = {"Button. Cancel"}
-                    onClickFunction = {
-                        props.onClickCancelButton
+                    onClickFunction = {(event) => {
+                        setVisibleCalendar(false)
+                        setSelectedDate("")
+                        props.onClickCancelButton(event)
+                        event.preventDefault()
+                        }
                     }
                 />
                 </div>
