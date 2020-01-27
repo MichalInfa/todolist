@@ -7,6 +7,9 @@ const TaskList = (props) =>{
             <div className = "BoxContainter">
                 <form>
                     <label className="Box">
+                        <input type = "checkbox" checked = {props.done_status} onChange = {props.onStatusChange}/> 
+                        <span className="WhiteBox"></span> 
+                    </label>
                     <div className = "Normal">
                         {props.name}
                     </div>
@@ -16,9 +19,6 @@ const TaskList = (props) =>{
                     <div className = "SmallDate">
                         {props.due_date}
                     </div>
-                        <input type = "checkbox" checked = {props.done_status} onChange = {props.onStatusChange}/> 
-                        <span className="WhiteBox"></span> 
-                    </label>
                 </form> 
             </div>
     )
