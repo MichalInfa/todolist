@@ -28,32 +28,6 @@ const ToDos = () => {
     let {projectid} = useParams()
     let {listid} = useParams()
 
-    const renderTaskList = (tasklistfiltered) => {
-        return tasklistfiltered.map (taskList => {
-            return (<TaskList 
-                key = {taskList.id} 
-                name = {taskList.name} 
-                description = {taskList.description}
-                due_date = {taskList.due_date}
-                done_status = {taskList.done_status}
-
-                onStatusChange = {(event) => {
-                    updateDoneStatus(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks/${taskList.id}`,{
-                    done_status: event.target.checked
-                    })
-                    .then((element) => {
-                        tasklists.splice(indexOfElement(taskList.id),1)
-                        setTaskList([
-                            ...tasklists,
-                            element
-                        ])
-                    })}   
-                }
-
-                />)
-        })
-    }
-
 useEffect(() => {
     fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
     .then(resp => {
@@ -129,6 +103,33 @@ useEffect(() => {
         return null;
     }
 
+    const renderTaskList = (tasklistfiltered) => {
+        return tasklistfiltered.map (taskList => {
+            return (<TaskList 
+                key = {taskList.id} 
+                name = {taskList.name} 
+                description = {taskList.description}
+                due_date = {taskList.due_date}
+                done_status = {taskList.done_status}
+                taskid = {taskList.id}
+
+                onStatusChange = {(event) => {
+                    updateDoneStatus(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks/${taskList.id}`,{
+                    done_status: event.target.checked
+                    })
+                    .then((element) => {
+                        tasklists.splice(indexOfElement(taskList.id),1)
+                        setTaskList([
+                            ...tasklists,
+                            element
+                        ])
+                    })}   
+                }
+
+                />)
+        })
+    }
+
     const renderForm = () => {
         return (visibleform ?
             <AddNewTask
@@ -179,15 +180,15 @@ useEffect(() => {
         )
     } 
 
-const compare = (a,b) => {
-    if(a.due_date < b.due_date){
-        return -1;
+    const compare = (a,b) => {
+        if(a.due_date < b.due_date){
+            return -1;
+        }
+        if(a.due_date > b.due_date){
+            return 1;
+        }
+        return 0;
     }
-    if(a.due_date > b.due_date){
-        return 1;
-    }
-    return 0;
-}
 
     return(
         <div>

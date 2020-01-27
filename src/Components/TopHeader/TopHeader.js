@@ -5,20 +5,34 @@ import './TopHeader.css'
 const TopHeader = (props) => {
 
     switch(props.title){
-        case "backtodos":
+        case "backtotasklist":
             return(
                 <div className = "TopHeader">
-                    <Link className = "Underline" to = "../../../../"> Back to Project </Link>
+                    <Link className = "Underline" to = "../../../../../">Back to Project</Link>
                     {' '}
                     <div className = "NoUnderline">></div>
                     {' '}
-                    <Link className = "Underline" to = "../../"> Back to To-Dos</Link>
+                    <Link className = "Underline" to = "../../../" >Back to To-Dos</Link>
+                    {' '}
+                    <div className = "NoUnderline">></div>
+                    {' '}
+                    <Link className = "Underline" to = "../tasks">Back to TaskList</Link>
+                </div>
+            );
+        case "backtodos":
+            return(
+                <div className = "TopHeader">
+                    <Link className = "Underline" to = "../../../../">Back to Project</Link>
+                    {' '}
+                    <div className = "NoUnderline">></div>
+                    {' '}
+                    <Link className = "Underline" to = "../../">Back to To-Dos</Link>
                 </div>
             );
         default:
             return(
                 <div className = "TopHeader">
-                    <Link className = "Underline" to = "../../"> Back to Project </Link>
+                    <Link className = "Underline" to = "../../">Back to Project</Link>
                 </div>
             );
     }
