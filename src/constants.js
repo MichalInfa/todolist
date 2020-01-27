@@ -1,4 +1,4 @@
-const API_ROOT = 'http://139.162.159.44:3001'
+const API_ROOT = 'http://139.162.159.44:3000'
 //const API_ROOT = 'http://localhost:3000'
 
 //139.162.159.44
