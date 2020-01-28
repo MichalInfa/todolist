@@ -57,7 +57,7 @@ const AddNewTask = (props) => {
                     <div className = "FormText">
                         Due on
                     </div>
-                    <div className = "FormTextLine">
+                    <div className = "FormDateLine">
                         <label>          
                             <input className = "TextPosition" type = "text" placeholder = "Select a date..."
                             value = {selectedDate} onChange = {props.onDateChange(selectedDate)} readOnly/>
@@ -84,7 +84,7 @@ const AddNewTask = (props) => {
                     <div className = "FormText">
                         Notes
                     </div>
-                    <div className = "FormTextLine">
+                    <div className = "FormNotesLine">
                         <label>          
                             <input className = "TextPosition" type = "text" placeholder = "Add extra details.."
                             value = {props.inputDescription} onChange = {props.onDescriptionChange}/>

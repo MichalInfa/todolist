@@ -17,7 +17,7 @@ input.TextPosition{
 .MiddleText{
     padding-top: 4px;
     margin-left: 32px;
-    margin-right: 4%;
+    margin-right: 5%;
 }
 
 .FormWrapper{
@@ -64,11 +64,18 @@ input.TextPosition{
     text-align: right;
 }
 
-.FormTextLine{
+.FormDateLine{
     display: inline-block;
     box-sizing: border-box;
     font-size: 12px;
     width: 30%;
+}
+
+.FormNotesLine{
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 12px;
+    width: 64%;
 }
 
 .FormTextButton{
@@ -114,9 +121,14 @@ input.TextPosition{
         padding-left: 15px;
     }
 
-    .FormTextLine{
+    .FormDateLine{
         width: 100%;
     }
+
+    .FormNotesLine{
+        width: 98%;
+    }
+
     .ButtonAddFormPosition{
         font-size: 12px;
         margin-left: 7px;

@@ -91,7 +91,23 @@ useEffect(() => {
             },
             body: JSON.stringify(listElement)
         })
+        .catch(error => {
+            return alert("Failed PATCH request from ToDosView. \nDetailed error: \"" + error + "\"");
+        });  
         return respond.json();
+    }
+
+    async function deleteTask(url = '', listElement = {}){
+       await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(listElement)
+        })
+        .catch(error => {
+            return alert("Failed DELETE request from ToDosView. \nDetailed error: \"" + error + "\"");
+        });  
     }
 
     const indexOfElement = (itemId) => {
@@ -112,7 +128,7 @@ useEffect(() => {
                 due_date = {taskList.due_date}
                 done_status = {taskList.done_status}
                 taskid = {taskList.id}
-
+                
                 onStatusChange = {(event) => {
                     updateDoneStatus(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks/${taskList.id}`,{
                     done_status: event.target.checked
@@ -125,6 +141,17 @@ useEffect(() => {
                         ])
                     })}   
                 }
+
+                ondDeleteTask = {() => {
+                    deleteTask(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks/${taskList.id}`,{
+                        id: taskList.id
+                    })
+                    .then(() => {
+                        tasklists.splice(indexOfElement(taskList.id),1)
+                        setTaskList([...tasklists])
+                        }
+                    )
+                }}
 
                 />)
         })

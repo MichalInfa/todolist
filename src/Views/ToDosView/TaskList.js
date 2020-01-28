@@ -2,11 +2,15 @@ import React from 'react'
 import './TaskList.css'
 import {Link} from 'react-router-dom'
 import {useParams} from 'react-router'
+import Button from '../../Components/Button/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const TaskList = (props) =>{
 
     let {projectid} = useParams()
     let {listid} = useParams()
+
 
     return (
             <div className = "BoxContainter">
@@ -27,7 +31,23 @@ const TaskList = (props) =>{
                                 {props.due_date}
                             </div>
                         </Link>
-                    </div>
+                        {
+                        <Button
+                            buttonClass = {
+                                `BoxDeleteButton
+                                ${props.done_status ? 
+                                "GreenDelButton" : "WhiteDelButton"} `}
+                            buttonText = {<FontAwesomeIcon icon = {faTrash} />}
+                            onClickFunction = {(event) => {
+                                props.ondDeleteTask(event)
+                                event.preventDefault()
+                                }
+                                
+                                
+                            }
+                        /> 
+                        }                       
+                    </div>     
                 </form> 
             </div>
     )
