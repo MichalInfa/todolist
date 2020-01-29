@@ -24,6 +24,7 @@
     color: black;
     background-color: rgb(238, 238, 238);
     margin-bottom: 10px;
+    cursor: auto;
 }
 
 .Cancel{

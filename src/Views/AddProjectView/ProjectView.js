@@ -6,11 +6,15 @@ import AddProjectCard from './AddProjectCard';
 import './ProjectView.css';
 import PaginationBar from './PaginationBar';
 
+
 const ProjectView = () => {
     document.title = `Your Projects`
     const[projects, setProject] = useState([])
     const[currentPage, setCurrentPage] = useState(1)
-    const[projectPerPage] = useState(2)
+    const[projectPerPage,setProjectPerPage] = useState(1)
+    const[amountOfProjects, setAmountOfProjects] = useState(1)
+
+    const[url, setUrl] = useState(PROJECT_URL)
 
     const renderProjects = (projects) => {
         return projects.map (projectCard => {
@@ -24,7 +28,7 @@ const ProjectView = () => {
     }
 
     useEffect (() => {       
-        fetch(PROJECT_URL)
+        fetch(url)
         .then(resp => {
             if(resp.status !== 200){
                 return null;
@@ -34,7 +38,13 @@ const ProjectView = () => {
         })
         .then(resp => {
             if(!null){
-                setProject(resp)
+                setProjectPerPage(resp.meta.per_page)
+                setAmountOfProjects(resp.meta.total_count)
+                setCurrentPage(resp.meta.current_page)
+                console.log(resp.meta)
+                console.log(resp.projects)
+                setProject(resp.projects)
+                
             }else{
                 console.log("Null!");
             }
@@ -42,11 +52,7 @@ const ProjectView = () => {
         .catch(error => {
             return alert("Failed GET request from ProjectView. \nDetailed error: \"" + error + "\"");
         });      
-    },[setProject]);
-
-    const indexOfLastProject = currentPage * projectPerPage;
-    const indexOfFirstProject = indexOfLastProject - projectPerPage;
-    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject)
+    },[setProject,setProjectPerPage,setAmountOfProjects,setCurrentPage,url]);
 
     return(
         <div>
@@ -54,12 +60,12 @@ const ProjectView = () => {
                 Your Projects                
             </p>
             <div className = "ProjectMiddle">
-                {renderProjects(currentProjects)}
+                {renderProjects(projects)}
                 <AddProjectCard />
                 <PaginationBar 
                     projectsPerPage = {projectPerPage}
-                    amountOfProjects = {10}
-                    onClickFunction = {(number) => setCurrentPage(number)}
+                    amountOfProjects = {amountOfProjects}
+                    onClickFunction = {(number) => setUrl(`${PROJECT_URL}?page=${number}`)}
                     currentPage = {currentPage}
                 />
             </div>
