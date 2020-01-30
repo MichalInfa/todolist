@@ -49,6 +49,7 @@
     font-weight: 700;
     background-color: white;
     border-radius: 7px;
+    outline: none;
 }
 
 .BoxDeleteButton.GreenDelButton{

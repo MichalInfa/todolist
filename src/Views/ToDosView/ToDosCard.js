@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import {useParams} from 'react-router';
 import Button from '../../Components/Button/Button';
-import './ToDosView.css';
+import './ToDosCard.css';
 import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
 import TopHeader from '../../Components/TopHeader/TopHeader';

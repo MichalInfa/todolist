@@ -4,47 +4,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons';
 import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons';
 import './PaginationBar.css'
+import {getPageNumbers} from '../../Utils/PaginationBarFunction.js';
 
-const PaginationBar = ({projectsPerPage, amountOfProjects, onClickFunction, currentPage}) => {
 
-    const maxPage = Math.ceil(amountOfProjects / projectsPerPage);
-    const pageNumbers = [];
+const PaginationBar = ({projectsPerPage, amountOfProjects, amountOfPages, onClickFunction, currentPage}) => {
 
-    if(maxPage > 6){
-        if(currentPage <= 3){
-            for(let i = 1; i <= 5; i++){
-                pageNumbers.push(i);
-            }
-            pageNumbers.push(maxPage + 1)
-            pageNumbers.push(maxPage)
-        }
-        else {
-            if(currentPage > (maxPage - 4)){
-                pageNumbers.push(1); // zawsze dodanie pierwszego elementu
-                pageNumbers.push(0)
-                for(let i = maxPage - 4; i <= maxPage; i++){
-                    pageNumbers.push(i);
-                }
-            }
-            else{
-                pageNumbers.push(1); // zawsze dodanie pierwszego elementu
-                pageNumbers.push(0)
-                for(let i = currentPage - 1; i <= currentPage + 1; i++){
-                    pageNumbers.push(i)
-                }
-                pageNumbers.push(maxPage + 1)
-                pageNumbers.push(maxPage)
-            }
-        }
-    }
-    else {
-        for(let i = 1; i <= maxPage; i++){
-            pageNumbers.push(i);
-        }
-    }
+    const pageNumbers = getPageNumbers(amountOfPages, currentPage);
 
-    const render = (number) => {
-            if(number === 0 || number === (maxPage + 1))
+    const renderPageNumber = (number) => {
+            if(number === 0 || number === (amountOfPages + 1))
                 return ("")
             return(number)
     }
@@ -68,7 +36,7 @@ const PaginationBar = ({projectsPerPage, amountOfProjects, onClickFunction, curr
                             className = {`PaginationItem 
                                 ${currentPage === number ? "CurrentNumber" 
                                 : number === 0 ? "ThreeDotMinus" 
-                                : number === (maxPage + 1) ? "ThreeDotPlus" : "" } `}
+                                : number === (amountOfPages + 1) ? "ThreeDotPlus" : "" } `}
                                 
                             //style = {{width: "calc(100% / " + (maxPage + 2) + ")" }}
                             
@@ -77,14 +45,14 @@ const PaginationBar = ({projectsPerPage, amountOfProjects, onClickFunction, curr
                                     onClickFunction(currentPage - 3)
                                 }
                                 else{
-                                    if(number === (maxPage + 1))
+                                    if(number === (amountOfPages + 1))
                                         onClickFunction(currentPage + 3)
                                     else
                                         onClickFunction(number)
                                 }
                                 event.preventDefault()
                             }}>
-                                {render(number)}                                    
+                                {renderPageNumber(number)}                                    
                         </div>
                     )
                  })
@@ -92,8 +60,8 @@ const PaginationBar = ({projectsPerPage, amountOfProjects, onClickFunction, curr
                 
                 <Button 
                     buttonClass = {`PaginationButton 
-                                    ${currentPage > (maxPage - 1) ? "NotProper" : "Proper"} `}
-                    disabledProperties = {currentPage > (maxPage - 1) }
+                                    ${currentPage > (amountOfPages - 1) ? "NotProper" : "Proper"} `}
+                    disabledProperties = {currentPage > (amountOfPages - 1) }
                     buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleRight} />}
                     onClickFunction = { (event) => {
                         onClickFunction(currentPage + 1)

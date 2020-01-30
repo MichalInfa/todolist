@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import './NewProjectForm.css'
+import './NewProjectCard.css'
 import symbol_2 from '../../Images/symbol_2.png'
 import Button from '../../Components/Button/Button'
 import TopHeader from '../../Components/TopHeader/TopHeader'

@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProjectDetailView.css';
+import './ProjectDetails.css';
 import ListCard from './ListCard';
 import {useState, useEffect} from 'react';
 import {useParams} from 'react-router';

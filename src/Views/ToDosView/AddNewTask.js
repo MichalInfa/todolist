@@ -2,7 +2,7 @@ import React from 'react'
 import {useState} from 'react'
 import './AddNewTask.css'
 import Button from '../../Components/Button/Button'
-import CalendarView from '../CalendarView/CalendarView'
+import CalendarView from '../CalendarView/Calendar'
 import {format} from 'date-fns'
 
 const AddNewTask = (props) => {

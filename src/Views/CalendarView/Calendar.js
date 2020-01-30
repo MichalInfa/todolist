@@ -8,7 +8,7 @@ import {
 import TopCalendarBar from './TopCalendarBar'
 import DaysBar from './DaysBar'
 import CalendarCells from './CalendarCells'
-import './CalendarView.css'
+import './Calendar.css'
 
 const CalendarView = (props) => {
     
