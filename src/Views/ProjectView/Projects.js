@@ -4,15 +4,13 @@ import {useState, useEffect} from 'react'
 import ProjectCard from './ProjectCard';
 import AddProjectCard from './AddProjectCard';
 import './Projects.css';
-import PaginationBar from './PaginationBar';
+import PaginationBar from '../../Components/PaginationBar/PaginationBar';
 import {useHistory} from 'react-router-dom'
 
 const ProjectView = () => {
     document.title = `Your Projects`
     const[projects, setProject] = useState([])
     const[currentPage, setCurrentPage] = useState(1)
-    const[projectPerPage,setProjectPerPage] = useState(1)
-    const[amountOfProjects, setAmountOfProjects] = useState(1)
     const[amountOfPages, setAmountOfPages] = useState(1)
 
     let history = useHistory();
@@ -44,11 +42,9 @@ const ProjectView = () => {
         })
         .then(resp => {
             if(!null){
-                setProjectPerPage(resp.meta.per_page)
-                setAmountOfProjects(resp.meta.total_count)
+                setAmountOfPages(resp.meta.total_pages)
                 setCurrentPage(resp.meta.current_page)
                 setProject(resp.projects)
-                setAmountOfPages(resp.meta.total_pages)
             }else{
                 console.log("Null!");
             }
@@ -58,8 +54,6 @@ const ProjectView = () => {
         });      
     },
     [setProject,
-    setProjectPerPage,
-    setAmountOfProjects,
     setCurrentPage, 
     setAmountOfPages,
     history.location.search]);
@@ -74,14 +68,12 @@ const ProjectView = () => {
                 
                 <AddProjectCard />
                 <PaginationBar 
-                    projectsPerPage = {projectPerPage}
-                    amountOfProjects = {amountOfProjects}
+                    currentPage = {currentPage}
                     amountOfPages = {amountOfPages}
                     onClickFunction = {(number) => {
                         history.push(`?page=${number}`)
                     }
                     }
-                    currentPage = {currentPage}
                 />
             </div>
         </div> 

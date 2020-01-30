@@ -25,7 +25,7 @@ function App() {
         <Switch>
           <Route path = {["/projects","/"]}  exact component = {ProjectView} /> 
           <Route path = "/projects/new" exact component = {NewProjectView} />
-          <Route path = "/projects/:projectid" exact component = {ProjectDetailView} />
+          <Route path = {["/projects/:projectid","/projects/:projectid/to_do_lists"]} exact component = {ProjectDetailView} />
           <Route path = {"/projects/:projectid/to_do_lists/:listid/tasks"} exact component = {ToDosView} />
           <Route path = {"/projects/:projectid/to_do_lists/:listid/tasks/:taskid"} exact component = {TaskView} />
           <Route path = "/userfetch" exact component = {UserFetch} />
