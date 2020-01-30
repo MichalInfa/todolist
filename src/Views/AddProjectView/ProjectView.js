@@ -27,7 +27,7 @@ const ProjectView = () => {
         })
     }
 
-    useEffect (() => {       
+    useEffect (() => {     
         fetch(PROJECT_URL + history.location.search)
         .then(resp => {
             if(resp.status !== 200){

@@ -1,8 +1,6 @@
-
 .PaginationBar{
     margin-top: 10px;
     padding: 5px;
-    width: 100%;
     display: inline-block;
     text-align: center;
 }
@@ -15,6 +13,7 @@
     cursor: pointer;
     font-size: 18px;
     background-color: white;
+    user-select: none;
     box-shadow: 
         0 0 1px rgba(0,0,0,.25),
         0 1px 3px rgba(0,0,0,.1);
@@ -26,9 +25,36 @@
 }
 
 .CurrentNumber{
+    color: rgb(81, 148, 81);
     border: 1px solid rgb(81, 148, 81);
 }
 
+.ThreeDotPlus, .ThreeDotMinus {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.ThreeDotPlus:hover, .ThreeDotMinus:hover{
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: rgb(81, 148, 81);
+}
+
+.ThreeDotPlus:after, .ThreeDotMinus:after{
+    content: '...';
+}
+
+.ThreeDotPlus:hover:after{
+    content: '+3';
+}
+
+.ThreeDotMinus:hover:after{
+    content: '-3';
+}
+
+/*
 .ArrowLeft{
     position: absolute;
     top: 50%;
@@ -39,4 +65,22 @@
     position: absolute;
     top: 50%;
     right: 5%;
+}*/
+
+@media screen and (max-width: 800px)
+{
+    .PaginationItem{
+        line-height: 35px;
+        width: 35px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 550px)
+{
+    .PaginationItem{
+        line-height: 20px;
+        width: 20px;
+        font-size: 9px;
+    }
 }
