@@ -68,7 +68,7 @@ async function addObject(url = '', listElement = {}){
                                 })
                             .then(respond => {
                                 if(respond != null){
-                                history.push("/")
+                                history.push("/projects")
                                 }
                             })
                             .catch(error => {
