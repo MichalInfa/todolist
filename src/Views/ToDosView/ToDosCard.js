@@ -29,8 +29,10 @@ const ToDos = () => {
     let {listid} = useParams()
 
 useEffect(() => {
+    
     fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
     .then(resp => {
+        
         if(resp.status !== 200){
             return null;
         }else{
@@ -39,7 +41,7 @@ useEffect(() => {
     })
     .then(resp => {
         if(!null){
-            setTaskList(resp)
+            setTaskList(resp.tasks)
         }else{
             console.log("Null!");
         }

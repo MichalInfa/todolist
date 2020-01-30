@@ -19,7 +19,7 @@ const ListCard = (props) =>{
         })
         .then(resp => {
             if(!null){
-                setTaskList(resp)
+                setTaskList(resp.tasks)
             }else{
                 console.log("Null!");
             }

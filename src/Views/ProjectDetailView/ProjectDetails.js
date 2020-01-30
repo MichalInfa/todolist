@@ -28,8 +28,10 @@ const ProjectDetailView = () => {
             }
         })
         .then(resp => {
+
+            console.log(resp)
             if(!null){
-                setTodolist(resp)
+                setTodolist(resp.to_do_lists)
             }else{
                 console.log("Null!");
             }
