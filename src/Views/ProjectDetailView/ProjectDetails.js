@@ -43,7 +43,6 @@ const ProjectDetailView = () => {
         })
         .then(resp => {
             if(!null){
-                console.log(resp.meta)
                 setAmountOfPages(resp.meta.total_pages)
                 setCurrentPage(resp.meta.current_page)
                 setTodolist(resp.to_do_lists)
@@ -102,7 +101,7 @@ const ProjectDetailView = () => {
                             currentPage = {currentPage}
                         />
                     </div>
-                    
+
                     <div>
                         {/*renderListCards(todolists)*/}
                         {renderListCards(todolists.slice(0,perPage))}
