@@ -23,7 +23,7 @@ function App() {
     <BrowserRouter>
       <div className = "App">
         <Switch>
-          <Route path = "/" exact component = {ProjectView} /> 
+          <Route path = "/projects" exact component = {ProjectView} /> 
           <Route path = "/projects/new" exact component = {NewProjectView} />
           <Route path = "/projects/:projectid" exact component = {ProjectDetailView} />
           <Route path = {"/projects/:projectid/to_do_lists/:listid/tasks"} exact component = {ToDosView} />

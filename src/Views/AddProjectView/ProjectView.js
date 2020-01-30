@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard';
 import AddProjectCard from './AddProjectCard';
 import './ProjectView.css';
 import PaginationBar from './PaginationBar';
-
+import {useHistory} from 'react-router-dom'
 
 const ProjectView = () => {
     document.title = `Your Projects`
@@ -14,7 +14,7 @@ const ProjectView = () => {
     const[projectPerPage,setProjectPerPage] = useState(1)
     const[amountOfProjects, setAmountOfProjects] = useState(1)
 
-    const[url, setUrl] = useState(PROJECT_URL)
+    let history = useHistory();
 
     const renderProjects = (projects) => {
         return projects.map (projectCard => {
@@ -28,7 +28,7 @@ const ProjectView = () => {
     }
 
     useEffect (() => {       
-        fetch(url)
+        fetch(PROJECT_URL + history.location.search)
         .then(resp => {
             if(resp.status !== 200){
                 return null;
@@ -41,10 +41,7 @@ const ProjectView = () => {
                 setProjectPerPage(resp.meta.per_page)
                 setAmountOfProjects(resp.meta.total_count)
                 setCurrentPage(resp.meta.current_page)
-                console.log(resp.meta)
-                console.log(resp.projects)
                 setProject(resp.projects)
-                
             }else{
                 console.log("Null!");
             }
@@ -52,7 +49,7 @@ const ProjectView = () => {
         .catch(error => {
             return alert("Failed GET request from ProjectView. \nDetailed error: \"" + error + "\"");
         });      
-    },[setProject,setProjectPerPage,setAmountOfProjects,setCurrentPage,url]);
+    },[setProject,setProjectPerPage,setAmountOfProjects,setCurrentPage, history.location.search]);
 
     return(
         <div>
@@ -61,11 +58,15 @@ const ProjectView = () => {
             </p>
             <div className = "ProjectMiddle">
                 {renderProjects(projects)}
+                
                 <AddProjectCard />
                 <PaginationBar 
                     projectsPerPage = {projectPerPage}
                     amountOfProjects = {amountOfProjects}
-                    onClickFunction = {(number) => setUrl(`${PROJECT_URL}?page=${number}`)}
+                    onClickFunction = {(number) => {
+                        history.push(`?page=${number}`)
+                    }
+                    }
                     currentPage = {currentPage}
                 />
             </div>
