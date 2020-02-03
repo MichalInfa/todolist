@@ -1,6 +1,6 @@
 import React from 'react';
 import {PROJECT_URL} from '../../constants';
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import ProjectCard from './ProjectCard';
 import AddProjectCard from './AddProjectCard';
 import './Projects.css';
@@ -12,13 +12,13 @@ import {addProject} from '../../Actions'
 
 const ProjectView = () => {
 
-    const projects = useSelector(state => state.addproject)
+    const projects = useSelector(state => state.project)
     const dispatch = useDispatch()
 
     document.title = `Your Projects`
     //const[projects, setProject] = useState([])
-    const[currentPage, setCurrentPage] = useState(1)
-    const[amountOfPages, setAmountOfPages] = useState(1)
+    //const[currentPage, setCurrentPage] = useState(1)
+    //const[amountOfPages, setAmountOfPages] = useState(1)
 
     let history = useHistory();
     if(history.location.pathname === "")
@@ -47,14 +47,11 @@ const ProjectView = () => {
             }
         })
         .then(resp => {
-            if(!null){
-                setAmountOfPages(resp.meta.total_pages)
-                setCurrentPage(resp.meta.current_page)
+                //setAmountOfPages(resp.meta.total_pages)
+                //setCurrentPage(resp.meta.current_page)
                 //setProject(resp.projects)
-                dispatch(addProject(resp.projects))
-            }else{
-                console.log("Null!");
-            }
+                dispatch(addProject(resp.projects, resp.meta))
+                //dispatch(addMeta(resp.meta))
         })
         .catch(error => {
             return alert("Failed GET request from ProjectView. \nDetailed error: \"" + error + "\"");
@@ -63,8 +60,8 @@ const ProjectView = () => {
     [
         dispatch,
     //setProject,
-    setCurrentPage, 
-    setAmountOfPages,
+    //setCurrentPage, 
+    //setAmountOfPages,
     history.location.search]);
 
     return(
@@ -73,12 +70,9 @@ const ProjectView = () => {
                 Your Projects                
             </p>
             <div className = "ProjectMiddle">
-                {renderProjects(projects)}
-                
+                {renderProjects(projects.slice(0,projects.length - 3))}
                 <AddProjectCard />
                 <PaginationBar 
-                    currentPage = {currentPage}
-                    amountOfPages = {amountOfPages}
                     onClickFunction = {(number) => {
                         history.push(`?page=${number}`)
                     }

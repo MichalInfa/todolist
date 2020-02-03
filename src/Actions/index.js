@@ -1,9 +1,11 @@
-export const addProject = (name_of_project) => {
+export const addProject = (list_of_project, meta) => {
     return{
-        type: 'ADD_PROJECT',
-        payload: name_of_project
+        type: 'ADD_LIST_OF_PROJECTS',
+        projects: (list_of_project),
+        meta: (meta)
     };
 };
+
 
 
 

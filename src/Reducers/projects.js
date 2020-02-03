@@ -1,45 +1,12 @@
-let initialState = []
-
-const projectReducer = (state = initialState, action) => {
+const projectReducer = (state = [], action) => {
   switch(action.type) {
-    case 'ADD_PROJECT':
-      return (state = [...action.payload]);
+    case 'ADD_LIST_OF_PROJECTS': {
+        state = [...action.projects];
+        return ([...state, action.meta.current_page, action.meta.total_count, action.meta.total_pages]);
+    }
     default:
-      return state;
+        return state;
   }
 }
-export default projectReducer;
 
-
-/*const initialState = {
-    fetching: false,
-    fetched: false,
-    projects: [],
-    error: null
-};
-
-const projectReducer = (state = initialState, action) => {
-    switch(action.type){
-        case 'Fetch_Projects_Started':
-            return {
-                ...state,
-                fetching: true
-            }
-        case 'Fetch_Projects_Error': 
-            return {
-                ...state,
-                fetching: false,
-                error: action.payload
-            }
-        case 'Received_Projects':
-            return {
-                ...state,
-                fetching: false,
-                fetched: true,
-                projects: action.payload
-            }
-        default:
-            return state;
-    }
-}
-export default projectReducer;*/
+export default projectReducer

@@ -1,13 +1,17 @@
 import React from 'react'
 import Button from '../Button/Button'
+//import {connect} from 'react-redux'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons';
 import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons';
 import './PaginationBar.css'
 import {getPageNumbers} from '../../Utils/PaginationBarFunction.js';
+import {useSelector} from 'react-redux'
 
-
-const PaginationBar = ({amountOfPages, onClickFunction, currentPage, reload}) => {
+const PaginationBar = ({onClickFunction, reload}) => {
+    
+    const currentPage = useSelector(state => state.project[state.project.length - 3]) 
+    const amountOfPages = useSelector(state => state.project[state.project.length - 1]) 
 
     const pageNumbers = getPageNumbers(amountOfPages, currentPage);
 
