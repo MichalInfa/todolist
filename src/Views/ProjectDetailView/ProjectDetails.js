@@ -23,6 +23,9 @@ const ProjectDetailView = () => {
     const[amountOfToDos, setAmountOfToDos] = useState(1);
     const[perPage, setPerPage] = useState(1);
 
+    const[reload, setReload] = useState(false)
+
+
     let {projectid} = useParams();
 
     let history = useHistory();
@@ -33,6 +36,7 @@ const ProjectDetailView = () => {
         history.push(`/projects/${projectid}/to_do_lists`)
 
     useEffect (() => {   
+        setReload(false)
         fetch(PROJECT_URL + `/${projectid}/to_do_lists` + history.location.search)
         .then(resp => {
             if(resp.status !== 200){
@@ -48,13 +52,15 @@ const ProjectDetailView = () => {
                 setTodolist(resp.to_do_lists)
                 setAmountOfToDos(resp.meta.total_count)
                 setPerPage(resp.meta.per_page)
+                setReload(true)                  
             }else{
                 console.log("Null!");
             }
         })
         .catch(error => {   
             return alert("Failed GET request from ProjectDetailsView. \nDetailed error: \"" + error + "\"");
-        });          
+        }); 
+       
     },[
         projectid,
         setTodolist, 
@@ -70,7 +76,10 @@ const ProjectDetailView = () => {
                 key = {listCard.id}
                 name = {listCard.name}
                 projectid = {projectid}
-                taskid = {listCard.id}            
+                taskid = {listCard.id}
+                
+                //reloadTasks = {(status) => {setReload(status)}}
+                //reloadDoneTasks = {(status) => {setReload(status)}}
                 />)               
         })
     }
@@ -98,12 +107,12 @@ const ProjectDetailView = () => {
                             onClickFunction = {(number) => {
                                 history.push(`?page=${number}`)
                             }}
+                            reload = {reload}
                             currentPage = {currentPage}
                         />
                     </div>
 
                     <div>
-                        {/*renderListCards(todolists)*/}
                         {renderListCards(todolists.slice(0,perPage))}
                     </div>
                     <div className = "ButtonWrapper">  

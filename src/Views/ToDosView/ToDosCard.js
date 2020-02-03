@@ -6,73 +6,98 @@ import './ToDosCard.css';
 import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
 import TopHeader from '../../Components/TopHeader/TopHeader';
-import {PROJECT_URL} from '../../constants'
+import {PROJECT_URL} from '../../constants';
 
 const ToDos = () => {
 
     document.title = `Task List`
 
     const[text, setText] = useState("");
-
     const[descript, setDescription] = useState("");
-
     const[date, setDate] = useState("");
-
     const[donestat, setDoneStatus] = useState(false);
-
     const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
-
     const[taskname,setName] = useState("");
 
     let {projectid} = useParams()
     let {listid} = useParams()
 
-useEffect(() => {
-    
-    fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
-    .then(resp => {
+    const[doneTasks, setDoneTasks] = useState(0);
+    const[allTasks, setAllTasks] = useState(0);
         
-        if(resp.status !== 200){
-            return null;
-        }else{
-            return resp.json();
-        }
-    })
-    .then(resp => {
-        if(!null){
-            setTaskList(resp.tasks)
-        }else{
-            console.log("Null!");
-        }
-    })
-    .catch(error => {
-        return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
-    });
+    useEffect(() => {
+        fetch(PROJECT_URL + '/' + projectid + '/to_do_lists/' + listid + '/tasks')
+        .then(resp => {
+            if(resp.status !== 200){
+                return null;
+            }else{
+                return resp.json();
+            }})
+        .then(resp => {
+            if(!null){
+                setAllTasks(resp.meta.total_count)
+            }else{
+                console.log("Null!");
+            }})
+        .catch(error => {
+            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
+            });
 
-    fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}`)
+        fetch(PROJECT_URL + '/' + projectid + '/to_do_lists/' + listid + '/tasks?done_status=true')
+        .then(resp => {
+            if(resp.status !== 200){
+                return null;
+            }else{
+                return resp.json();
+            }})
+        .then(resp => {
+            if(!null){
+                setDoneTasks(resp.meta.total_count)
+            }else{
+                console.log("Null!");
+            }})
+        .catch(error => {
+            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
+        });
+    
+        fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
+        .then(resp => {
+            if(resp.status !== 200){
+                return null;
+            }else{
+                return resp.json();
+            }})
+        .then(resp => {
+            if(!null){
+                setTaskList(resp.tasks)
+            }else{
+                console.log("Null!");
+            }})
+        .catch(error => {
+            return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
+        });
+
+        fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}`)
         .then(resp => {
             if(resp.status !== 200)
             {
                 return null;
-            }
-            else
-            {
+            }else{
                 return resp.json();
             }
         })
         .then(resp => {
             if(!null){
                 setName(resp.name);
-            }
-            else{
+            }else{
                 console.log("Null!");
             }
         })
         .catch(error => {
             return alert("Failed GET request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
         });
-},[projectid,listid,setName,setTaskList])
+    },[setDoneTasks, setAllTasks,projectid,listid,setName,setTaskList])
 
     async function addToDoList(url = '', listElement = {}){
         const respond = await fetch(url, {
@@ -227,8 +252,8 @@ useEffect(() => {
                     <div>
                         <p className = "ToDoCircle" /> 
                         <p className = "Light">
-                            {tasklists.filter(tasklists => tasklists.done_status === true).length}/
-                            {(tasklists.length)} complete 
+                            {doneTasks}/
+                            {allTasks} complete 
                         </p> 
                         <p className = "BigFontToDoPoint">
                             {taskname}

@@ -6,10 +6,17 @@ import AddProjectCard from './AddProjectCard';
 import './Projects.css';
 import PaginationBar from '../../Components/PaginationBar/PaginationBar';
 import {useHistory} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
+import {addProject} from '../../Actions'
+
 
 const ProjectView = () => {
+
+    const projects = useSelector(state => state.addproject)
+    const dispatch = useDispatch()
+
     document.title = `Your Projects`
-    const[projects, setProject] = useState([])
+    //const[projects, setProject] = useState([])
     const[currentPage, setCurrentPage] = useState(1)
     const[amountOfPages, setAmountOfPages] = useState(1)
 
@@ -31,7 +38,6 @@ const ProjectView = () => {
     }
 
     useEffect (() => {    
-
         fetch(PROJECT_URL + history.location.search)
         .then(resp => {
             if(resp.status !== 200){
@@ -44,7 +50,8 @@ const ProjectView = () => {
             if(!null){
                 setAmountOfPages(resp.meta.total_pages)
                 setCurrentPage(resp.meta.current_page)
-                setProject(resp.projects)
+                //setProject(resp.projects)
+                dispatch(addProject(resp.projects))
             }else{
                 console.log("Null!");
             }
@@ -53,7 +60,9 @@ const ProjectView = () => {
             return alert("Failed GET request from ProjectView. \nDetailed error: \"" + error + "\"");
         });      
     },
-    [setProject,
+    [
+        dispatch,
+    //setProject,
     setCurrentPage, 
     setAmountOfPages,
     history.location.search]);

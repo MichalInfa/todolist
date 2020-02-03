@@ -7,7 +7,7 @@ import './PaginationBar.css'
 import {getPageNumbers} from '../../Utils/PaginationBarFunction.js';
 
 
-const PaginationBar = ({amountOfPages, onClickFunction, currentPage}) => {
+const PaginationBar = ({amountOfPages, onClickFunction, currentPage, reload}) => {
 
     const pageNumbers = getPageNumbers(amountOfPages, currentPage);
 
@@ -20,10 +20,9 @@ const PaginationBar = ({amountOfPages, onClickFunction, currentPage}) => {
         <div className = "PaginationBar">
              <Button 
                 buttonClass = {`PaginationButton ${currentPage < 2 ? "NotProper" : "Proper"} `}
-                disabledProperties = {currentPage < 2}
+                disabledProperties = {(currentPage < 2) || (reload === false)}
                 buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleLeft} />}
                 onClickFunction = { (event) => {
-                    console.log(currentPage)
                     onClickFunction(currentPage - 1)
                     event.preventDefault()
                 }}
@@ -61,7 +60,7 @@ const PaginationBar = ({amountOfPages, onClickFunction, currentPage}) => {
         <Button 
             buttonClass = {`PaginationButton 
                         ${currentPage > (amountOfPages - 1) ? "NotProper" : "Proper"} `}
-            disabledProperties = {currentPage > (amountOfPages - 1) }
+            disabledProperties = {(currentPage > (amountOfPages - 1)) || (reload === false)}
             buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleRight} />}
             onClickFunction = { (event) => {
                 onClickFunction(currentPage + 1)

@@ -19,6 +19,9 @@ function App() {
   //const [page, setPage] = useQueryParam('page', NumberParam);
   //const query = new URLSearchParams(window.location.search);
   //console.log(window.location.search)
+
+  /*
+    */
   return (
     <BrowserRouter>
       <div className = "App">

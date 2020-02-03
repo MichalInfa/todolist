@@ -5,10 +5,12 @@ import {Link} from 'react-router-dom'
 import {PROJECT_URL} from '../../constants'
 
 const ListCard = (props) =>{
-    const[doneTasks, setDoneTasks] = useState(1);
-    const[allTasks, setAllTasks] = useState(1);
+    const[doneTasks, setDoneTasks] = useState(0);
+    const[allTasks, setAllTasks] = useState(0);
 
     useEffect(() => {
+        //props.reloadDoneTasks(false)
+        //props.reloadTasks(false)
         fetch(PROJECT_URL + '/' + props.projectid + '/to_do_lists/' + props.taskid + '/tasks')
         .then(resp => {
             if(resp.status !== 200){
@@ -20,6 +22,7 @@ const ListCard = (props) =>{
         .then(resp => {
             if(!null){
                 setAllTasks(resp.meta.total_count)
+                //props.reloadTasks(true)
             }else{
                 console.log("Null!");
             }
@@ -39,6 +42,7 @@ const ListCard = (props) =>{
         .then(resp => {
             if(!null){
                 setDoneTasks(resp.meta.total_count)
+                //props.reloadDoneTasks(true)
             }else{
                 console.log("Null!");
             }
@@ -47,11 +51,13 @@ const ListCard = (props) =>{
             return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
         });
         
-    },[props.projectid,props.taskid,setDoneTasks,setAllTasks])
+    },[props.projectid, props.taskid, setDoneTasks, setAllTasks])
+    
     return (
         <div>
                 <p className = "Circle" />
                 <p className = "Light">
+                    
                     {doneTasks}/
                     {allTasks} complete
                  </p> 
