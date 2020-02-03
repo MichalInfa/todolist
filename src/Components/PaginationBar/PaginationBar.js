@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from '../Button/Button'
-//import {connect} from 'react-redux'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons';
 import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons';
@@ -8,10 +7,25 @@ import './PaginationBar.css'
 import {getPageNumbers} from '../../Utils/PaginationBarFunction.js';
 import {useSelector} from 'react-redux'
 
-const PaginationBar = ({onClickFunction, reload}) => {
+const PaginationBar = ({onClickFunction, position}) => {
     
-    const currentPage = useSelector(state => state.project[state.project.length - 3]) 
-    const amountOfPages = useSelector(state => state.project[state.project.length - 1]) 
+    const projects = useSelector(state => state.project)
+    const todolists = useSelector(state => state.todolist)
+
+    let currentPage = 0;
+    let amountOfPages = 0;
+
+    if(position === "ProjectView" && projects && projects.projects && projects.meta)
+    {
+        currentPage = projects.meta.current_page
+        amountOfPages = projects.meta.total_pages
+    }
+
+    if(position === "ProjectDetails" && todolists && todolists.lists && todolists.meta && position === "ProjectDetails")
+    {
+        currentPage = todolists.meta.current_page
+        amountOfPages = todolists.meta.total_pages
+    }
 
     const pageNumbers = getPageNumbers(amountOfPages, currentPage);
 
@@ -24,7 +38,7 @@ const PaginationBar = ({onClickFunction, reload}) => {
         <div className = "PaginationBar">
              <Button 
                 buttonClass = {`PaginationButton ${currentPage < 2 ? "NotProper" : "Proper"} `}
-                disabledProperties = {(currentPage < 2) || (reload === false)}
+                disabledProperties = {currentPage < 2}
                 buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleLeft} />}
                 onClickFunction = { (event) => {
                     onClickFunction(currentPage - 1)
@@ -64,7 +78,7 @@ const PaginationBar = ({onClickFunction, reload}) => {
         <Button 
             buttonClass = {`PaginationButton 
                         ${currentPage > (amountOfPages - 1) ? "NotProper" : "Proper"} `}
-            disabledProperties = {(currentPage > (amountOfPages - 1)) || (reload === false)}
+            disabledProperties = {(currentPage > (amountOfPages - 1))}
             buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleRight} />}
             onClickFunction = { (event) => {
                 onClickFunction(currentPage + 1)

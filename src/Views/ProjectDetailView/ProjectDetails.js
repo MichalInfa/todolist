@@ -9,24 +9,21 @@ import PaginationBar from '../../Components/PaginationBar/PaginationBar';
 
 import {PROJECT_URL} from '../../constants';
 import {useHistory} from 'react-router-dom';
-
+import { useSelector, useDispatch } from 'react-redux';
+import {addToDoList}  from '../../Actions';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from 'react-loader-spinner';
 
 const ProjectDetailView = () => {
     
     document.title = `To-Do List`
+    let {projectid} = useParams();
 
     const[text, setText] = useState("");
-
-    const[todolists, setTodolist] = useState([]);
-    const[currentPage, setCurrentPage] = useState(1);
-    const[amountOfPages, setAmountOfPages] = useState(1);
-    const[amountOfToDos, setAmountOfToDos] = useState(1);
-    const[perPage, setPerPage] = useState(1);
-
     const[reload, setReload] = useState(false)
 
-
-    let {projectid} = useParams();
+    const todolists = useSelector(state => state.todolist)
+    const dispatch = useDispatch()
 
     let history = useHistory();
 
@@ -35,8 +32,20 @@ const ProjectDetailView = () => {
     if(history.location.pathname === `/projects/${projectid}/`)
         history.push(`/projects/${projectid}/to_do_lists`)
 
-    useEffect (() => {   
-        setReload(false)
+    async function addElementToList(listElement = {}) {
+        const resp = await fetch(PROJECT_URL + `/${projectid}/to_do_lists`,{
+            method: "POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(listElement)
+        })
+        return resp.json(); 
+    };
+
+    useEffect (() => {  
+        if(reload)
+            setReload(!reload)
         fetch(PROJECT_URL + `/${projectid}/to_do_lists` + history.location.search)
         .then(resp => {
             if(resp.status !== 200){
@@ -46,54 +55,38 @@ const ProjectDetailView = () => {
             }
         })
         .then(resp => {
-            if(!null){
-                setAmountOfPages(resp.meta.total_pages)
-                setCurrentPage(resp.meta.current_page)
-                setTodolist(resp.to_do_lists)
-                setAmountOfToDos(resp.meta.total_count)
-                setPerPage(resp.meta.per_page)
-                setReload(true)                  
-            }else{
-                console.log("Null!");
-            }
+                dispatch(addToDoList(resp.to_do_lists, resp.meta))
         })
         .catch(error => {   
             return alert("Failed GET request from ProjectDetailsView. \nDetailed error: \"" + error + "\"");
         }); 
        
-    },[
-        projectid,
-        setTodolist, 
-        setCurrentPage,
-        setAmountOfPages,
-        setAmountOfToDos,
-        setPerPage,
+    },[projectid,
+        dispatch,
+        reload,
         history.location.search]);
 
     const renderListCards = (todolists) => {
-        return todolists.map (listCard => {
-            return (<ListCard 
-                key = {listCard.id}
-                name = {listCard.name}
-                projectid = {projectid}
-                taskid = {listCard.id}
-                
-                //reloadTasks = {(status) => {setReload(status)}}
-                //reloadDoneTasks = {(status) => {setReload(status)}}
-                />)               
-        })
+        if(todolists && todolists.lists && todolists.meta){
+            return todolists.lists.map (listCard => {
+                return (<ListCard 
+                    key = {listCard.id}
+                    name = {listCard.name}
+                    projectid = {projectid}
+                    taskid = {listCard.id}
+                    />)               
+            })
+        }
+        else{
+            return <Loader
+                type = "ThreeDots"
+                color = 'rgb(82, 167, 82)'
+                height = {50}
+                width = {50}
+                timeout = {3000}
+                />
+        }
     }
-
- async function addToDoList(listElement = {}) {
-    const resp = await fetch(PROJECT_URL + `/${projectid}/to_do_lists`,{
-        method: "POST",
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify(listElement)
-    })
-    return resp.json(); 
-};
 
     return(
         <div>
@@ -101,19 +94,9 @@ const ProjectDetailView = () => {
             <div className = "Top">
                 <div className = "Heavy"> To-dos </div>
                 <div className = "MiddleDetailViewPart">
-                    <div className = "PaginationPosition">
-                        <PaginationBar
-                            amountOfPages = {amountOfPages}
-                            onClickFunction = {(number) => {
-                                history.push(`?page=${number}`)
-                            }}
-                            reload = {reload}
-                            currentPage = {currentPage}
-                        />
-                    </div>
 
                     <div>
-                        {renderListCards(todolists.slice(0,perPage))}
+                        {renderListCards(todolists)}
                     </div>
                     <div className = "ButtonWrapper">  
                         <form onSubmit = {(event) => event.preventDefault()}>
@@ -128,26 +111,22 @@ const ProjectDetailView = () => {
                                 buttonText = {"Add on click"}
                                 onClickFunction = {() => {
                                     
-                                    addToDoList({name: text})
-                                    .then((element) => {
-                                        if (amountOfToDos % perPage === 0){
-                                            setAmountOfPages(amountOfPages + 1)
-                                        }
-                                        setAmountOfToDos(amountOfToDos + 1)
-                                        setTodolist([
-                                            ...todolists,
-                                            element
-                                        ])
-                                    })
-                                    .catch(error => {
-                                        return alert("Failed POST request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
-                                    })
+                                    addElementToList({name: text})
+                                    setReload(!reload)
                                     setText("")
                                 }
                             }/>
                             </div>
                         </form>
                     </div>
+                    <div className = "PaginationPosition">
+                        <PaginationBar
+                            position = "ProjectDetails"
+                            onClickFunction = {(number) => {
+                                history.push(`?page=${number}`)
+                            }}
+                        />
+                    </div>                    
                 </div>
             </div>
         </div>

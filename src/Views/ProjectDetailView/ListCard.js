@@ -9,8 +9,6 @@ const ListCard = (props) =>{
     const[allTasks, setAllTasks] = useState(0);
 
     useEffect(() => {
-        //props.reloadDoneTasks(false)
-        //props.reloadTasks(false)
         fetch(PROJECT_URL + '/' + props.projectid + '/to_do_lists/' + props.taskid + '/tasks')
         .then(resp => {
             if(resp.status !== 200){
@@ -21,28 +19,9 @@ const ListCard = (props) =>{
         })
         .then(resp => {
             if(!null){
-                setAllTasks(resp.meta.total_count)
-                //props.reloadTasks(true)
-            }else{
-                console.log("Null!");
-            }
-        })
-        .catch(error => {
-            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
-        });
 
-        fetch(PROJECT_URL + '/' + props.projectid + '/to_do_lists/' + props.taskid + '/tasks?done_status=true')
-        .then(resp => {
-            if(resp.status !== 200){
-                return null;
-            }else{
-                return resp.json();
-            }
-        })
-        .then(resp => {
-            if(!null){
-                setDoneTasks(resp.meta.total_count)
-                //props.reloadDoneTasks(true)
+                setDoneTasks(resp.meta_true.total_count)
+                setAllTasks(resp.meta_true.total_count + resp.meta_false.total_count)
             }else{
                 console.log("Null!");
             }
@@ -50,7 +29,6 @@ const ListCard = (props) =>{
         .catch(error => {
             return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
         });
-        
     },[props.projectid, props.taskid, setDoneTasks, setAllTasks])
     
     return (

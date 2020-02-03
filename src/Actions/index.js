@@ -1,11 +1,18 @@
 export const addProject = (list_of_project, meta) => {
     return{
         type: 'ADD_LIST_OF_PROJECTS',
-        projects: (list_of_project),
-        meta: (meta)
+        projects: list_of_project,
+        meta: meta
     };
 };
 
+export const addToDoList = (list_of_todos, meta) => {
+    return{
+        type: 'ADD_TODO_LISTS',
+        lists: list_of_todos,
+        meta: meta
+    };
+};
 
 
 

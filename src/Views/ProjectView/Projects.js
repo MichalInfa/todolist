@@ -8,7 +8,8 @@ import PaginationBar from '../../Components/PaginationBar/PaginationBar';
 import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {addProject} from '../../Actions'
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 
 const ProjectView = () => {
 
@@ -27,14 +28,25 @@ const ProjectView = () => {
         history.push("projects")
 
     const renderProjects = (projects) => {
-        return projects.map (projectCard => {
-            return (<ProjectCard 
-                key = {projectCard.id} 
-                name = {projectCard.name} 
-                description ={projectCard.description}
-                id = {projectCard.id}
-                />)
-        })
+        if(projects && projects.projects && projects.meta) {
+            return projects.projects.map (projectCard => {
+                return (<ProjectCard 
+                    key = {projectCard.id} 
+                    name = {projectCard.name} 
+                    description ={projectCard.description}
+                    id = {projectCard.id}
+                    />)
+                })
+        }
+        else {
+            return <Loader
+                type = "ThreeDots"
+                color = 'rgb(82, 167, 82)'
+                height = {100}
+                width = {100}
+                timeout = {3000}
+                />        
+        }
     }
 
     useEffect (() => {    
@@ -47,9 +59,10 @@ const ProjectView = () => {
             }
         })
         .then(resp => {
+            
                 //setAmountOfPages(resp.meta.total_pages)
                 //setCurrentPage(resp.meta.current_page)
-                //setProject(resp.projects)
+                //setProject(resp.projects
                 dispatch(addProject(resp.projects, resp.meta))
                 //dispatch(addMeta(resp.meta))
         })
@@ -58,7 +71,7 @@ const ProjectView = () => {
         });      
     },
     [
-        dispatch,
+    dispatch,
     //setProject,
     //setCurrentPage, 
     //setAmountOfPages,
@@ -69,10 +82,14 @@ const ProjectView = () => {
             <p className = "Header">                    
                 Your Projects                
             </p>
+            {console.log(projects)}            
+
             <div className = "ProjectMiddle">
-                {renderProjects(projects.slice(0,projects.length - 3))}
+                
+                {renderProjects(projects)}
                 <AddProjectCard />
                 <PaginationBar 
+                    position = {"ProjectView"}
                     onClickFunction = {(number) => {
                         history.push(`?page=${number}`)
                     }
