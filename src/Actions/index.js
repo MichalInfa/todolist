@@ -1,3 +1,4 @@
+/*--------------------projects.js--------------------*/
 export const addProject = (list_of_project, meta) => {
     return{
         type: 'ADD_LIST_OF_PROJECTS',
@@ -6,6 +7,7 @@ export const addProject = (list_of_project, meta) => {
     };
 };
 
+/*--------------------todolist.js--------------------*/
 export const getToDoList = (list_of_todos, meta) => {
     return{
         type: 'GET_TODO_LISTS',
@@ -21,47 +23,28 @@ export const addToDoList = (list_of_todos) => {
     }
 }
 
-
-
-
-/*export const Fetch_Projects_Started = 'Fetch_Projects_Started';
-export const Received_Projects = 'Received_Projects';
-export const Fetch_Projects_Error = 'Fetch_Projects_Error';
-
-export function getDataRequested() {
-  return {
-    type: 'Fetch_Projects_Started'
-  };
+/*--------------------tasklist.js--------------------*/
+export const getTaskList = (list_of_tasks, completed_tasks, all_tasks) => {
+    return{
+        type: 'GET_TASKLIST',
+        tasks: list_of_tasks,
+        completedTasks: completed_tasks,
+        allTasks: all_tasks
+    }
 }
 
-export function getDataDone(data) {
-  return {
-    type: 'Received_Projects',
-    payload: data
-  };
+export const addTaskToList = (task) => {
+    return{
+        type: 'ADD_TASK_TO_LIST',
+        task: task
+    }
 }
 
-export function getDataFailed(error) {
-  return {
-    type: 'Fetch_Projects_Error',
-    payload: error
-  };
+export const getTasksStatus = (completed_tasks, all_tasks) => {
+    console.log(completed_tasks,all_tasks)
+    return{
+        type: 'GET_TASK_STATUS',
+        completedTasks: completed_tasks,
+        allTasks: all_tasks
+    }
 }
-
-export function fetchProjects() {
-  return dispatch => {
-    // set state to "loading"
-    dispatch(getDataRequested());
-
-    fetch('http://localhost:3000/projects')
-      .then(response => response.json())
-      .then(data => {
-        dispatch(getDataDone(data));
-      })
-      .catch(error => {
-        dispatch(getDataFailed(error));
-      })
-  }
-}
-
-export default fetchProjects*/

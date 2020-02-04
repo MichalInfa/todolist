@@ -37,6 +37,21 @@ const ProjectDetailView = () => {
         return resp.json(); 
     };
 
+    async function getLists (url = ''){
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          })
+          .catch(error => {   
+            return alert("Failed GET request from ProjectDetailsView. \nDetailed error: \"" + error + "\"");
+        });
+        if(response!=null){
+            return response.json();
+        }
+    };
+
     useEffect (() => {  
         fetch(PROJECT_URL + `/${projectid}/to_do_lists` + history.location.search)
         .then(resp => {
@@ -103,10 +118,13 @@ const ProjectDetailView = () => {
                                 onClickFunction = {() => {
                                     
                                     addElementToList({name: text})
-                                        .then(resp => dispatch(addToDoList(resp)))
-                                        .catch(error => {   
-                                            return alert("Failed POST request from ProjectDetailsView. \nDetailed error: \"" + error + "\"");
-                                        }); 
+                                    .then(resp => {
+                                            dispatch(addToDoList(resp));
+                                            getLists(`${PROJECT_URL}/${projectid}/to_do_lists` + history.location.search).then(resp => { 
+                                                dispatch(getToDoList(resp.to_do_lists, resp.meta))
+                                                history.push(`?page=${resp.meta.total_pages}`)
+                                            })
+                                    })
                                     setText("")
                                 }
                             }/>

@@ -1,4 +1,4 @@
-const todolistReducer = (state = [], action) => {
+const todoListReducer = (state = [], action) => {
     switch(action.type) {
       case 'GET_TODO_LISTS': {
           state = {
@@ -14,8 +14,9 @@ const todolistReducer = (state = [], action) => {
           }
           return state;
       }
+     
       default:
           return state;
     }
   }
-  export default todolistReducer
+  export default todoListReducer

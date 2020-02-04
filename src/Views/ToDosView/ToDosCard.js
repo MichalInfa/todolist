@@ -7,59 +7,32 @@ import TaskList from './TaskList';
 import AddNewTask from './AddNewTask';
 import TopHeader from '../../Components/TopHeader/TopHeader';
 import {PROJECT_URL} from '../../constants';
+import {useSelector, useDispatch} from 'react-redux';
+import {getTaskList, addTaskToList, getTasksStatus} from '../../Actions';
 
 const ToDos = () => {
 
     document.title = `Task List`
 
+    const tasks = useSelector(state => state.task)
+    const dispatch = useDispatch()
+
     const[text, setText] = useState("");
     const[descript, setDescription] = useState("");
     const[date, setDate] = useState("");
     const[donestat, setDoneStatus] = useState(false);
-    const[tasklists, setTaskList] = useState([]);
+    //const[tasklists, setTaskList] = useState([]);
     const[visibleform, setVisible] = useState(false);
     const[taskname,setName] = useState("");
 
     let {projectid} = useParams()
     let {listid} = useParams()
 
-    const[doneTasks, setDoneTasks] = useState(0);
-    const[allTasks, setAllTasks] = useState(0);
+    //const[doneTasks, setDoneTasks] = useState(0);
+    //const[allTasks, setAllTasks] = useState(0);
         
     useEffect(() => {
-        fetch(PROJECT_URL + '/' + projectid + '/to_do_lists/' + listid + '/tasks')
-        .then(resp => {
-            if(resp.status !== 200){
-                return null;
-            }else{
-                return resp.json();
-            }})
-        .then(resp => {
-            if(!null){
-                setAllTasks(resp.meta.total_count)
-            }else{
-                console.log("Null!");
-            }})
-        .catch(error => {
-            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
-            });
-
-        fetch(PROJECT_URL + '/' + projectid + '/to_do_lists/' + listid + '/tasks?done_status=true')
-        .then(resp => {
-            if(resp.status !== 200){
-                return null;
-            }else{
-                return resp.json();
-            }})
-        .then(resp => {
-            if(!null){
-                setDoneTasks(resp.meta.total_count)
-            }else{
-                console.log("Null!");
-            }})
-        .catch(error => {
-            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
-        });
+        
     
         fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
         .then(resp => {
@@ -69,13 +42,33 @@ const ToDos = () => {
                 return resp.json();
             }})
         .then(resp => {
-            if(!null){
-                setTaskList(resp.tasks)
-            }else{
-                console.log("Null!");
-            }})
+
+                const doneTasks = resp.tasks.filter(resp => (resp.done_status === true)).length
+                const allTask = resp.tasks.length
+                dispatch(getTaskList(resp.tasks, doneTasks, allTask))
+            })
         .catch(error => {
             return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
+        });
+
+        fetch(PROJECT_URL + '/' + projectid + '/to_do_lists/' + listid + '/tasks')
+        .then(resp => {
+            if(resp.status !== 200){
+                return null;
+            }else{
+                return resp.json();
+            }})
+        .then(resp => {
+                // const second = resp.tasks.filter(resp => (resp.done_status === false)).length
+                // //setDoneTasks(first)
+                // //setAllTasks(first + second)
+                // console.log(first)
+                // console.log(first+second)
+                // dispatch(getTasksStatus(first,first+second))
+            }
+            )
+        .catch(error => {
+            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
         });
 
         fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}`)
@@ -88,16 +81,12 @@ const ToDos = () => {
             }
         })
         .then(resp => {
-            if(!null){
                 setName(resp.name);
-            }else{
-                console.log("Null!");
-            }
         })
         .catch(error => {
             return alert("Failed GET request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
         });
-    },[setDoneTasks, setAllTasks,projectid,listid,setName,setTaskList])
+    },[dispatch, setName, listid, projectid])
 
     async function addToDoList(url = '', listElement = {}){
         const respond = await fetch(url, {
@@ -138,16 +127,16 @@ const ToDos = () => {
     }
 
     const indexOfElement = (itemId) => {
-        for(let i = 0; i < tasklists.length; i++)
+        for(let i = 0; i < tasks.tasks.length; i++)
         {
-            if(tasklists[i].id === itemId)
+            if(tasks.tasks[i].id === itemId)
                 return i;
         }
         return null;
     }
 
-    const renderTaskList = (tasklistfiltered) => {
-        return tasklistfiltered.map (taskList => {
+    const renderTaskList = (filtredTasks) => {
+        return filtredTasks.map (taskList => {
             return (<TaskList 
                 key = {taskList.id} 
                 name = {taskList.name} 
@@ -157,15 +146,13 @@ const ToDos = () => {
                 taskid = {taskList.id}
                 
                 onStatusChange = {(event) => {
+
                     updateDoneStatus(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks/${taskList.id}`,{
                     done_status: event.target.checked
                     })
                     .then((element) => {
-                        tasklists.splice(indexOfElement(taskList.id),1)
-                        setTaskList([
-                            ...tasklists,
-                            element
-                        ])
+                        tasks.tasks.splice(indexOfElement(taskList.id),1)
+                        dispatch(addTaskToList(element))
                     })}   
                 }
 
@@ -174,8 +161,8 @@ const ToDos = () => {
                         id: taskList.id
                     })
                     .then(() => {
-                        tasklists.splice(indexOfElement(taskList.id),1)
-                        setTaskList([...tasklists])
+                        tasks.tasks.splice(indexOfElement(taskList.id),1)
+                        dispatch(getTaskList(tasks.tasks))
                         }
                     )
                 }}
@@ -207,11 +194,11 @@ const ToDos = () => {
                         due_date: date,
                         done_status: donestat
                         })
-                    .then((element) => {
-                        setTaskList([
-                            ...tasklists,
-                            element
-                        ])})
+                    // .then((element) => {
+                    //     setTaskList([
+                    //         ...tasklists,
+                    //         element
+                    //     ])})
                     .catch(error => {
                         return alert("Failed POST request from ToDosView. \nDetailed error: \"" + error + "\"");
                     })
@@ -244,6 +231,13 @@ const ToDos = () => {
         return 0;
     }
 
+    //tasks.filter(tasklists => tasklists.done_status === false).sort(compare)
+    const renderTasks = (tasks, status) => {   
+        if(tasks && tasks.tasks){
+            return renderTaskList(tasks.tasks.filter( (filtredTasks) =>  filtredTasks.done_status === status).sort(compare))
+        }
+    }
+
     return(
         <div>
             <TopHeader title = "backtodos" />
@@ -252,18 +246,15 @@ const ToDos = () => {
                     <div>
                         <p className = "ToDoCircle" /> 
                         <p className = "Light">
-                            {doneTasks}/
-                            {allTasks} complete 
+                            {tasks.completedTasks}/
+                            {tasks.allTasks} complete 
                         </p> 
                         <p className = "BigFontToDoPoint">
                             {taskname}
                         </p>
                     </div>
                     <div>
-                        {
-                        renderTaskList(tasklists.filter(tasklists => tasklists.done_status === false)
-                        .sort(compare))
-                        } 
+                        {renderTasks(tasks, false)} 
                     </div>
                     <div className = {visibleform ? "Hidden" : "Block"}>
                         <Button 
@@ -276,10 +267,7 @@ const ToDos = () => {
                     </div>
                     <div>
                         {renderForm()}
-                        {
-                        renderTaskList(tasklists.filter(tasklists => tasklists.done_status === true)
-                        .sort(compare))
-                        }
+                        {renderTasks(tasks, true)}
                     </div>
                 </div>
             </div>

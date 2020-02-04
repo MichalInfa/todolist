@@ -1,10 +1,12 @@
 import projectReducer from './projects'
-import todolistReducer from './todolist'
+import todoListReducer from './todolist'
+import taskListReducer from './tasklist'
 import {combineReducers} from 'redux'
 
 const allReducers = combineReducers({
     project: projectReducer,
-    todolist: todolistReducer
+    todolist: todoListReducer,
+    task: taskListReducer
 })
 
 export default allReducers
