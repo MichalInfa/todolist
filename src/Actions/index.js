@@ -2,17 +2,24 @@ export const addProject = (list_of_project, meta) => {
     return{
         type: 'ADD_LIST_OF_PROJECTS',
         projects: list_of_project,
-        meta: meta
+        meta
     };
 };
 
-export const addToDoList = (list_of_todos, meta) => {
+export const getToDoList = (list_of_todos, meta) => {
     return{
-        type: 'ADD_TODO_LISTS',
+        type: 'GET_TODO_LISTS',
         lists: list_of_todos,
-        meta: meta
+        meta
     };
 };
+
+export const addToDoList = (list_of_todos) => {
+    return{
+        type: 'ADD_TODO_LIST',
+        lists: list_of_todos
+    }
+}
 
 
 

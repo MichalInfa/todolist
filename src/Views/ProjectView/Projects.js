@@ -82,8 +82,6 @@ const ProjectView = () => {
             <p className = "Header">                    
                 Your Projects                
             </p>
-            {console.log(projects)}            
-
             <div className = "ProjectMiddle">
                 
                 {renderProjects(projects)}

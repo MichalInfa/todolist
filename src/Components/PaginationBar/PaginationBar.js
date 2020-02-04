@@ -37,7 +37,7 @@ const PaginationBar = ({onClickFunction, position}) => {
     return (
         <div className = "PaginationBar">
              <Button 
-                buttonClass = {`PaginationButton ${currentPage < 2 ? "NotProper" : "Proper"} `}
+                buttonClass = {`PaginationButton ${currentPage < 2 ? "PaginNotProper" : "PaginProper"} `}
                 disabledProperties = {currentPage < 2}
                 buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleLeft} />}
                 onClickFunction = { (event) => {
@@ -77,7 +77,7 @@ const PaginationBar = ({onClickFunction, position}) => {
                 
         <Button 
             buttonClass = {`PaginationButton 
-                        ${currentPage > (amountOfPages - 1) ? "NotProper" : "Proper"} `}
+                        ${currentPage > (amountOfPages - 1) ? "PaginNotProper" : "PaginProper"} `}
             disabledProperties = {(currentPage > (amountOfPages - 1))}
             buttonText = {<FontAwesomeIcon icon = {faArrowAltCircleRight} />}
             onClickFunction = { (event) => {

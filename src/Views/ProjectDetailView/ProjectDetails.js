@@ -10,7 +10,7 @@ import PaginationBar from '../../Components/PaginationBar/PaginationBar';
 import {PROJECT_URL} from '../../constants';
 import {useHistory} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {addToDoList}  from '../../Actions';
+import {getToDoList, addToDoList}  from '../../Actions';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 
@@ -20,17 +20,11 @@ const ProjectDetailView = () => {
     let {projectid} = useParams();
 
     const[text, setText] = useState("");
-    const[reload, setReload] = useState(false)
 
     const todolists = useSelector(state => state.todolist)
     const dispatch = useDispatch()
 
-    let history = useHistory();
-
-    if(history.location.pathname === `/projects/${projectid}`)
-        history.push(`/projects/${projectid}/to_do_lists`)
-    if(history.location.pathname === `/projects/${projectid}/`)
-        history.push(`/projects/${projectid}/to_do_lists`)
+    let history = useHistory();    
 
     async function addElementToList(listElement = {}) {
         const resp = await fetch(PROJECT_URL + `/${projectid}/to_do_lists`,{
@@ -44,8 +38,6 @@ const ProjectDetailView = () => {
     };
 
     useEffect (() => {  
-        if(reload)
-            setReload(!reload)
         fetch(PROJECT_URL + `/${projectid}/to_do_lists` + history.location.search)
         .then(resp => {
             if(resp.status !== 200){
@@ -55,7 +47,7 @@ const ProjectDetailView = () => {
             }
         })
         .then(resp => {
-                dispatch(addToDoList(resp.to_do_lists, resp.meta))
+                dispatch(getToDoList(resp.to_do_lists, resp.meta))
         })
         .catch(error => {   
             return alert("Failed GET request from ProjectDetailsView. \nDetailed error: \"" + error + "\"");
@@ -63,7 +55,6 @@ const ProjectDetailView = () => {
        
     },[projectid,
         dispatch,
-        reload,
         history.location.search]);
 
     const renderListCards = (todolists) => {
@@ -112,7 +103,10 @@ const ProjectDetailView = () => {
                                 onClickFunction = {() => {
                                     
                                     addElementToList({name: text})
-                                    setReload(!reload)
+                                        .then(resp => dispatch(addToDoList(resp)))
+                                        .catch(error => {   
+                                            return alert("Failed POST request from ProjectDetailsView. \nDetailed error: \"" + error + "\"");
+                                        }); 
                                     setText("")
                                 }
                             }/>
@@ -123,6 +117,9 @@ const ProjectDetailView = () => {
                         <PaginationBar
                             position = "ProjectDetails"
                             onClickFunction = {(number) => {
+                                if(history.location.pathname === `/projects/${projectid}`)
+                                    history.push(`/projects/${projectid}/to_do_lists`)
+
                                 history.push(`?page=${number}`)
                             }}
                         />

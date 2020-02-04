@@ -1,17 +1,22 @@
 .PaginationBar{
-    margin-top: 10px;
-    padding: 5px;
+    max-height: 50px;
     display: inline-block;
+    padding: 0px;
     text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .PaginationItem{
     display: inline-block;
-    width: 50px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    width: 20px;
+    padding: calc(100%/40);
+    font-size: 16px;
     border-radius: 7px;
-    line-height: 50px;
     cursor: pointer;
-    font-size: 18px;
     background-color: white;
     user-select: none;
     box-shadow: 
@@ -67,20 +72,27 @@
     right: 5%;
 }*/
 
-@media screen and (max-width: 800px)
+@media screen and (max-width: 850px)
 {
     .PaginationItem{
-        line-height: 35px;
-        width: 35px;
         font-size: 12px;
+        width: 12px
     }
 }
 
-@media screen and (max-width: 550px)
+@media screen and (max-width: 600px)
 {
     .PaginationItem{
-        line-height: 20px;
-        width: 20px;
         font-size: 9px;
+        width: 9px;
+    }
+}
+
+@media screen and (max-width: 500px)
+{
+    .PaginationItem{
+        font-size: 5px;
+        width: 7px;
+        margin-left: 2px;
     }
 }
