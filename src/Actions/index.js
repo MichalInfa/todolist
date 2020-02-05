@@ -24,12 +24,10 @@ export const addToDoList = (list_of_todos) => {
 }
 
 /*--------------------tasklist.js--------------------*/
-export const getTaskList = (list_of_tasks, completed_tasks, all_tasks) => {
+export const getTaskList = (list_of_tasks) => {
     return{
         type: 'GET_TASKLIST',
-        tasks: list_of_tasks,
-        completedTasks: completed_tasks,
-        allTasks: all_tasks
+        tasks: list_of_tasks
     }
 }
 

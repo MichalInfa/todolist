@@ -42,33 +42,10 @@ const ToDos = () => {
                 return resp.json();
             }})
         .then(resp => {
-
-                const doneTasks = resp.tasks.filter(resp => (resp.done_status === true)).length
-                const allTask = resp.tasks.length
-                dispatch(getTaskList(resp.tasks, doneTasks, allTask))
+                dispatch(getTaskList(resp.tasks))
             })
         .catch(error => {
             return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
-        });
-
-        fetch(PROJECT_URL + '/' + projectid + '/to_do_lists/' + listid + '/tasks')
-        .then(resp => {
-            if(resp.status !== 200){
-                return null;
-            }else{
-                return resp.json();
-            }})
-        .then(resp => {
-                // const second = resp.tasks.filter(resp => (resp.done_status === false)).length
-                // //setDoneTasks(first)
-                // //setAllTasks(first + second)
-                // console.log(first)
-                // console.log(first+second)
-                // dispatch(getTasksStatus(first,first+second))
-            }
-            )
-        .catch(error => {
-            return alert("Failed GET request from ListCard. \nDetailed error: \"" + error + "\"");
         });
 
         fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}`)
@@ -110,6 +87,7 @@ const ToDos = () => {
         .catch(error => {
             return alert("Failed PATCH request from ToDosView. \nDetailed error: \"" + error + "\"");
         });  
+        
         return respond.json();
     }
 
@@ -194,11 +172,9 @@ const ToDos = () => {
                         due_date: date,
                         done_status: donestat
                         })
-                    // .then((element) => {
-                    //     setTaskList([
-                    //         ...tasklists,
-                    //         element
-                    //     ])})
+                        .then(element => {
+                            dispatch(addTaskToList(element))
+                        })
                     .catch(error => {
                         return alert("Failed POST request from ToDosView. \nDetailed error: \"" + error + "\"");
                     })
@@ -231,10 +207,20 @@ const ToDos = () => {
         return 0;
     }
 
-    //tasks.filter(tasklists => tasklists.done_status === false).sort(compare)
     const renderTasks = (tasks, status) => {   
         if(tasks && tasks.tasks){
             return renderTaskList(tasks.tasks.filter( (filtredTasks) =>  filtredTasks.done_status === status).sort(compare))
+        }
+    }
+
+    const renderCompletedTasks = (tasks) => {
+        if(tasks && tasks.tasks){
+            return (tasks.tasks.filter(filtredTasks => filtredTasks.done_status === true).length)
+        }
+    }
+    const renderAllTasks = (tasks) => {
+        if(tasks && tasks.tasks){
+            return (tasks.tasks.length)
         }
     }
 
@@ -246,8 +232,8 @@ const ToDos = () => {
                     <div>
                         <p className = "ToDoCircle" /> 
                         <p className = "Light">
-                            {tasks.completedTasks}/
-                            {tasks.allTasks} complete 
+                            {renderCompletedTasks(tasks)}/
+                            {renderAllTasks(tasks)} complete 
                         </p> 
                         <p className = "BigFontToDoPoint">
                             {taskname}

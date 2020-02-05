@@ -122,6 +122,8 @@ const ProjectDetailView = () => {
                                             dispatch(addToDoList(resp));
                                             getLists(`${PROJECT_URL}/${projectid}/to_do_lists` + history.location.search).then(resp => { 
                                                 dispatch(getToDoList(resp.to_do_lists, resp.meta))
+                                                if(history.location.pathname === (`/projects/${projectid}`))
+                                                    history.push(`${projectid}/to_do_lists`)
                                                 history.push(`?page=${resp.meta.total_pages}`)
                                             })
                                     })
