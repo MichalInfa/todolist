@@ -8,13 +8,13 @@ import AddNewTask from './AddNewTask';
 import TopHeader from '../../Components/TopHeader/TopHeader';
 import {PROJECT_URL} from '../../constants';
 import {useSelector, useDispatch} from 'react-redux';
-import {getTaskList, addTaskToList, getTasksStatus} from '../../Actions';
+import {getTaskList, addTaskToList} from '../../Actions';
 
 const ToDos = () => {
 
     document.title = `Task List`
 
-    const tasks = useSelector(state => state.task)
+    const tasks = useSelector(state => state.tasks)
     const dispatch = useDispatch()
 
     const[text, setText] = useState("");

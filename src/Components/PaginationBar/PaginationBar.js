@@ -9,8 +9,8 @@ import {useSelector} from 'react-redux'
 
 const PaginationBar = ({onClickFunction, position}) => {
     
-    const projects = useSelector(state => state.project)
-    const todolists = useSelector(state => state.todolist)
+    const projects = useSelector(state => state.projects)
+    const todolists = useSelector(state => state.todolists)
 
     let currentPage = 0;
     let amountOfPages = 0;

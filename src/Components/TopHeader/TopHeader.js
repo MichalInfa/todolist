@@ -1,8 +1,17 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './TopHeader.css'
+import { useSelector } from 'react-redux';
 
 const TopHeader = (props) => {
+
+    const todolists = useSelector(state => state.todolists)    
+
+    const renderBack = () => {
+        if(todolists && todolists.meta)
+            return(`?page=${todolists.meta.current_page}`)
+        return "";
+    }
 
     switch(props.title){
         case "backtotasklist":
@@ -26,7 +35,7 @@ const TopHeader = (props) => {
                     {' '}
                     <div className = "NoUnderline">></div>
                     {' '}
-                    <Link className = "Underline" to = "../../">Back to To-Dos</Link>
+                    <Link className = "Underline" to = {"../../to_do_lists" + renderBack()}>Back to To-Dos</Link>
                 </div>
             );
         default:

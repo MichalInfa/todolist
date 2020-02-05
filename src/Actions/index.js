@@ -23,6 +23,15 @@ export const addToDoList = (list_of_todos) => {
     }
 }
 
+export const addTasksProperties = (single_list, completed_tasks, all_tasks) => {
+    return{
+        type: 'ADD_TASK_PROPERTIES',
+        list: single_list,
+        completedTasks: completed_tasks,
+        allTasks: all_tasks
+    }
+}
+
 /*--------------------tasklist.js--------------------*/
 export const getTaskList = (list_of_tasks) => {
     return{

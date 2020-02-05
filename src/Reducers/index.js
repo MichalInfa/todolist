@@ -4,9 +4,9 @@ import taskListReducer from './tasklist'
 import {combineReducers} from 'redux'
 
 const allReducers = combineReducers({
-    project: projectReducer,
-    todolist: todoListReducer,
-    task: taskListReducer
+    projects: projectReducer,
+    todolists: todoListReducer,
+    tasks: taskListReducer
 })
 
 export default allReducers

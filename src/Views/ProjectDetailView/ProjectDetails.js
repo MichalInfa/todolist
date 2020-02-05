@@ -21,7 +21,7 @@ const ProjectDetailView = () => {
 
     const[text, setText] = useState("");
 
-    const todolists = useSelector(state => state.todolist)
+    const todolists = useSelector(state => state.todolists)
     const dispatch = useDispatch()
 
     let history = useHistory();    

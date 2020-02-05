@@ -13,7 +13,7 @@ import Loader from 'react-loader-spinner'
 
 const ProjectView = () => {
 
-    const projects = useSelector(state => state.project)
+    const projects = useSelector(state => state.projects)
     const dispatch = useDispatch()
 
     document.title = `Your Projects`

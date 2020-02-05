@@ -14,7 +14,15 @@ const todoListReducer = (state = [], action) => {
           }
           return state;
       }
-     
+
+     case 'ADD_TASK_PROPERTIES': {
+         console.log(action.list, action.completedTasks, action.allTasks)
+         state = {
+            lists: [...state.lists],
+            meta: {...state.meta}
+         }
+         return state;
+     }
       default:
           return state;
     }
