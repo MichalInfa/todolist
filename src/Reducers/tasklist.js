@@ -1,4 +1,4 @@
-const taskListReducer = (state = [], action) => {
+const taskListReducer = (state = {tasks: []}, action) => {
     switch(action.type) {
         case 'GET_TASKLIST': {
             state = {

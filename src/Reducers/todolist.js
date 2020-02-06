@@ -1,4 +1,4 @@
-const todoListReducer = (state = [], action) => {
+const todoListReducer = (state = {lists: [], meta: {}}, action) => {
     switch(action.type) {
       case 'GET_TODO_LISTS': {
           state = {

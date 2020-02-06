@@ -19,21 +19,17 @@ const ToDos = () => {
 
     const[text, setText] = useState("");
     const[descript, setDescription] = useState("");
+
     const[date, setDate] = useState("");
     const[donestat, setDoneStatus] = useState(false);
-    //const[tasklists, setTaskList] = useState([]);
+
     const[visibleform, setVisible] = useState(false);
     const[taskname,setName] = useState("");
 
     let {projectid} = useParams()
     let {listid} = useParams()
 
-    //const[doneTasks, setDoneTasks] = useState(0);
-    //const[allTasks, setAllTasks] = useState(0);
-        
     useEffect(() => {
-        
-    
         fetch(PROJECT_URL + `/${projectid}/to_do_lists/${listid}/tasks`)
         .then(resp => {
             if(resp.status !== 200){

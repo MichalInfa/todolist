@@ -6,10 +6,17 @@ import { useSelector } from 'react-redux';
 const TopHeader = (props) => {
 
     const todolists = useSelector(state => state.todolists)    
+    const projects = useSelector(state => state.projects)
 
-    const renderBack = () => {
+    const renderBackToDoList = () => {
         if(todolists && todolists.meta)
             return(`?page=${todolists.meta.current_page}`)
+        return "";
+    }
+
+    const renderBackProjects = () => {
+        if(projects && projects.meta)
+            return(`?page=${projects.meta.current_page}`)
         return "";
     }
 
@@ -31,17 +38,17 @@ const TopHeader = (props) => {
         case "backtodos":
             return(
                 <div className = "TopHeader">
-                    <Link className = "Underline" to = "../../../../projects">Back to Project</Link>
+                    <Link className = "Underline" to = {"../../../../projects" + renderBackProjects()}>Back to Project</Link>
                     {' '}
                     <div className = "NoUnderline">></div>
                     {' '}
-                    <Link className = "Underline" to = {"../../to_do_lists" + renderBack()}>Back to To-Dos</Link>
+                    <Link className = "Underline" to = {"../../to_do_lists" + renderBackToDoList()}>Back to To-Dos</Link>
                 </div>
             );
         default:
             return(
                 <div className = "TopHeader">
-                    <Link className = "Underline" to = "../../projects">Back to Project</Link>
+                    <Link className = "Underline" to = {"../../projects" + renderBackProjects()}>Back to Project</Link>
                 </div>
             );
     }

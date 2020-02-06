@@ -1,4 +1,4 @@
-const projectReducer = (state = [], action) => {
+const projectReducer = (state = {projects: [], meta: {}}, action) => {
   switch(action.type) {
     case 'ADD_LIST_OF_PROJECTS': {
         state = {

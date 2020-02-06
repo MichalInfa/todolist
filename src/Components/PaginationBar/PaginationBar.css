@@ -75,7 +75,7 @@
 @media screen and (max-width: 850px)
 {
     .PaginationItem{
-        font-size: 12px;
+        font-size: 0.5em;
         width: 12px
     }
 }
@@ -83,7 +83,7 @@
 @media screen and (max-width: 600px)
 {
     .PaginationItem{
-        font-size: 9px;
+        font-size: 0.25em;
         width: 9px;
     }
 }
@@ -93,6 +93,7 @@
     .PaginationItem{
         font-size: 5px;
         width: 7px;
-        margin-left: 2px;
+        margin-left: 0.5px;
+        margin-right: 0.5px;
     }
 }
