@@ -48,10 +48,18 @@ export const addTaskToList = (task) => {
 }
 
 export const getTasksStatus = (completed_tasks, all_tasks) => {
-    console.log(completed_tasks,all_tasks)
     return{
         type: 'GET_TASK_STATUS',
         completedTasks: completed_tasks,
         allTasks: all_tasks
+    }
+}
+
+/*--------------------comments.js--------------------*/
+export const getCommentsList = (comment_list, meta) => {
+    return{
+        type: 'GET_COMMENT_LIST',
+        commentList: comment_list,
+        meta
     }
 }

@@ -94,6 +94,16 @@
     color: rgb(81, 148, 81);
 }
 
+.CommentButton{
+    color: white;
+    background-color: rgb(102, 187, 102);
+    text-align: left;
+}
+
+.CommentButton:hover{
+    background-color: rgb(81, 148, 81);
+}
+
 @media screen and (max-width: 800px)
 {
     .PaginationButton{

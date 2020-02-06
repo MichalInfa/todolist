@@ -1,0 +1,46 @@
+.CommentsSection{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.CommentsTopBarContainer{
+    display: inline-block;
+    width: 100%;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.CommentsTopBarCircle{
+    width: 30px;
+    line-height: 30px;
+    color: white;
+    border: 1px solid rgb(53, 53, 202);
+    background-color: rgb(59, 59, 197);
+    box-shadow: 0 0 1px rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.1);
+    border-radius: 50%;
+    float: left;
+}
+
+.CommentsTopBarInfo{
+    padding-bottom: 5px;
+    padding-top: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+    width: 90px;
+    float: left;
+}
+
+.CommentsHr {
+    padding-bottom: 5px;
+    padding-top: 11px;
+    padding-right: 5px;
+    margin-left: 130px;
+    border-bottom: 2px solid rgb(122, 118, 118);
+}
+
+.CommentsButton{
+    margin-left: 23px;
+    text-align: left;
+}

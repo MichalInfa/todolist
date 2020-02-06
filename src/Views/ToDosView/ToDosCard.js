@@ -9,6 +9,7 @@ import TopHeader from '../../Components/TopHeader/TopHeader';
 import {PROJECT_URL} from '../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {getTaskList, addTaskToList} from '../../Actions';
+import CommentsList from './CommentsList';
 
 const ToDos = () => {
 
@@ -250,7 +251,8 @@ const ToDos = () => {
                     <div>
                         {renderForm()}
                         {renderTasks(tasks, true)}
-                    </div>
+                    </div>                        
+                        <CommentsList />         
                 </div>
             </div>
         </div>

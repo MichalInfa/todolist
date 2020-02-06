@@ -9,14 +9,14 @@ const TopHeader = (props) => {
     const projects = useSelector(state => state.projects)
 
     const renderBackToDoList = () => {
-        if(todolists && todolists.meta)
+        if(todolists && todolists.meta && todolists.meta.current_page)
             return(`?page=${todolists.meta.current_page}`)
         return "";
     }
 
     const renderBackProjects = () => {
-        if(projects && projects.meta)
-            return(`?page=${projects.meta.current_page}`)
+        if(projects && projects.meta && projects.meta.current_page)
+            return(`?page=${projects.meta.current_page}`);
         return "";
     }
 

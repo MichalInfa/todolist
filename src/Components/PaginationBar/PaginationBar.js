@@ -11,6 +11,7 @@ const PaginationBar = ({onClickFunction, position}) => {
     
     const projects = useSelector(state => state.projects)
     const todolists = useSelector(state => state.todolists)
+    const comments = useSelector(state => state.comments)
 
     let currentPage = 0;
     let amountOfPages = 0;
@@ -21,11 +22,18 @@ const PaginationBar = ({onClickFunction, position}) => {
         amountOfPages = projects.meta.total_pages
     }
 
-    if(position === "ProjectDetails" && todolists && todolists.lists && todolists.meta && position === "ProjectDetails")
+    if(position === "ProjectDetails" && todolists && todolists.lists && todolists.meta)
     {
         currentPage = todolists.meta.current_page
         amountOfPages = todolists.meta.total_pages
     }
+
+    if(position === "Comments" && comments && comments.comments && comments.meta)
+    {
+        currentPage = comments.meta.current_page
+        amountOfPages = comments.meta.total_pages
+    }
+
 
     const pageNumbers = getPageNumbers(amountOfPages, currentPage);
 

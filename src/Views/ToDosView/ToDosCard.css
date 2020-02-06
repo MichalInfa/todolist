@@ -19,15 +19,18 @@
     font-weight: 600;
     color: black;
 }
+
 .Hidden{
     display: none;
 }
+
 .Block{
     margin-left: 21px;
     margin-bottom: 5px;
     margin-top: 5px;
     display: block;
 }
+
 .MiddleToDoPart{
     margin-top: 40px;
     width: 75%;
