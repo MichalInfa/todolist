@@ -57,7 +57,7 @@ const ToDos = () => {
                 setName(resp.name);
         })
         .catch(error => {
-            return alert("Failed GET request from ProjectDetailView. \nDetailed error: \"" + error + "\"");
+            return alert("Failed GET request from ToDosView. \nDetailed error: \"" + error + "\"");
         });
     },[dispatch, setName, listid, projectid])
 

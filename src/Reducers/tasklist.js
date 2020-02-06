@@ -12,15 +12,6 @@ const taskListReducer = (state = {tasks: []}, action) => {
             }
             return state;
         }
-        // case 'GET_TASK_STATUS': {
-        //     console.log(state.tasks, state.action.completed_tasks, state.action.all_tasks)
-        //     state = {
-        //         tasks: state.tasks,
-        //         completedTasks: action.completedTasks,
-        //         allTasks: action.allTasks
-        //     }
-        //     return state
-        // }
         default:
             return state;
     }

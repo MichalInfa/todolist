@@ -11,7 +11,6 @@ const TaskList = (props) =>{
     let {projectid} = useParams()
     let {listid} = useParams()
 
-
     return (
             <div className = "BoxContainter">
                 <form>
@@ -41,9 +40,7 @@ const TaskList = (props) =>{
                             onClickFunction = {(event) => {
                                 props.ondDeleteTask(event)
                                 event.preventDefault()
-                                }
-                                
-                                
+                                }    
                             }
                         /> 
                         }                       

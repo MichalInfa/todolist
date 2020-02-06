@@ -17,9 +17,6 @@ const ProjectView = () => {
     const dispatch = useDispatch()
 
     document.title = `Your Projects`
-    //const[projects, setProject] = useState([])
-    //const[currentPage, setCurrentPage] = useState(1)
-    //const[amountOfPages, setAmountOfPages] = useState(1)
 
     let history = useHistory();
     if(history.location.pathname === "")
@@ -59,12 +56,7 @@ const ProjectView = () => {
             }
         })
         .then(resp => {
-            
-                //setAmountOfPages(resp.meta.total_pages)
-                //setCurrentPage(resp.meta.current_page)
-                //setProject(resp.projects
                 dispatch(addProject(resp.projects, resp.meta))
-                //dispatch(addMeta(resp.meta))
         })
         .catch(error => {
             return alert("Failed GET request from ProjectView. \nDetailed error: \"" + error + "\"");
@@ -72,9 +64,6 @@ const ProjectView = () => {
     },
     [
     dispatch,
-    //setProject,
-    //setCurrentPage, 
-    //setAmountOfPages,
     history.location.search]);
 
     return(

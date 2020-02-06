@@ -9,6 +9,7 @@ import {PROJECT_URL} from '../../constants'
 
 const NewProjectForm = () => {
     document.title = `Add project`
+    
     const[projectname, setName] = useState("");
     
     const[projectdescription, setDescription] = useState("");

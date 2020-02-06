@@ -122,7 +122,6 @@ const AddNewTask = (props) => {
             </form>
         </div>
     )
-
 }
 
 export default AddNewTask

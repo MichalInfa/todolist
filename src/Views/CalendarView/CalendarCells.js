@@ -40,9 +40,6 @@ const CalendarCells = (props) => {
                     <span>
                         {formattedDate}
                     </span>
-                    {/*<span className="bg">
-                        {formattedDate}
-                        </span>*/}
                 </div>
             );
             day = addDays(day, 1);
