@@ -1,5 +1,6 @@
 import React from 'react'
 import './Comment.css'
+import Button from '../../Components/Button/Button'
 
 const Comment = (props) => {
 
@@ -14,6 +15,17 @@ const Comment = (props) => {
                     {props.description}
                 </p>
             </div>
+            <div className = "CommentsDate">
+                {props.date}
+            </div>
+            <Button
+                buttonClass = "DeleteComment"
+                buttonText = "X"
+                onClickFunction = {(event) => {
+                    props.onDeleteComment(event)
+                    event.preventDefault()
+                }}
+            />
         </div>
     )
 }

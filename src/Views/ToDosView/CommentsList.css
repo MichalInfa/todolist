@@ -1,7 +1,18 @@
 .CommentsSection{
-    display: inline-block;
     text-align: center;
-    width: 100%;
+    font-size: 10px;
+    font-weight: 700;
+    width: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0 0 1px rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.1);
+    background-color: white;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
 .CommentsTopBarContainer{
@@ -9,14 +20,15 @@
     width: 100%;
     font-weight: 700;
     font-size: 15px;
+    position: relative;
 }
 
 .CommentsTopBarCircle{
     width: 30px;
     line-height: 30px;
     color: white;
-    border: 1px solid rgb(53, 53, 202);
-    background-color: rgb(59, 59, 197);
+    border: 1px solid rgb(88, 88, 170);
+    background-color: rgb(88, 88, 170);
     box-shadow: 0 0 1px rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.1);
     border-radius: 50%;
     float: left;
@@ -38,9 +50,21 @@
     padding-right: 5px;
     margin-left: 130px;
     border-bottom: 2px solid rgb(122, 118, 118);
+    margin-right: 30px;
 }
 
-.CommentsButton{
-    margin-left: 23px;
-    text-align: left;
+.CommentsCurrentPage{
+    margin-top: 5px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    width: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgb(88, 88, 170);
+    background-color: rgb(88, 88, 170);
+    box-shadow: 0 0 1px rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.1);
+    border-radius: 50%;
 }
+

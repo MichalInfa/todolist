@@ -27,6 +27,8 @@ const ToDos = () => {
     const[visibleform, setVisible] = useState(false);
     const[taskname,setName] = useState("");
 
+    const[visibleComments, setVisibleComments] = useState(false);
+
     let {projectid} = useParams()
     let {listid} = useParams()
 
@@ -221,6 +223,35 @@ const ToDos = () => {
         }
     }
 
+
+    const renderCommentsButton = () => {
+        return(
+            !visibleComments ? (
+                <div className = "CommentsButton">
+                    <Button 
+                        buttonText = {"Show Comments"}
+                        buttonClass = {"CommentButton"}
+                        onClickFunction = {() => {
+                            setVisibleComments(true);
+                        }}
+                    />
+                </div>
+            )
+            : 
+            (
+                <div className = "CommentsButton">
+                    <Button 
+                        buttonText = {"Hide Comments"}
+                        buttonClass = {"CommentButton"}
+                        onClickFunction = {() => {
+                            setVisibleComments(false);
+                        }}
+                    />
+                </div>
+            )
+            )
+    }
+
     return(
         <div>
             <TopHeader title = "backtodos" />
@@ -252,9 +283,10 @@ const ToDos = () => {
                         {renderForm()}
                         {renderTasks(tasks, true)}
                     </div>                        
-                        <CommentsList />         
                 </div>
-            </div>
+                {renderCommentsButton()}
+            </div>    
+            <CommentsList visible = {visibleComments}/> 
         </div>
     )
 }
