@@ -41,18 +41,18 @@ const Comments = (props) => {
         });
     },[dispatch, listid, projectid, history.location.search, props.visible])
 
-    // async function deleteComment(url = '', listElement = {}){
-    //     await fetch(url, {
-    //          method: "DELETE",
-    //          headers: {
-    //              "Content-type": "application/json; charset=UTF-8"
-    //          },
-    //          body: JSON.stringify(listElement)
-    //      })
-    //      .catch(error => {
-    //          return alert("Failed DELETE request from ToDosView. \nDetailed error: \"" + error + "\"");
-    //      });  
-    //  }
+    async function deleteComment(url = '', listElement = {}){
+        await fetch(url, {
+             method: "DELETE",
+             headers: {
+                 "Content-type": "application/json; charset=UTF-8"
+             },
+             body: JSON.stringify(listElement)
+         })
+         .catch(error => {
+             return alert("Failed DELETE request from ToDosView. \nDetailed error: \"" + error + "\"");
+         });  
+     }
  
 
     const renderAmountOfComments = (comments) => {
@@ -87,6 +87,15 @@ const Comments = (props) => {
         )
     }
 
+    const indexOfElement = (itemId) => {
+        for(let i = 0; i < comments.comments.length; i++)
+        {
+            if(comments.comments[i].id === itemId)
+                return i;
+        }
+        return null;
+    }
+
     const renderCommentsList = (commentsList) => {
         if(commentsList && commentsList.comments){
             return (
@@ -99,15 +108,14 @@ const Comments = (props) => {
                         date = {comment.post_date}
 
                         onDeleteComment = {() => {
-                            /*deleteComment(``,{
-                                id: taskList.id
+                            deleteComment(`${PROJECT_URL}/${projectid}/to_do_lists/${listid}/comments/${comment.id}`,{
+                                id: comment.id
                             })
                             .then(() => {
-                                tasks.tasks.splice(indexOfElement(taskList.id),1)
-                                dispatch(getTaskList(tasks.tasks))
+                                comments.comments.splice(indexOfElement(comment.id),1)
+                                dispatch(getCommentsList(comments.comments, comments.meta))
                                 }
                             )
-                            */
                         }}
                     />
                     )

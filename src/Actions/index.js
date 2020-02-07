@@ -63,3 +63,10 @@ export const getCommentsList = (comment_list, meta) => {
         meta
     }
 }
+
+export const updateCommentsList = (comment_list) => {
+    return{
+        type: 'UPDATE_COMMENT_LIST',
+        commentList: comment_list
+    }
+}

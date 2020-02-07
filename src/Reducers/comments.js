@@ -7,6 +7,13 @@ const commentListReducer = (state = {comments: [], meta: {}}, action) => {
             }
             return state;
         }
+        case 'UPDATE_COMMENT_LIST': {
+            state = {
+                comments: [...action.commentList],
+                meta: state.meta
+            }
+            return state;
+        }
         default:
             return state
     }
