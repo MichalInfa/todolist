@@ -56,17 +56,18 @@ export const getTasksStatus = (completed_tasks, all_tasks) => {
 }
 
 /*--------------------comments.js--------------------*/
-export const getCommentsList = (comment_list, meta) => {
+export const getComments = (url) => {
     return{
-        type: 'GET_COMMENT_LIST',
-        commentList: comment_list,
-        meta
+        type: 'GET_COMMENTS',
+        url: url
     }
 }
 
-export const updateCommentsList = (comment_list) => {
+export const deleteComment = (deleteurl, element, url) => {
     return{
-        type: 'UPDATE_COMMENT_LIST',
-        commentList: comment_list
+        type: 'DELETE_COMMENT',
+        deleteurl,
+        element,
+        url
     }
 }

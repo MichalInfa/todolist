@@ -1,19 +1,33 @@
 const commentListReducer = (state = {comments: [], meta: {}}, action) => {
     switch(action.type){
-        case 'GET_COMMENT_LIST': {
+        case 'GET_COMMENTS': {
             state = {
-                comments: [...action.commentList],
+                comments: [...state.comments],
+                meta: state.meta,
+                url: action.url
+            }
+            return state;
+        }
+        
+       case 'COMMENTS_RECEIVED': {
+            state = {
+                comments: [...action.comments],
                 meta: action.meta
             }
             return state;
-        }
-        case 'UPDATE_COMMENT_LIST': {
-            state = {
-                comments: [...action.commentList],
-                meta: state.meta
-            }
-            return state;
-        }
+       }
+
+       case 'DELETE_COMMENT': {
+           state = {
+                comments: [...state.comments],
+                meta: state.meta,
+                deleteurl: action.delteurl,
+                element: action.element,
+                url: action.url
+           }
+           return state;
+       }
+
         default:
             return state
     }
